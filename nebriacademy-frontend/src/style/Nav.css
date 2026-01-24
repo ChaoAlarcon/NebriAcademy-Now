@@ -1,0 +1,131 @@
+
+/* ===== NAVBAR NEBRIACADEMY ===== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-sm-custom);
+  z-index: 1000;
+}
+
+/* Contenedor principal */
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--nebrija-red);
+  text-decoration: none;
+  transition: color var(--transition-speed);
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.navbar-logo:hover {
+  color: var(--nebrija-red-hover);
+}
+
+.navbar-logo-image {
+  height: 40px;
+}
+
+
+/* Enlaces centrales */
+.navbar-links {
+  display: flex;
+  gap: 32px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #343a40;
+  position: relative;
+  transition: color var(--transition-speed);
+}
+
+.navbar-links a:hover {
+  color: var(--nebrija-red);
+}
+
+/* Subrayado animado */
+.navbar-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background-color: var(--nebrija-red);
+  transition: width var(--transition-speed);
+}
+
+.navbar-links a:hover::after {
+  width: 100%;
+}
+
+/* Zona login / registro */
+.navbar-auth {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar-login {
+  text-decoration: none;
+  font-weight: 500;
+  color: #343a40;
+  transition: color var(--transition-speed);
+}
+
+.navbar-login:hover {
+  color: var(--nebrija-red);
+}
+
+/* Botón principal */
+.navbar-register {
+  text-decoration: none;
+  background-color: var(--nebrija-red);
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  box-shadow: var(--shadow-sm-custom);
+  transition: 
+    background-color var(--transition-speed),
+    box-shadow var(--transition-speed),
+    transform var(--transition-speed);
+}
+
+.navbar-register:hover {
+  background-color: var(--nebrija-red-hover);
+  box-shadow: var(--shadow-lg-custom);
+  transform: translateY(-1px);
+}
+
+.navbar-register:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.25rem var(--nebrija-focus-color);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+}

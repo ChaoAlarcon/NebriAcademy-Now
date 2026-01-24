@@ -1,8 +1,8 @@
-import React from 'react'
+
 
 function Home() {
   return (
-    <div>Home</div>
+    <h1>Estás en la página Home</h1>
   )
 }
 
