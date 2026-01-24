@@ -3,11 +3,14 @@ import Footer from './Footer';
 import { Outlet } from 'react-router-dom'
 
 
+import TestConnection from './TestConnection';
+
 function AppLayout (){
     return (
          <div className='App'>
         <Nav />  
-        <Outlet />  
+        <Outlet />
+        
         <Footer />
       </div>
     )
