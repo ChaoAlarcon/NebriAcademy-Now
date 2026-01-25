@@ -1,6 +1,60 @@
 const express = require("express");
 const router = express.Router();
 const Usuarios = require("../models/Usuarios.js");
+const Alumnos = require("../models/Alumnos.js");
+const Profesores = require("../models/Profesores.js");
+const Administradores = require("../models/Administradores.js");
+
+// Ruta de Login
+router.post("/login", async (req, res) => {
+  try {
+    const { email, contrasena } = req.body;
+    console.log(`Intento de login para: ${email}`);
+
+    // Buscar en Alumnos
+    let usuario = await Alumnos.findOne({ where: { email, contrasena } });
+    if (usuario) {
+      return res.json({ 
+        id: usuario.id, 
+        nombre: usuario.nombre, 
+        apellidos: usuario.apellidos, 
+        email: usuario.email, 
+        tipo: 'alumno' 
+      });
+    }
+
+    // Buscar en Profesores
+    usuario = await Profesores.findOne({ where: { email, contrasena } });
+    if (usuario) {
+      return res.json({ 
+        id: usuario.id, 
+        nombre: usuario.nombre, 
+        apellidos: usuario.apellidos, 
+        email: usuario.email, 
+        tipo: 'profesor' 
+      });
+    }
+
+    // Buscar en Administradores
+    usuario = await Administradores.findOne({ where: { email, contrasena } });
+    if (usuario) {
+      return res.json({ 
+        id: usuario.id, 
+        nombre: usuario.nombre, 
+        apellidos: usuario.apellidos, 
+        email: usuario.email, 
+        tipo: 'administrador' 
+      });
+    }
+
+    // Si no se encuentra en ninguna tabla
+    res.status(401).json({ error: "Credenciales incorrectas" });
+
+  } catch (error) {
+    console.error("Error en el login:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
 
 // Obtener todos los usuarios
 router.get("/", (req, res) => {

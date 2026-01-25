@@ -1,4 +1,4 @@
-
+@import "./variables.css";
 /* ===== NAVBAR NEBRIACADEMY ===== */
 
 .navbar {
@@ -10,8 +10,8 @@
   background-color: #ffffff;
   box-shadow: var(--shadow-sm-custom);
   z-index: 1000;
-  
-  
+
+
 }
 
 /* Contenedor principal */
@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
+
 }
 
 /* Logo */
@@ -109,7 +109,7 @@
   border-radius: var(--border-radius);
   font-weight: 500;
   box-shadow: var(--shadow-sm-custom);
-  transition: 
+  transition:
     background-color var(--transition-speed),
     box-shadow var(--transition-speed),
     transform var(--transition-speed);

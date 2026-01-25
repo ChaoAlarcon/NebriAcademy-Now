@@ -1,40 +1,72 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../style/Nav.css";
 
 function Nav() {
-	return (
-		<nav className="navbar">
-			<div className="navbar-container">
-				{/* Logo */}
-				<Link to="/" className="navbar-logo">
-					<img
-						src="/nebrija.png"
-						alt="NebriAcademy Logo"
-						className="navbar-logo-image"
-					/>
+  const [usuario, setUsuario] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userStr = localStorage.getItem("usuario");
+    if (userStr) {
+      setUsuario(JSON.parse(userStr));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("usuario");
+    setUsuario(null);
+    navigate("/");
+    window.location.reload();
+  };
+
+  return (
+    <nav className="navbar">
+      <div className="navbar-container">
+        {/* Logo */}
+        <Link to="/" className="navbar-logo">
+          <img
+            src="/nebrija.png"
+            alt="NebriAcademy Logo"
+            className="navbar-logo-image"
+          />
           <p className="navbar-logo-text">NebriAcademy</p>
-				</Link>
+        </Link>
 
-				{/* Links */}
-				<div className="navbar-links">
-					<Link to="/">Mi Academia</Link>
-					<Link to="/cursos">Cursos</Link>
-					<Link to="/profesores">Profesores</Link>
-					<Link to="/masterclass">Masterclass</Link>
-				</div>
+        {/* Links */}
+        <div className="navbar-links">
+          <Link to="/">Mi Academia</Link>
+          <Link to="/cursos">Cursos</Link>
+          <Link to="/profesores">Profesores</Link>
+          <Link to="/masterclass">Masterclass</Link>
+        </div>
 
-				{/* Auth (opcional, puedes quitarlo si no lo usas) */}
-				<div className="navbar-auth">
-					<Link to="/login" className="navbar-login">
-						Login
-					</Link>
-					<Link to="/register" className="navbar-register">
-						Registro
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
+        {/* Auth Section */}
+        <div className="navbar-auth">
+          {usuario ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span >Hola, {usuario.nombre}</span>
+              <button
+                onClick={handleLogout}
+
+              >
+                Salir
+              </button>
+            </div>
+          ) : (
+            <>
+              <Link to="/login" className="navbar-login">
+                Login
+              </Link>
+              <Link to="/register" className="navbar-register">
+                Registro
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
 }
 
 export default Nav;
