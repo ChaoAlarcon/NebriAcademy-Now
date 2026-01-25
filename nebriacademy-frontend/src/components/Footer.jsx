@@ -16,7 +16,7 @@ function Footer() {
 					</div>
 				</div>
 				<div className="footer-bottom">
-					© 2025 NebriAcademy. Todos los derechos reservados.
+					© 2026 NebriAcademy. Todos los derechos reservados.
 				</div>
 			</footer>
 		</>

@@ -1,5 +1,6 @@
 // Cargar variables de entorno si no se han cargado (opcional aquí si se carga en app.js, pero buena práctica para scripts sueltos)
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 const { Sequelize } = require('sequelize');
 

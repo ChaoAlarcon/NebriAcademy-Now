@@ -6,6 +6,10 @@ import Cursos from "./pages/Cursos";
 import AppLayout from "./Components/AppLayout";
 import ErrorPage from "./pages/ErrorPage";
 import MasterClass from "./pages/MasterClass";
+import AlumnosList from "./components/AlumnosList";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
 
 //Esto es con React Router versión 6.
 
@@ -36,6 +40,20 @@ const router = createBrowserRouter([
 				path: "/masterclass",
 				element: <MasterClass />,
 			},
+			{
+				path: "/alumnos",
+				element: <AlumnosList />,
+			},
+			{
+				path: "/login",
+				element: <Login />,
+			},
+			{
+				path: "/register",
+				element: <Register />,
+			},
+			
+			
 		], //Componentes navegables del elemento
 	},
 ]);
