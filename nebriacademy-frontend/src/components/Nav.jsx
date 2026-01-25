@@ -18,8 +18,8 @@ function Nav() {
 				{/* Links */}
 				<div className="navbar-links">
 					<Link to="/">Mi Academia</Link>
-					<Link to="/alumnos">Alumnos</Link>
 					<Link to="/cursos">Cursos</Link>
+					<Link to="/profesores">Profesores</Link>
 					<Link to="/masterclass">Masterclass</Link>
 				</div>
 

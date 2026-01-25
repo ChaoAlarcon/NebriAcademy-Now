@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../style/Cursos.css";
 import { fetchData } from "../api/api";
 
@@ -81,14 +82,19 @@ function Cursos() {
     {!loading && !error && cursos.length === 0 && <p>No hay cursos disponibles.</p>}
     
     {cursos.map((curso) => (
-      <div className="course-card" key={curso.id}>
+      <Link 
+        to={`/cursos/${curso.id}`} 
+        className="course-card" 
+        key={curso.id} 
+        style={{ textDecoration: 'none', color: 'inherit' }}
+      >
         <h4>{curso.nombreCurso}</h4>
-        <p class="no-select"><strong>Categoría:</strong> {curso.categoria}</p>
-        <p class="no-select"><strong>Profesor:</strong> {getNombreProfesor(curso.profesor)}</p>
-        <p class="no-select"><strong>Nivel:</strong> {curso.nivel}</p>
-        <p class="no-select"><strong>Valoración:</strong> {curso.valoracion} ⭐</p>
-        <p class="no-select">{curso.descripcion}</p>
-      </div>
+        <p className="no-select"><strong>Categoría:</strong> {curso.categoria}</p>
+        <p className="no-select"><strong>Profesor:</strong> {getNombreProfesor(curso.profesor)}</p>
+        <p className="no-select"><strong>Nivel:</strong> {curso.nivel}</p>
+        <p className="no-select"><strong>Valoración:</strong> {curso.valoracion} ⭐</p>
+        <p className="no-select">{curso.descripcion}</p>
+      </Link>
     ))}
 
   </section>

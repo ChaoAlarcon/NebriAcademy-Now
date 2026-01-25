@@ -1,4 +1,4 @@
-
+import "../style/Login.css";
 
 function LoginGrid() {
 

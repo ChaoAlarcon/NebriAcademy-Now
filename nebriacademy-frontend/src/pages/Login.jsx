@@ -4,7 +4,6 @@ import Header from '../components/Header.jsx';
 function Login() {
   return (
     <div>
-      <Header />
       <LoginGrid />
     </div>
   )

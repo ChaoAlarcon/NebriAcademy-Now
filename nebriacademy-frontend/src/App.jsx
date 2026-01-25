@@ -9,6 +9,8 @@ import MasterClass from "./pages/MasterClass";
 import AlumnosList from "./components/AlumnosList";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profesores from "./pages/Profesores";
+import Curso from "./pages/Curso";
 
 
 //Esto es con React Router versión 6.
@@ -24,15 +26,6 @@ const router = createBrowserRouter([
 				element: <Home />,
 			},
 			{
-				path: "/users",
-				element: <Users />,
-
-				loader: async () => {
-					const res = await fetch("https://jsonplaceholder.typicode.com/users");
-					return res.json();
-				},
-			},
-			{
 				path: "/cursos",
 				element: <Cursos />,
 			},
@@ -45,6 +38,10 @@ const router = createBrowserRouter([
 				element: <AlumnosList />,
 			},
 			{
+				path: "/profesores",
+				element: <Profesores />,
+			},
+			{
 				path: "/login",
 				element: <Login />,
 			},
@@ -52,9 +49,11 @@ const router = createBrowserRouter([
 				path: "/register",
 				element: <Register />,
 			},
-			
-			
-		], //Componentes navegables del elemento
+			{
+				path: "/cursos/:id",
+				element: <Curso />,
+			},
+		], 
 	},
 ]);
 

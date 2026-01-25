@@ -1,0 +1,85 @@
+@import "./variables.css";
+
+.login-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px); /* Adjust for header height */
+  padding: 2rem;
+  /* background-color: #f7f9fc; // Inherited from body */
+}
+
+.formulario-login-contenedor {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm-custom);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  border: 1px solid #eee; /* Subtle border similar to cards */
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.formulario-login-contenedor:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg-custom);
+}
+
+.formulario-login {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.formulario-login input {
+  padding: 0.8rem 1rem;
+  border: 2px solid #e1e1e1;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #fafafa;
+  font-family: inherit; /* Ensure Poppins */
+}
+
+.formulario-login input:focus {
+  outline: none;
+  border-color: var(--nebrija-red);
+  box-shadow: 0 0 0 4px var(--nebrija-focus-color);
+  background-color: #fff;
+}
+
+.formulario-login button {
+  padding: 0.9rem;
+  background-color: var(--nebrija-red);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.formulario-login button:hover {
+  background-color: var(--nebrija-red-hover);
+  box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+.formulario-login button:active {
+  transform: scale(0.98);
+}
+
+.formulario-login-contenedor a {
+  color: var(--nebrija-red);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 1px dashed transparent;
+  transition: border-color 0.2s;
+}
+
+.formulario-login-contenedor a:hover {
+  border-bottom-color: var(--nebrija-red);
+}

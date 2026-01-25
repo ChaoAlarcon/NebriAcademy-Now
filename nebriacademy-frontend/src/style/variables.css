@@ -9,3 +9,7 @@
   --border-radius: 0.75rem;
   --transition-speed: 0.3s;
 }
+
+body{
+  padding-top: 80px;
+}
