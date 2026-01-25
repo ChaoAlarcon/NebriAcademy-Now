@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profesores from "./pages/Profesores";
 import Curso from "./pages/Curso";
+import Perfil from "./pages/Perfil";
 
 
 //Esto es con React Router versión 6.
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
 				element: <Profesores />,
 			},
 			{
+				path: "/perfil",
+				element: <Perfil />,
+			},
+			{
 				path: "/login",
 				element: <Login />,
 			},
@@ -53,6 +58,7 @@ const router = createBrowserRouter([
 				path: "/cursos/:id",
 				element: <Curso />,
 			},
+			
 		], 
 	},
 ]);

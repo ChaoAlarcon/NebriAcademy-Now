@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchData } from '../api/api';
 import "../style/Profesores.css";
 
@@ -6,8 +7,15 @@ const Profesores = () => {
   const [profesores, setProfesores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const userStr = localStorage.getItem("usuario");
+    if (!userStr) {
+      navigate('/login');
+      return;
+    }
+
     // La ruta en el backend es '/profesores'
     fetchData('profesores')
       .then((data) => {
@@ -15,8 +23,8 @@ const Profesores = () => {
         if (data.Profesores) {
           setProfesores(data.Profesores);
         } else {
-             // Fallback por si la estructura cambia
-             setProfesores(Array.isArray(data) ? data : []);
+          // Fallback por si la estructura cambia
+          setProfesores(Array.isArray(data) ? data : []);
         }
         setLoading(false);
       })
