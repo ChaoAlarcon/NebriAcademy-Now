@@ -4,7 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 64px); /* Adjust for header height */
+  min-height: calc(100vh - 64px);
+  /* Adjust for header height */
   padding: 2rem;
   /* background-color: #f7f9fc; // Inherited from body */
 }
@@ -17,7 +18,8 @@
   width: 100%;
   max-width: 400px;
   text-align: center;
-  border: 1px solid #eee; /* Subtle border similar to cards */
+  border: 1px solid #eee;
+  /* Subtle border similar to cards */
   transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 
@@ -40,7 +42,8 @@
   font-size: 1rem;
   transition: border-color 0.2s, box-shadow 0.2s;
   background-color: #fafafa;
-  font-family: inherit; /* Ensure Poppins */
+  font-family: inherit;
+  /* Ensure Poppins */
 }
 
 .formulario-login input:focus {
@@ -82,4 +85,9 @@
 
 .formulario-login-contenedor a:hover {
   border-bottom-color: var(--nebrija-red);
+}
+
+.error-message {
+  color: var(--nebrija-red);
+  margin-bottom: 1rem;
 }

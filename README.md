@@ -59,3 +59,7 @@ NebriAcademy-Now/
 
 ## 📝 Notas de Implementación
 Para detalles técnicos profundos sobre el sistema de login y seguridad, consulta los [apuntes de implementación](file:///c:/GitHub/NebriAcademy-Now/nebriacademy-frontend/docs/login_implementation_notes.md).
+
+## 📝 Notas de los desarrolladores:
+
+- 

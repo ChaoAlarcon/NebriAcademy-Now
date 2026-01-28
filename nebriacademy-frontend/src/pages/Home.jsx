@@ -23,11 +23,6 @@ function Home() {
             const user = JSON.parse(userStr);
             setUserName(user.nombre);
             setIsLoggedIn(true);
-        } else {
-            setIsLoggedIn(false);
-            setLoading(false);
-            navigate('/login');
-            return;
         }
 
         const getAllData = async () => {

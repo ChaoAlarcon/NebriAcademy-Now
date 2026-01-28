@@ -12,7 +12,18 @@ import Register from "./pages/Register";
 import Profesores from "./pages/Profesores";
 import Curso from "./pages/Curso";
 import Perfil from "./pages/Perfil";
+import LoginSelection from "./Components/LoginSelection";
+import LoginProfesor from "./pages/LoginProfesor";
+import { Navigate } from "react-router-dom";
 
+// Componente para proteger rutas
+const ProtectedRoute = ({ children }) => {
+	const user = localStorage.getItem("usuario");
+	if (!user) {
+		return <Navigate to="/login" replace />;
+	}
+	return children;
+};
 
 //Esto es con React Router versión 6.
 
@@ -24,42 +35,49 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: "/",
-				element: <Home />,
+				element: <ProtectedRoute><Home /></ProtectedRoute>,
 			},
 			{
 				path: "/cursos",
-				element: <Cursos />,
+				element: <ProtectedRoute><Cursos /></ProtectedRoute>,
 			},
 			{
 				path: "/masterclass",
-				element: <MasterClass />,
+				element: <ProtectedRoute><MasterClass /></ProtectedRoute>,
 			},
 			{
 				path: "/alumnos",
-				element: <AlumnosList />,
+				element: <ProtectedRoute><AlumnosList /></ProtectedRoute>,
 			},
 			{
 				path: "/profesores",
-				element: <Profesores />,
+				element: <ProtectedRoute><Profesores /></ProtectedRoute>,
 			},
 			{
 				path: "/perfil",
-				element: <Perfil />,
+				element: <ProtectedRoute><Perfil /></ProtectedRoute>,
+			},
+			{
+				path: "/cursos/:id",
+				element: <ProtectedRoute><Curso /></ProtectedRoute>,
 			},
 			{
 				path: "/login",
+				element: <LoginSelection />,
+			},
+			{
+				path: "/login-form",
 				element: <Login />,
+			},
+			{
+				path: "/login-profesor",
+				element: <LoginProfesor />,
 			},
 			{
 				path: "/register",
 				element: <Register />,
 			},
-			{
-				path: "/cursos/:id",
-				element: <Curso />,
-			},
-			
-		], 
+		],
 	},
 ]);
 

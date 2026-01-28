@@ -26,7 +26,7 @@ function LoginGrid() {
 
     try {
       const data = await postData("usuarios/login", formData);
-      
+
       if (data.error) {
         setError(data.error);
       } else {
@@ -49,21 +49,21 @@ function LoginGrid() {
     <div className="login-grid">
       <div className="formulario-login-contenedor">
         <h2>Iniciar Sesión</h2>
-        {error && <p style={{ color: "red", marginBottom: "1rem" }}>{error}</p>}
-        
+        {error && <p className="error-message">{error}</p>}
+
         <form className="formulario-login" onSubmit={handleSubmit}>
-          <input 
-            type="email" 
+          <input
+            type="email"
             name="email"
-            placeholder="Email" 
+            placeholder="Email"
             value={formData.email}
             onChange={handleChange}
             required
           />
-          <input 
-            type="password" 
+          <input
+            type="password"
             name="contrasena"
-            placeholder="Contraseña" 
+            placeholder="Contraseña"
             value={formData.contrasena}
             onChange={handleChange}
             required
@@ -73,7 +73,7 @@ function LoginGrid() {
           </button>
         </form>
 
-        <a href="/register">Crear cuenta</a>
+        <a href="/register" onClick={(e) => { e.preventDefault(); navigate('/register'); }}>¿No tienes cuenta? Regístrate aquí</a>
       </div>
     </div>
   );

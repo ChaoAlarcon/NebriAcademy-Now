@@ -1,0 +1,133 @@
+@import "./variables.css";
+
+.login-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px);
+  padding: 2rem;
+  background-color: #f8fafc;
+}
+
+.formulario-login-contenedor {
+  background-color: #ffffff;
+  padding: 3rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 550px;
+  text-align: center;
+  border: 1px solid #edf2f7;
+}
+
+.register-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.register-form-subtitle {
+  font-size: 1rem;
+  color: #718096;
+  margin-bottom: 2.5rem;
+}
+
+.formulario-login {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.register-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.register-input,
+.register-select {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 1.5px solid #edf2f7;
+  border-radius: 10px;
+  font-size: 1rem;
+  background-color: #f8fafc;
+  color: #4a5568;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.register-input:focus,
+.register-select:focus {
+  outline: none;
+  border-color: var(--nebrija-red);
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.register-input::placeholder {
+  color: #a0aec0;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.register-button {
+  margin-top: 1rem;
+  padding: 1.1rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.register-button:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+}
+
+.register-button:disabled {
+  background-color: #feb2b2;
+  cursor: not-allowed;
+}
+
+.register-footer {
+  margin-top: 2rem;
+}
+
+.register-footer a {
+  color: #dc3545;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.register-footer a:hover {
+  color: #c82333;
+  text-decoration: underline;
+}
+
+.error-message {
+  color: #dc3545;
+  background-color: #fff5f5;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  border: 1px solid #fed7d7;
+}
+
+@media (max-width: 480px) {
+  .register-form-row {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
