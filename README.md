@@ -62,4 +62,4 @@ Para detalles técnicos profundos sobre el sistema de login y seguridad, consult
 
 ## 📝 Notas de los desarrolladores:
 
-- 
+- Usar Zustand para un diferente Home tanto para Alumnos como para Profesores
