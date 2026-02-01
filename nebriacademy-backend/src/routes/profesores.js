@@ -3,37 +3,34 @@ const router = express.Router();
 const Profesores = require("../models/Profesores.js");
 
 // Obtener todos los profesores
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   try {
     console.log("GET /profesores");
-    Profesores.findAll().then((resultado) => {
-      res.json({
-        "Numero de profesores": resultado.length,
-        Profesores: resultado,
-      });
+    const resultado = await Profesores.findAll();
+    res.json({
+      "Numero de profesores": resultado.length,
+      Profesores: resultado,
     });
   } catch (error) {
     console.error("Error al obtener profesores:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    res.status(500).json({ error: "Error interno del servidor al obtener profesores" });
   }
 });
 
 // Obtener por ID un profesor
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     console.log(`GET /profesores/${id}`);
-    Profesores.findAll().then((resultado) => {
-      const profesor = resultado.find((p) => p.id === id);
-      if (profesor) {
-        res.json(profesor);
-      } else {
-        res.status(404).json({ error: "Profesor no encontrado" });
-      }
-    });
+    const profesor = await Profesores.findByPk(id);
+    if (profesor) {
+      res.json(profesor);
+    } else {
+      res.status(404).json({ error: "Profesor no encontrado" });
+    }
   } catch (error) {
     console.error("Error al obtener profesor:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    res.status(500).json({ error: "Error interno del servidor al obtener profesor" });
   }
 });
 
@@ -51,21 +48,20 @@ router.post("/", (req, res) => {
 });
 
 // Actualizar un profesor por ID
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     console.log(`PUT /profesores/${id}`);
-    Profesores.findAll().then((resultado) => {
-      const profesor = resultado.find((p) => p.id === id);
-      if (profesor) {
-        profesor.update(req.body).then((actualizado) => res.json(actualizado));
-      } else {
-        res.status(404).json({ error: "Profesor no encontrado" });
-      }
-    });
+    const profesor = await Profesores.findByPk(id);
+    if (profesor) {
+      await profesor.update(req.body);
+      res.json(profesor);
+    } else {
+      res.status(404).json({ error: "Profesor no encontrado" });
+    }
   } catch (error) {
     console.error("Error al actualizar profesor:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    res.status(500).json({ error: "Error interno del servidor al actualizar profesor" });
   }
 });
 

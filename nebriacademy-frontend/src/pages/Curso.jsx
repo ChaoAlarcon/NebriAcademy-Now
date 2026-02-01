@@ -22,7 +22,7 @@ const Curso = () => {
 
         const getData = async () => {
             try {
-                const cursoRes = await fetchData(`cursos / ${ id } `);
+                const cursoRes = await fetchData(`cursos/${id}`);
                 const cursoData = cursoRes.Curso || cursoRes;
                 setCurso(cursoData);
 
@@ -35,7 +35,7 @@ const Curso = () => {
                 setLoading(false);
             } catch (err) {
                 console.error(err);
-                setError('Error al cargar datos');
+                setError(`Error al cargar datos: ${err.message}`);
                 setLoading(false);
             }
         };
@@ -83,7 +83,7 @@ const Curso = () => {
                     </div>
                     <div>
                         <strong style={{ display: 'block', color: '#666', fontSize: '0.9rem' }}>Profesor</strong>
-                        <span style={{ fontSize: '1.1rem' }}>{profesor ? `${ profesor.nombre } ${ profesor.apellidos } ` : 'Cargando...'}</span>
+                        <span style={{ fontSize: '1.1rem' }}>{profesor ? `${profesor.nombre} ${profesor.apellidos}` : 'Cargando...'}</span>
                     </div>
                     {/* We assume getting profesor name might require another fetch if not included in course details. 
                     For now omitting complex logic to keep it simple, or displaying the ID/Object if available. */}
