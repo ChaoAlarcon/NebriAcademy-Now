@@ -57,14 +57,15 @@ router.post("/login", async (req, res) => {
 });
 
 // Obtener todos los usuarios
-router.get("/", async (req, res) => {
+router.get("/", (req, res) => {
   try {
     console.log("GET /usuarios");
-    const resultado = await Usuarios.findAll();
-    res.json({ "Numero de usuarios": resultado.length, Usuarios: resultado });
+    Usuarios.findAll().then((resultado) => {
+      res.json({ "Numero de usuarios": resultado.length, Usuarios: resultado });
+    });
   } catch (error) {
     console.error("Error al obtener usuarios:", error);
-    res.status(500).json({ error: "Error interno del servidor al obtener usuarios" });
+    res.status(500).json({ error: "Error interno del servidor" });
   }
 });
 

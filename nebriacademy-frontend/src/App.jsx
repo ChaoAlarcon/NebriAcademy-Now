@@ -14,7 +14,6 @@ import Curso from "./pages/Curso";
 import Perfil from "./pages/Perfil";
 import LoginSelection from "./Components/LoginSelection";
 import LoginProfesor from "./pages/LoginProfesor";
-import CourseUploadForm from "./Components/CourseUploadForm";
 import { Navigate } from "react-router-dom";
 
 // Componente para proteger rutas
@@ -77,10 +76,6 @@ const router = createBrowserRouter([
 			{
 				path: "/register",
 				element: <Register />,
-			},
-			{
-				path: "/nuevo-curso",
-				element: <ProtectedRoute><CourseUploadForm /></ProtectedRoute>,
 			},
 		],
 	},

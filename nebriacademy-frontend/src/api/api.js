@@ -1,17 +1,8 @@
 export const API_URL = "http://localhost:3000";
 
 export const fetchData = async (endpoint) => {
-  try {
-    const res = await fetch(`${API_URL}/${endpoint}`);
-    if (!res.ok) {
-      const errorData = await res.json().catch(() => ({}));
-      throw new Error(errorData.error || `Error: ${res.status} ${res.statusText}`);
-    }
-    return await res.json();
-  } catch (error) {
-    console.error(`Error fetching ${endpoint}:`, error);
-    throw error;
-  }
+  const res = await fetch(`${API_URL}/${endpoint}`);
+  return res.json();
 };
 
 export const postData = async (endpoint, data) => {
@@ -23,24 +14,4 @@ export const postData = async (endpoint, data) => {
     body: JSON.stringify(data),
   });
   return res.json();
-};
-
-export const putData = async (endpoint, data) => {
-  try {
-    const res = await fetch(`${API_URL}/${endpoint}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    if (!res.ok) {
-      const errorData = await res.json().catch(() => ({}));
-      throw new Error(errorData.error || `Error: ${res.status} ${res.statusText}`);
-    }
-    return await res.json();
-  } catch (error) {
-    console.error(`Error updating ${endpoint}:`, error);
-    throw error;
-  }
 };

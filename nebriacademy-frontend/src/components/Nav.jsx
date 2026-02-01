@@ -39,9 +39,6 @@ function Nav() {
 					<Link to="/cursos">Cursos</Link>
 					<Link to="/profesores">Profesores</Link>
 					<Link to="/masterclass">Masterclass</Link>
-					{usuario && usuario.tipo === 'profesor' && (
-						<Link to="/nuevo-curso" style={{ color: '#28a745', fontWeight: 'bold' }}>Subir Curso</Link>
-					)}
 				</div>
 
 				{/* Auth Section */}
