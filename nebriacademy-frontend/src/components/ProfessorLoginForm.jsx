@@ -22,7 +22,7 @@ function ProfessorLoginForm() {
                 setProfesores(lista);
             } catch (err) {
                 console.error("Error fetching profesores:", err);
-                setError("Error al cargar la lista de profesores");
+                setError(`Error al cargar la lista de profesores: ${err.message}`);
             } finally {
                 setFetching(false);
             }
