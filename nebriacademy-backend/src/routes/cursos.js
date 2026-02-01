@@ -16,19 +16,21 @@ router.get("/", (req, res) => {
 });
 
 // Obtener por ID un curso
-router.get("/:id", async (req, res) => {
+router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
     console.log(`GET /cursos/${id}`);
-    const curso = await Cursos.findByPk(id);
-    if (curso) {
-      res.json(curso);
-    } else {
-      res.status(404).json({ error: "Curso no encontrado" });
-    }
+    Cursos.findAll().then((resultado) => {
+      const curso = resultado.find((c) => c.id === id);
+      if (curso) {
+        res.json(curso);
+      } else {
+        res.status(404).json({ error: "Curso no encontrado" });
+      }
+    });
   } catch (error) {
     console.error("Error al obtener curso:", error);
-    res.status(500).json({ error: "Error interno del servidor al obtener el curso" });
+    res.status(500).json({ error: "Error interno del servidor" });
   }
 });
 
