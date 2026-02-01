@@ -161,6 +161,7 @@ function Cursos() {
               key={curso.id}
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
+              <div style={{ fontSize: '2rem', marginBottom: '10px' }}>{curso.icono || '📚'}</div>
               <h4>{curso.nombreCurso}</h4>
               <p className="no-select"><strong>Categoría:</strong> {curso.categoria}</p>
               <p className="no-select"><strong>Profesor:</strong> {getNombreProfesor(curso.profesor)}</p>

@@ -24,5 +24,17 @@ app.use('/puntuacionesejercicios', require('./routes/puntuacionesejercicios'));
 app.use('/usuarios', require('./routes/usuarios'));
 app.use('/videos', require('./routes/videos'));
 
-// Inica el servidor
-app.listen(3000, () => console.log('Servidor ejecutándose en http://localhost:3000'));
+const sequelize = require('./database/connection');
+
+// Sincronizar modelos con la base de datos (añade columnas nuevas si faltan)
+sequelize.sync({ alter: true })
+  .then(() => {
+    console.log('Modelos sincronizados con la base de datos.');
+    // Inicia el servidor
+    app.listen(3000, () => console.log('Servidor ejecutándose en http://localhost:3000'));
+  })
+  .catch(err => {
+    console.error('Error al sincronizar la base de datos:', err);
+    // Iniciar de todos modos o manejar error
+    app.listen(3000, () => console.log('Servidor ejecutándose en http://localhost:3000 con errores de sincronización'));
+  });

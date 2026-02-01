@@ -64,7 +64,7 @@ function ProfessorDashboard({ userName, userId }) {
                                     misCursos.map((curso, index) => (
                                         <div key={curso.id} className="dashboard-course-item">
                                             <div className="course-icon-placeholder">
-                                                {['📚', '💻', '🧪'][index % 3]}
+                                                {curso.icono || '📚'}
                                             </div>
                                             <div className="course-info" style={{ flex: 1 }}>
                                                 <h3>{curso.nombreCurso}</h3>

@@ -33,34 +33,36 @@ router.get("/:id", async (req, res) => {
 });
 
 // Crear un curso
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    console.log("POST /cursos");
-    Cursos.create(req.body).then((nuevo) => {
-      res.status(201).json(nuevo);
-    });
+    console.log("POST /cursos", req.body);
+    const nuevo = await Cursos.create(req.body);
+    res.status(201).json(nuevo);
   } catch (error) {
     console.error("Error al crear curso:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    // Provide more specific error if it's a database schema issue
+    const message = error.name === 'SequelizeDatabaseError' 
+      ? `Error de base de datos: ${error.message}. Asegúrate de que la tabla 'cursos' tenga la columna 'icono'.`
+      : "Error interno del servidor al crear el curso";
+    res.status(500).json({ error: message, details: error.message });
   }
 });
 
 // Actualizar un curso por ID
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    console.log(`PUT /cursos/${id}`);
-    Cursos.findAll().then((resultado) => {
-      const curso = resultado.find((c) => c.id === id);
-      if (curso) {
-        curso.update(req.body).then((actualizado) => res.json(actualizado));
-      } else {
-        res.status(404).json({ error: "Curso no encontrado" });
-      }
-    });
+    console.log(`PUT /cursos/${id}`, req.body);
+    const curso = await Cursos.findByPk(id);
+    if (curso) {
+      await curso.update(req.body);
+      res.json(curso);
+    } else {
+      res.status(404).json({ error: "Curso no encontrado" });
+    }
   } catch (error) {
     console.error("Error al actualizar curso:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    res.status(500).json({ error: "Error interno del servidor al actualizar el curso" });
   }
 });
 

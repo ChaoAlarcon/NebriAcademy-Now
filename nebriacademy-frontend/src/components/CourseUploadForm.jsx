@@ -9,8 +9,12 @@ function CourseUploadForm() {
         categoria: '',
         nivel: 'Principiante',
         descripcion: '',
-        profesor: null
+        profesor: null,
+        icono: '📚',
+        videoUrl: ''
     });
+
+    const icons = ['📚', '💻', '🎨', '🧪', '🌍', '📊', '🚀', '🧠', '⚖️', '🎭'];
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
@@ -99,12 +103,43 @@ function CourseUploadForm() {
                         <option value="Avanzado">Avanzado</option>
                     </select>
 
+                    <label style={{ textAlign: 'left', display: 'block', marginBottom: '10px', marginTop: '15px', fontSize: '0.9rem' }}>Elige un icono para el curso:</label>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px' }}>
+                        {icons.map(icon => (
+                            <div
+                                key={icon}
+                                onClick={() => setFormData(prev => ({ ...prev, icono: icon }))}
+                                style={{
+                                    fontSize: '1.5rem',
+                                    padding: '10px',
+                                    cursor: 'pointer',
+                                    borderRadius: '8px',
+                                    border: formData.icono === icon ? '2px solid var(--nebrija-red)' : '2px solid #eee',
+                                    backgroundColor: formData.icono === icon ? '#fff5f6' : 'white',
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                {icon}
+                            </div>
+                        ))}
+                    </div>
+
                     <textarea
                         name="descripcion"
                         placeholder="Descripción del curso"
                         className="register-input"
                         style={{ minHeight: '100px', padding: '10px' }}
                         value={formData.descripcion}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <input
+                        type="url"
+                        name="videoUrl"
+                        placeholder="URL del Vídeo (ej: YouTube, Vimeo)"
+                        className="register-input"
+                        value={formData.videoUrl}
                         onChange={handleChange}
                         required
                     />

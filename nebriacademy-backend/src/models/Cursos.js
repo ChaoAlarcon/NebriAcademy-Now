@@ -8,7 +8,9 @@ const Cursos = sequelize.define('cursos', {
   nivel: DataTypes.STRING,
   valoracion: DataTypes.FLOAT,
   comentarios: DataTypes.TEXT,
-  descripcion: DataTypes.TEXT
+  descripcion: DataTypes.TEXT,
+  icono: DataTypes.STRING,
+  videoUrl: DataTypes.STRING
 }, { timestamps: false });
 
 module.exports = Cursos;
