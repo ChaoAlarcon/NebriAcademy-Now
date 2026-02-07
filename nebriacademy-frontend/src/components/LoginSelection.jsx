@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../style/LoginSelection.css';
+import '../style/Auth.css';
 
 function LoginSelection() {
     const navigate = useNavigate();
@@ -16,9 +16,9 @@ function LoginSelection() {
     };
 
     return (
-        <div className="login-selection-container">
-            <div className="login-selection-card">
-                <h1>¿Cómo quieres acceder?</h1>
+        <div className="auth-grid">
+            <div className="auth-card register-form-width">
+                <h1 className="auth-title">¿Cómo quieres acceder?</h1>
                 <div className="selection-grid">
                     <div
                         className="selection-item"

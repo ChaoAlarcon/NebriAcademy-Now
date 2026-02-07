@@ -1,0 +1,120 @@
+/* Contenedor principal de los detalles del curso cargado */
+.curso-detail-container {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 64px auto 0;
+}
+
+/* Enlace de retroceso (vuelve al listado general) */
+.curso-back-link {
+    text-decoration: none;
+    color: #666;
+    margin-bottom: 1rem;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+/* Tarjeta contenedora de la información del curso */
+.curso-card {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e0e0;
+    position: relative;
+}
+
+/* Botón flotante para activar el modo edición (solo profesores) */
+.curso-edit-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 16px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Cabecera del curso: Título e Icono principal */
+.curso-header {
+    margin-top: 0;
+    color: #333;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.curso-icon-large {
+    font-size: 2.5rem;
+}
+
+/* Grid para mostrar metadatos (Nivel, Valoración, Profesor) */
+.curso-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.curso-stat-item strong {
+    display: block;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.curso-stat-item span {
+    font-size: 1.1rem;
+}
+
+/* Línea divisoria decorativa */
+.curso-divider {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 2rem 0;
+}
+
+/* Párrafo de la descripción detallada */
+.curso-description {
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+/* SECCIÓN DE VÍDEO CON RELACIÓN DE ASPECTO 16:9 */
+.curso-video-section {
+    margin-top: 2rem;
+}
+
+.curso-video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* Mantiene proporción 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* El frame del video ocupa todo el contenedor relative */
+.curso-video-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Reproductor nativo de vídeo (si se carga archivo directo) */
+.curso-video-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}

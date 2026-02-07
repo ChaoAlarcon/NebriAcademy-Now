@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postData } from "../api/api";
-import "../style/Login.css";
+import "../style/Auth.css";
 
 function LoginGrid() {
   const [formData, setFormData] = useState({
@@ -46,16 +46,17 @@ function LoginGrid() {
   };
 
   return (
-    <div className="login-grid">
-      <div className="formulario-login-contenedor">
-        <h2>Iniciar Sesión</h2>
+    <div className="auth-grid">
+      <div className="auth-card">
+        <h2 className="auth-title">Iniciar Sesión</h2>
         {error && <p className="error-message">{error}</p>}
 
-        <form className="formulario-login" onSubmit={handleSubmit}>
+        <form className="auth-form" onSubmit={handleSubmit}>
           <input
             type="email"
             name="email"
             placeholder="Email"
+            className="nebri-input"
             value={formData.email}
             onChange={handleChange}
             required
@@ -64,16 +65,19 @@ function LoginGrid() {
             type="password"
             name="contrasena"
             placeholder="Contraseña"
+            className="nebri-input"
             value={formData.contrasena}
             onChange={handleChange}
             required
           />
-          <button type="submit" disabled={loading}>
+          <button type="submit" className="nebri-button" disabled={loading}>
             {loading ? "Cargando..." : "Iniciar Sesión"}
           </button>
         </form>
 
-        <a href="/register" onClick={(e) => { e.preventDefault(); navigate('/register'); }}>¿No tienes cuenta? Regístrate aquí</a>
+        <div className="auth-footer">
+          <a href="/register" onClick={(e) => { e.preventDefault(); navigate('/register'); }}>¿No tienes cuenta? Regístrate aquí</a>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 @import "./variables.css";
 
+/* Contenedor principal del Dashboard */
 .dashboard-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -7,6 +8,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
+/* Cabecera del Dashboard: Título y bienvenida */
 .dashboard-header {
   margin-bottom: 2rem;
 }
@@ -27,19 +29,23 @@
   font-weight: 600;
 }
 
+/* Sistema de Rejilla del Dashboard (2 columnas: principal y lateral) */
 .dashboard-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
 }
 
+/* Adaptación para tablets y móviles: columna única */
 @media (max-width: 900px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
 }
 
-/* CARDS COMMON STYLES */
+/**
+ * ESTILOS COMUNES DE TARJETAS (CARDS)
+ */
 .dashboard-card {
   background-color: #fff;
   border-radius: var(--border-radius);
@@ -74,7 +80,9 @@
   text-decoration: underline;
 }
 
-/* COURSE LIST */
+/**
+ * LISTADO DE CURSOS EN EL DASHBOARD
+ */
 .dashboard-course-list {
   display: flex;
   flex-direction: column;
@@ -98,6 +106,7 @@
   border-color: #e0e0e0;
 }
 
+/* Icono o placeholder decorativo del curso */
 .course-icon-placeholder {
   width: 50px;
   height: 50px;
@@ -124,7 +133,9 @@
   margin: 0;
 }
 
-/* PROGRESS BARS */
+/**
+ * BARRAS DE PROGRESO (USADAS EN CURSOS ACTIVOS)
+ */
 .progress-container {
   width: 100%;
   background-color: #eee;
@@ -140,7 +151,9 @@
   border-radius: 10px;
 }
 
-/* STATS */
+/**
+ * ESTADÍSTICAS NUMÉRICAS (LATERAL)
+ */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -166,13 +179,16 @@
   color: #666;
 }
 
-/* EVENTS / UPCOMING */
+/**
+ * LISTA DE EVENTOS / INCIDENCIAS
+ */
 .event-item {
   display: flex;
   align-items: flex-start;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #eee;
+  gap: 1rem;
 }
 
 .event-item:last-child {
@@ -181,21 +197,30 @@
   padding-bottom: 0;
 }
 
+/* Caja de estado del evento (#ID o fecha) */
 .event-date {
+  width: 55px;
+  height: 55px;
   background-color: #333;
   color: #fff;
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  text-align: center;
-  margin-right: 1rem;
-  min-width: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
-.event-date span {
-  display: block;
-  font-weight: 700;
-  font-size: 1rem;
+/* Estados de color para incidencias */
+.event-date.pendiente {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.event-date.resuelto {
+  background-color: #e7f1ff;
+  color: #0056b3;
 }
 
 .event-details h4 {
@@ -208,4 +233,30 @@
   font-size: 0.8rem;
   color: #666;
   margin: 0;
+}
+
+/* Metadatos adicionales en los items de curso */
+.dashboard-course-item-info {
+  flex: 1;
+}
+
+.dashboard-course-item-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+/* Link especial para profesores: Crear curso */
+.create-course-link {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.create-course-link:hover {
+  background-color: #218838;
 }

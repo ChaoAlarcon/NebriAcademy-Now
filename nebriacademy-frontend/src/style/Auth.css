@@ -1,0 +1,66 @@
+@import "./variables.css";
+
+/* Auth Selection Screen */
+.selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.selection-item {
+    background: #ffffff;
+    border: 2px solid #f0f0f0;
+    border-radius: var(--border-radius);
+    padding: 2.5rem 1.5rem;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.selection-item:hover {
+    border-color: var(--nebrija-red);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.selection-icon {
+    font-size: 4rem;
+    line-height: 1;
+}
+
+/* Specific Register Layout */
+.register-form-width {
+    max-width: 600px;
+}
+
+.register-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+@media (max-width: 480px) {
+    .register-form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Title & Subtitle */
+.auth-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+    font-size: 1rem;
+    color: #718096;
+    margin-bottom: 2rem;
+}

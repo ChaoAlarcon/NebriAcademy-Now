@@ -1,5 +1,5 @@
 @import "./variables.css";
-/* ===== NAVBAR NEBRIACADEMY ===== */
+/* ===== BARRA DE NAVEGACIÓN (NAVBAR) ===== */
 
 .navbar {
   position: fixed;
@@ -10,11 +10,9 @@
   background-color: #ffffff;
   box-shadow: var(--shadow-sm-custom);
   z-index: 1000;
-
-
 }
 
-/* Contenedor principal */
+/* Contenedor principal alineado al centro */
 .navbar-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -23,10 +21,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
 }
 
-/* Logo */
+/* Espacio del Logo corporativo */
 .navbar-logo {
   font-size: 1.5rem;
   font-weight: 700;
@@ -46,8 +43,7 @@
   height: 40px;
 }
 
-
-/* Enlaces centrales */
+/* Enlaces centrales de navegación */
 .navbar-links {
   display: flex;
   gap: 32px;
@@ -66,7 +62,7 @@
   color: var(--nebrija-red);
 }
 
-/* Subrayado animado */
+/* Efecto de subrayado animado al pasar el ratón */
 .navbar-links a::after {
   content: "";
   position: absolute;
@@ -82,14 +78,14 @@
   width: 100%;
 }
 
-/* Zona login / registro */
+/* Zona de perfil y botones de salida/login */
 .navbar-auth {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.navbar-profile{
+.navbar-profile {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -106,7 +102,7 @@
   color: var(--nebrija-red);
 }
 
-/* Botón principal */
+/* Botón de Registro resaltado */
 .navbar-register {
   text-decoration: none;
   background-color: var(--nebrija-red);
@@ -132,9 +128,19 @@
   box-shadow: 0 0 0 0.25rem var(--nebrija-focus-color);
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE: Ocultar enlaces en móviles ===== */
 @media (max-width: 768px) {
   .navbar-links {
     display: none;
   }
+}
+
+/* Estilo especial para enlaces de acción como 'Subir Curso' */
+.nav-link-special {
+  color: #28a745 !important;
+  font-weight: bold;
+}
+
+.nav-link-special:hover {
+  color: #218838 !important;
 }

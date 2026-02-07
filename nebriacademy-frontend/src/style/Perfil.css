@@ -1,3 +1,4 @@
+/* Contenedor principal de la página de perfil */
 .profile-container {
     max-width: 900px;
     margin: 64px auto 0;
@@ -5,6 +6,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
+/* Tarjeta principal del usuario */
 .profile-card {
     background-color: #fff;
     border-radius: 16px;
@@ -13,12 +15,14 @@
     border: 1px solid #f0f0f0;
 }
 
+/* Cabecera con degradado corporativo */
 .profile-header {
     background: linear-gradient(135deg, var(--nebrija-red) 0%, #a01a2c 100%);
     height: 120px;
     position: relative;
 }
 
+/* Marco circular para el avatar del perfil */
 .profile-avatar-container {
     position: absolute;
     bottom: -50px;
@@ -41,10 +45,12 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Contenido interno del perfil (Ajustado para el avatar flotante) */
 .profile-body {
     padding: 70px 40px 40px;
 }
 
+/* Cabecera de información: Nombre y botones */
 .profile-info-header {
     display: flex;
     justify-content: space-between;
@@ -58,6 +64,7 @@
     color: #333;
 }
 
+/* Etiquetas de rol estilizadas */
 .profile-role-badge {
     display: inline-block;
     padding: 4px 12px;
@@ -80,6 +87,7 @@
     gap: 10px;
 }
 
+/* Estilos de botones dentro del perfil */
 .btn-profile {
     padding: 10px 20px;
     border-radius: 8px;
@@ -108,6 +116,7 @@
     background-color: #e9ecef;
 }
 
+/* Grid para detalles divididos de información */
 .profile-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -139,6 +148,7 @@
     font-weight: 500;
 }
 
+/* Sección de Redes Sociales */
 .social-links {
     display: flex;
     gap: 15px;
@@ -156,6 +166,7 @@
     color: var(--nebrija-red);
 }
 
+/* Adaptación para dispositivos pequeños */
 @media (max-width: 600px) {
     .profile-body {
         padding: 60px 20px 30px;
@@ -169,4 +180,30 @@
     .profile-avatar-container {
         left: 20px;
     }
+}
+
+/* Utilidades para campos de edición */
+.profile-edit-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.profile-social-input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.profile-social-link {
+    color: var(--nebrija-red);
+    text-decoration: none;
+}
+
+.profile-social-list {
+    display: flex;
+    gap: 15px;
 }

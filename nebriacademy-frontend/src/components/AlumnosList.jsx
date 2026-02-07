@@ -14,8 +14,8 @@ const AlumnosList = () => {
         if (data.Alumnos) {
           setAlumnos(data.Alumnos);
         } else {
-             // Fallback por si la estructura cambia
-             setAlumnos(Array.isArray(data) ? data : []);
+          // Fallback por si la estructura cambia
+          setAlumnos(Array.isArray(data) ? data : []);
         }
         setLoading(false);
       })
@@ -30,17 +30,11 @@ const AlumnosList = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div className="p-2rem">
       <h2>Lista de Alumnos</h2>
-      <ul style={{ listStyleType: 'none', padding: 0 }}>
+      <ul className="list-none">
         {alumnos.map((alumno) => (
-          <li key={alumno.id} style={{ 
-            border: '1px solid #ddd', 
-            borderRadius: '8px', 
-            padding: '10px', 
-            marginBottom: '10px',
-            backgroundColor: '#fff'
-          }}>
+          <li key={alumno.id} className="dashboard-card mb-1rem p-2rem">
             <strong>{alumno.nombre} {alumno.apellidos}</strong> <br />
             <small>{alumno.email}</small>
           </li>

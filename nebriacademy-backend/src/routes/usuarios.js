@@ -69,74 +69,67 @@ router.get("/", async (req, res) => {
 });
 
 // Obtener por ID un usuario
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     console.log(`GET /usuarios/${id}`);
-    Usuarios.findAll().then((resultado) => {
-      const usuario = resultado.find((u) => u.id === id);
-      if (usuario) {
-        res.json(usuario);
-      } else {
-        res.status(404).json({ error: "Usuario no encontrado" });
-      }
-    });
+    const usuario = await Usuarios.findByPk(id);
+    if (usuario) {
+      res.json(usuario);
+    } else {
+      res.status(404).json({ error: "Usuario no encontrado" });
+    }
   } catch (error) {
     console.error("Error al obtener usuario:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    res.status(500).json({ error: "Error interno del servidor al obtener usuario" });
   }
 });
 
 // Crear un usuario
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   try {
     console.log("POST /usuarios");
-    Usuarios.create(req.body).then((nuevo) => {
-      res.status(201).json(nuevo);
-    });
+    const nuevo = await Usuarios.create(req.body);
+    res.status(201).json(nuevo);
   } catch (error) {
     console.error("Error al crear usuario:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    res.status(500).json({ error: "Error interno del servidor al crear usuario" });
   }
 });
 
 // Actualizar un usuario por ID
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     console.log(`PUT /usuarios/${id}`);
-    Usuarios.findAll().then((resultado) => {
-      const usuario = resultado.find((u) => u.id === id);
-      if (usuario) {
-        usuario.update(req.body).then((actualizado) => res.json(actualizado));
-      } else {
-        res.status(404).json({ error: "Usuario no encontrado" });
-      }
-    });
+    const usuario = await Usuarios.findByPk(id);
+    if (usuario) {
+      await usuario.update(req.body);
+      res.json(usuario);
+    } else {
+      res.status(404).json({ error: "Usuario no encontrado" });
+    }
   } catch (error) {
     console.error("Error al actualizar usuario:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    res.status(500).json({ error: "Error interno del servidor al actualizar usuario" });
   }
 });
 
 // Eliminar un usuario por ID
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     console.log(`DELETE /usuarios/${id}`);
-    Usuarios.findAll().then((resultado) => {
-      const usuario = resultado.find((u) => u.id === id);
-      if (usuario) {
-        usuario
-          .destroy()
-          .then(() => res.json({ mensaje: "Usuario eliminado" }));
-      } else {
-        res.status(404).json({ error: "Usuario no encontrado" });
-      }
-    });
+    const usuario = await Usuarios.findByPk(id);
+    if (usuario) {
+      await usuario.destroy();
+      res.json({ mensaje: "Usuario eliminado" });
+    } else {
+      res.status(404).json({ error: "Usuario no encontrado" });
+    }
   } catch (error) {
     console.error("Error al eliminar usuario:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    res.status(500).json({ error: "Error interno del servidor al eliminar usuario" });
   }
 });
 

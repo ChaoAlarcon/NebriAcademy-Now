@@ -1,6 +1,6 @@
 @import "./variables.css";
 
-/* ===== FOOTER ===== */
+/* ===== PIE DE PÁGINA (FOOTER) ===== */
 .footer {
   background-color: #ffffff;
   box-shadow: var(--shadow-sm-custom);
@@ -8,6 +8,7 @@
   margin-top: 3rem;
 }
 
+/* Layout de columnas del footer */
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -16,7 +17,7 @@
   gap: 2rem;
 }
 
-/* Columnas */
+/* Estilos para los títulos de sección en el footer */
 .footer-column h4 {
   font-size: 1.1rem;
   font-weight: 600;
@@ -24,6 +25,7 @@
   color: #212529;
 }
 
+/* Estilos para textos y enlaces del footer */
 .footer-column p,
 .footer-column a {
   font-size: 0.95rem;
@@ -38,7 +40,7 @@
   color: var(--nebrija-red);
 }
 
-/* Marca */
+/* Identidad visual de la marca en el pie de página */
 .footer-brand {
   font-size: 1.4rem;
   font-weight: 700;
@@ -46,7 +48,7 @@
   margin-bottom: 0.5rem;
 }
 
-/* Línea inferior */
+/* Línea divisoria y pie final de créditos/copyright */
 .footer-bottom {
   margin-top: 2rem;
   padding-top: 1rem;

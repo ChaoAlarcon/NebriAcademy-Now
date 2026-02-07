@@ -2,10 +2,15 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../style/Nav.css";
 
+/**
+ * Componente de barra de navegación.
+ * Gestiona el estado del usuario autenticado y muestra enlaces dinámicos.
+ */
 function Nav() {
 	const [usuario, setUsuario] = useState(null);
 	const navigate = useNavigate();
 
+	// Al montar el componente, verificamos si hay un usuario en localStorage
 	useEffect(() => {
 		const userStr = localStorage.getItem("usuario");
 		if (userStr) {
@@ -13,17 +18,19 @@ function Nav() {
 		}
 	}, []);
 
+	// Función para cerrar sesión: limpia el storage y redirige al inicio
 	const handleLogout = () => {
 		localStorage.removeItem("usuario");
 		setUsuario(null);
 		navigate("/");
+		// Recargamos para limpiar estados globales si fuera necesario
 		window.location.reload();
 	};
 
 	return (
 		<nav className="navbar">
 			<div className="navbar-container">
-				{/* Logo */}
+				{/* Sección del Logo */}
 				<Link to="/" className="navbar-logo">
 					<img
 						src="/nebrija.png"
@@ -33,18 +40,19 @@ function Nav() {
 					<p className="navbar-logo-text">NebriAcademy</p>
 				</Link>
 
-				{/* Links */}
+				{/* Enlaces de navegación principales */}
 				<div className="navbar-links">
 					<Link to="/">Mi Academia</Link>
 					<Link to="/cursos">Cursos</Link>
 					<Link to="/profesores">Profesores</Link>
 					<Link to="/masterclass">Masterclass</Link>
+					{/* Solo los profesores pueden ver el enlace para subir cursos */}
 					{usuario && usuario.tipo === 'profesor' && (
-						<Link to="/nuevo-curso" style={{ color: '#28a745', fontWeight: 'bold' }}>Subir Curso</Link>
+						<Link to="/nuevo-curso" className="nav-link-special">Subir Curso</Link>
 					)}
 				</div>
 
-				{/* Auth Section */}
+				{/* Sección de autenticación / perfil */}
 				<div className="navbar-auth">
 					{usuario ? (
 						<div className="navbar-profile">
@@ -55,6 +63,7 @@ function Nav() {
 						</div>
 					) : (
 						<>
+							{/* Si no hay usuario, mostramos Login y Registro */}
 							<Link to="/login" className="navbar-login">
 								Login
 							</Link>

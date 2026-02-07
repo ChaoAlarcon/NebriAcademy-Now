@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postData } from "../api/api";
-import "../style/Register.css";
+import "../style/Auth.css";
 
 function RegisterForm() {
     const [formData, setFormData] = useState({
@@ -47,20 +47,20 @@ function RegisterForm() {
     };
 
     return (
-        <div className="login-grid">
-            <div className="formulario-login-contenedor register-form-width">
-                <h2 className="register-title">Registrarse</h2>
-                <p className="register-form-subtitle">Completa tus datos para crear una cuenta externa.</p>
+        <div className="auth-grid">
+            <div className="auth-card register-form-width">
+                <h2 className="auth-title">Registrarse</h2>
+                <p className="auth-subtitle">Completa tus datos para crear una cuenta externa.</p>
 
                 {error && <p className="error-message">{error}</p>}
 
-                <form className="formulario-login" onSubmit={handleSubmit}>
+                <form className="auth-form" onSubmit={handleSubmit}>
                     <div className="register-form-row">
                         <input
                             type="text"
                             name="nombre"
                             placeholder="Nombre"
-                            className="register-input"
+                            className="nebri-input"
                             value={formData.nombre}
                             onChange={handleChange}
                             required
@@ -69,7 +69,7 @@ function RegisterForm() {
                             type="text"
                             name="apellidos"
                             placeholder="Apellidos"
-                            className="register-input"
+                            className="nebri-input"
                             value={formData.apellidos}
                             onChange={handleChange}
                             required
@@ -80,7 +80,7 @@ function RegisterForm() {
                         type="email"
                         name="email"
                         placeholder="Email"
-                        className="register-input full-width"
+                        className="nebri-input"
                         value={formData.email}
                         onChange={handleChange}
                         required
@@ -90,7 +90,7 @@ function RegisterForm() {
                         type="password"
                         name="contrasena"
                         placeholder="Contraseña"
-                        className="register-input full-width"
+                        className="nebri-input"
                         value={formData.contrasena}
                         onChange={handleChange}
                         required
@@ -101,7 +101,7 @@ function RegisterForm() {
                             type="text"
                             name="dni"
                             placeholder="DNI"
-                            className="register-input"
+                            className="nebri-input"
                             value={formData.dni}
                             onChange={handleChange}
                             required
@@ -110,7 +110,7 @@ function RegisterForm() {
                             type="text"
                             name="numTelefono"
                             placeholder="Teléfono"
-                            className="register-input"
+                            className="nebri-input"
                             value={formData.numTelefono}
                             onChange={handleChange}
                         />
@@ -119,7 +119,7 @@ function RegisterForm() {
                     <div className="register-form-row">
                         <select
                             name="pais"
-                            className="register-select"
+                            className="nebri-select"
                             value={formData.pais}
                             onChange={handleChange}
                             required
@@ -133,7 +133,7 @@ function RegisterForm() {
                         </select>
                         <select
                             name="localidad"
-                            className="register-select"
+                            className="nebri-select"
                             value={formData.localidad}
                             onChange={handleChange}
                             required
@@ -147,12 +147,12 @@ function RegisterForm() {
                         </select>
                     </div>
 
-                    <button type="submit" className="register-button" disabled={loading}>
+                    <button type="submit" className="nebri-button" disabled={loading}>
                         {loading ? "Registrando..." : "Crear cuenta"}
                     </button>
                 </form>
 
-                <div className="register-footer">
+                <div className="auth-footer">
                     <a href="/login-form" onClick={(e) => { e.preventDefault(); navigate('/login-form'); }}>¿Ya tienes cuenta? Inicia sesión</a>
                 </div>
             </div>

@@ -35,15 +35,24 @@ router.get("/:id", async (req, res) => {
 });
 
 // Crear un alumno
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   try {
     console.log("POST /alumnos");
-    Alumnos.create(req.body).then((nuevo) => {
-      res.status(201).json(nuevo);
-    });
+    const nuevo = await Alumnos.create(req.body);
+    res.status(201).json(nuevo);
   } catch (error) {
     console.error("Error al crear alumno:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    
+    // Manejar errores de validación/unicidad de Sequelize
+    if (error.name === 'SequelizeUniqueConstraintError') {
+      const campo = error.errors[0].path;
+      return res.status(400).json({ 
+        error: `El ${campo} ya está registrado`,
+        mensaje: error.errors.map(e => e.message)
+      });
+    }
+    
+    res.status(500).json({ error: "Error interno del servidor al crear alumno" });
   }
 });
 
@@ -66,21 +75,20 @@ router.put("/:id", async (req, res) => {
 });
 
 // Eliminar un alumno por ID
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     console.log(`DELETE /alumnos/${id}`);
-    Alumnos.findAll().then((resultado) => {
-      const alumno = resultado.find((a) => a.id === id);
-      if (alumno) {
-        alumno.destroy().then(() => res.json({ mensaje: "Alumno eliminado" }));
-      } else {
-        res.status(404).json({ error: "Alumno no encontrado" });
-      }
-    });
+    const alumno = await Alumnos.findByPk(id);
+    if (alumno) {
+      await alumno.destroy();
+      res.json({ mensaje: "Alumno eliminado" });
+    } else {
+      res.status(404).json({ error: "Alumno no encontrado" });
+    }
   } catch (error) {
     console.error("Error al eliminar alumno:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    res.status(500).json({ error: "Error interno del servidor al eliminar alumno" });
   }
 });
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchData, postData } from "../api/api";
-import "../style/Login.css";
+import "../style/Auth.css";
 
 function ProfessorLoginForm() {
     const [profesores, setProfesores] = useState([]);
@@ -67,19 +67,19 @@ function ProfessorLoginForm() {
     };
 
     return (
-        <div className="login-grid">
-            <div className="formulario-login-contenedor">
-                <h2>Acceso Profesores</h2>
-                <p className="register-form-subtitle">Selecciona tu perfil de la lista para continuar.</p>
+        <div className="auth-grid">
+            <div className="auth-card">
+                <h2 className="auth-title">Acceso Profesores</h2>
+                <p className="auth-subtitle">Selecciona tu perfil de la lista para continuar.</p>
 
                 {error && <p className="error-message">{error}</p>}
                 {fetching && <p>Cargando lista de profesores...</p>}
 
                 {!fetching && (
-                    <form className="formulario-login" onSubmit={handleSubmit}>
+                    <form className="auth-form" onSubmit={handleSubmit}>
                         <select
                             name="email"
-                            className="register-select"
+                            className="nebri-select"
                             value={formData.email}
                             onChange={handleChange}
                             required
@@ -96,19 +96,19 @@ function ProfessorLoginForm() {
                             type="password"
                             name="contrasena"
                             placeholder="Contraseña"
-                            className="register-input"
+                            className="nebri-input"
                             value={formData.contrasena}
                             onChange={handleChange}
                             required
                         />
 
-                        <button type="submit" className="register-button" disabled={loading}>
+                        <button type="submit" className="nebri-button" disabled={loading}>
                             {loading ? "Verificando..." : "Iniciar Sesión"}
                         </button>
                     </form>
                 )}
 
-                <div className="register-footer">
+                <div className="auth-footer">
                     <a href="/login" onClick={(e) => { e.preventDefault(); navigate('/login'); }}>Volver a selección</a>
                 </div>
             </div>

@@ -1,29 +1,147 @@
 @import "./variables.css";
 
+/* Reseteo básico y configuración de caja */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Estilos base del cuerpo */
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #f7f9fc;
   color: #343a40;
 }
 
-html, body, #root {
+/* Asegurar que el contenedor raíz ocupe toda la altura */
+html,
+body,
+#root {
   height: 100%;
 }
 
+/* Layout principal en columna para empujar el footer abajo */
 .app-layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+/* Espaciado superior para el contenido principal (Navbar fijo) */
 .main-content {
   flex: 1;
-  margin-top: 64px; /* altura del navbar */
+  margin-top: 64px;
 }
 
+/**
+ * Clases Compartidas para Autenticación (Login/Registro)
+ */
+
+/* Contenedor centrado para tarjetas de autenticación */
+.auth-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px);
+  padding: 2rem;
+  background-color: #f8fafc;
+}
+
+/* Tarjeta blanca con sombra para formularios de auth */
+.auth-card {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm-custom);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  border: 1px solid #edf2f7;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.auth-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg-custom);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/**
+ * Elementos de Formulario Estilo 'Nebrija'
+ */
+
+/* Inputs y Selects estandarizados */
+.nebri-input,
+.nebri-select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e1e1e1;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  background-color: #fafafa;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.nebri-input:focus,
+.nebri-select:focus {
+  outline: none;
+  border-color: var(--nebrija-red);
+  box-shadow: 0 0 0 4px var(--nebrija-focus-color);
+  background-color: #fff;
+}
+
+/* Botón principal rojo corporativo */
+.nebri-button {
+  padding: 0.9rem;
+  background-color: var(--nebrija-red);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.nebri-button:hover:not(:disabled) {
+  background-color: var(--nebrija-red-hover);
+  box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+.nebri-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.nebri-button:disabled {
+  background-color: #feb2b2;
+  cursor: not-allowed;
+}
+
+/**
+ * Pie de página de Auth (enlaces de ayuda o cambio de vista)
+ */
+.auth-footer {
+  margin-top: 1.5rem;
+}
+
+.auth-footer a {
+  color: var(--nebrija-red);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 1px dashed transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.auth-footer a:hover {
+  border-bottom-color: var(--nebrija-red);
+  color: var(--nebrija-red-hover);
+}

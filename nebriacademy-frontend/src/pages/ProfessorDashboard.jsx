@@ -3,39 +3,50 @@ import { Link } from 'react-router-dom';
 import { fetchData } from '../api/api';
 import '../style/Home.css';
 
+/**
+ * Dashboard principal para usuarios con rol de 'profesor'.
+ * Permite gestionar sus cursos subidos y ver estadísticas de rendimiento.
+ */
 function ProfessorDashboard({ userName, userId }) {
+    // Estado para las métricas clave del profesor
     const [stats, setStats] = useState({
         misCursos: 0,
         totalAlumnos: 0,
         valoracionMedia: 0
     });
-    const [misCursos, setMisCursos] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [misCursos, setMisCursos] = useState([]); // Lista filtrada de cursos del profesor
+    const [loading, setLoading] = useState(true); // Control de carga
 
     useEffect(() => {
+        /**
+         * Obtiene todos los cursos de la API y filtra los que pertenecen al profesor actual.
+         */
         const getProfessorData = async () => {
             try {
+                // Obtenemos todos los cursos registrados
                 const cursosData = await fetchData('cursos');
                 const allCursos = cursosData.Cursos || (Array.isArray(cursosData) ? cursosData : []);
 
-                // Filtrar cursos impartidos por este profesor
+                // Filtramos por el ID del profesor actual (pasado por props)
                 const professorCursos = allCursos.filter(c => c.profesor === userId);
 
+                // Calculamos las métricas basadas en los cursos filtrados
                 setMisCursos(professorCursos);
                 setStats({
                     misCursos: professorCursos.length,
-                    totalAlumnos: professorCursos.length * 15, // Mockup: assumes 15 students per course
+                    totalAlumnos: professorCursos.length * 15, // Estimación: 15 alumnos de media por curso
                     valoracionMedia: professorCursos.length > 0
                         ? (professorCursos.reduce((acc, c) => acc + (c.valoracion || 0), 0) / professorCursos.length).toFixed(1)
                         : 0
                 });
                 setLoading(false);
             } catch (err) {
-                console.error("Error fetching professor data:", err);
+                console.error("Error al cargar datos del profesor:", err);
                 setLoading(false);
             }
         };
 
+        // Solo lanzamos la petición si tenemos el ID del usuario
         if (userId) {
             getProfessorData();
         }
@@ -43,17 +54,20 @@ function ProfessorDashboard({ userName, userId }) {
 
     return (
         <div className="dashboard-container">
+            {/* Cabecera del panel con nombre del profesor */}
             <header className="dashboard-header">
                 <h1>Panel de Control, <span>Prof. {userName}</span></h1>
                 <p>Gestiona tus contenidos y haz un seguimiento de tus alumnos.</p>
             </header>
 
             <div className="dashboard-grid">
+                {/* Columna principal: Listado de gestión de cursos propios */}
                 <div className="main-column">
                     <div className="dashboard-card">
                         <div className="card-header">
                             <h2 className="card-title">Mis Cursos</h2>
-                            <Link to="/nuevo-curso" className="card-link" style={{ backgroundColor: '#28a745', color: 'white', padding: '5px 10px', borderRadius: '5px', textDecoration: 'none' }}>+ Crear Nuevo Curso</Link>
+                            {/* Botón para navegar al formulario de creación */}
+                            <Link to="/nuevo-curso" className="create-course-link">+ Crear Nuevo Curso</Link>
                         </div>
 
                         {loading ? (
@@ -61,19 +75,20 @@ function ProfessorDashboard({ userName, userId }) {
                         ) : (
                             <div className="dashboard-course-list">
                                 {misCursos.length > 0 ? (
-                                    misCursos.map((curso, index) => (
+                                    misCursos.map((curso) => (
                                         <div key={curso.id} className="dashboard-course-item">
                                             <div className="course-icon-placeholder">
                                                 {curso.icono || '📚'}
                                             </div>
-                                            <div className="course-info" style={{ flex: 1 }}>
+                                            <div className="dashboard-course-item-info">
                                                 <h3>{curso.nombreCurso}</h3>
-                                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#888', marginBottom: '4px' }}>
+                                                <div className="dashboard-course-item-meta">
                                                     <span>Nivel: {curso.nivel}</span>
                                                     <span>⭐ {curso.valoracion || 'N/A'}</span>
                                                 </div>
                                             </div>
-                                            <Link to={`/cursos/${curso.id}`} className="card-link" style={{ fontSize: '0.8rem' }}>Gestionar</Link>
+                                            {/* Link directo a la página de detalle/edición del curso */}
+                                            <Link to={`/cursos/${curso.id}`} className="card-link font-small">Gestionar</Link>
                                         </div>
                                     ))
                                 ) : (
@@ -84,9 +99,10 @@ function ProfessorDashboard({ userName, userId }) {
                     </div>
                 </div>
 
+                {/* Columna lateral: Estadísticas de impacto del profesor */}
                 <aside className="sidebar-column">
                     <div className="dashboard-card">
-                        <h2 className="card-title" style={{ marginBottom: '1rem' }}>Tus Estadísticas</h2>
+                        <h2 className="card-title mb-1rem">Tus Estadísticas</h2>
                         <div className="stats-grid">
                             <div className="stat-item">
                                 <span className="stat-number">{stats.misCursos}</span>

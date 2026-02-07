@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import "../style/Cursos.css";
 import { fetchData } from "../api/api";
 
-
+/**
+ * Página de Listado de Cursos.
+ * Muestra todos los cursos de la academia con un sistema de filtrado avanzado lateral.
+ */
 function Cursos() {
-  const [cursos, setCursos] = useState([]);
-  const [profesores, setProfesores] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [cursos, setCursos] = useState([]); // Todos los cursos cargados
+  const [profesores, setProfesores] = useState([]); // Lista de profesores para asociar nombres
+  const [loading, setLoading] = useState(true); // Estado de carga
+  const [error, setError] = useState(null); // Gestión de errores
 
-  // Filter state
+  // Estado para los filtros actuales (categoría, valoración mínima, nivel y profesor)
   const [filters, setFilters] = useState({
     categoria: "",
     valoracion: "",
@@ -18,6 +21,7 @@ function Cursos() {
     profesorId: ""
   });
 
+  // Cargar cursos al montar el componente
   useEffect(() => {
     fetchData('cursos')
       .then((data) => {
@@ -33,6 +37,7 @@ function Cursos() {
       });
   }, []);
 
+  // Cargar profesores para poder mostrar sus nombres en el grid de cursos
   useEffect(() => {
     fetchData('profesores')
       .then((data) => {
@@ -50,11 +55,13 @@ function Cursos() {
       });
   }, []);
 
+  // Busca el nombre de un profesor dado su ID
   const getNombreProfesor = (id) => {
     const profesor = profesores.find(p => p.id === parseInt(id));
     return profesor ? `${profesor.nombre} ${profesor.apellidos}` : 'Desconocido';
   };
 
+  // Actualiza el estado de los filtros según el input cambiado
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters(prev => ({
@@ -63,10 +70,13 @@ function Cursos() {
     }));
   };
 
-  // Unique categories for the dropdown
+  // Genera una lista única de categorías existentes en los cursos cargados
   const categories = [...new Set(cursos.map(c => c.categoria))];
 
-  // Filtering logic
+  /**
+   * Lógica de filtrado en tiempo real.
+   * Aplica todos los filtros seleccionados sobre la lista completa de cursos.
+   */
   const filteredCursos = cursos.filter(curso => {
     const matchCategoria = filters.categoria === "" || curso.categoria === filters.categoria;
     const matchValoracion = filters.valoracion === "" || curso.valoracion >= parseFloat(filters.valoracion);
@@ -79,10 +89,11 @@ function Cursos() {
   return (
     <>
       <div className="cursos-page">
-
+        {/* Barra Lateral de Filtros */}
         <aside className="filters">
           <h3>Filtros</h3>
 
+          {/* Filtro por Categoría */}
           <label>
             Categoría
             <select
@@ -99,6 +110,7 @@ function Cursos() {
             </select>
           </label>
 
+          {/* Filtro por Valoración Mínima */}
           <label>
             Valoración Mínima
             <input
@@ -113,6 +125,7 @@ function Cursos() {
             />
           </label>
 
+          {/* Filtro por Nivel (Texto) */}
           <label>
             Nivel
             <input
@@ -124,6 +137,7 @@ function Cursos() {
             />
           </label>
 
+          {/* Filtro por Profesor específico */}
           <label>
             Profesor
             <select
@@ -140,28 +154,29 @@ function Cursos() {
             </select>
           </label>
 
+          {/* Botón para resetear todos los filtros a su estado inicial */}
           <button
             className="btn-limpiar"
             onClick={() => setFilters({ categoria: "", valoracion: "", nivel: "", profesorId: "" })}
-            style={{ marginTop: '1rem', width: '100%', padding: '0.5rem', cursor: 'pointer' }}
           >
             Limpiar Filtros
           </button>
         </aside>
 
+        {/* Grid Principal de Cursos */}
         <section className="courses-grid">
           {loading && <p>Cargando datos...</p>}
           {error && <p>{error}</p>}
           {!loading && !error && filteredCursos.length === 0 && <p>No hay cursos que coincidan con los filtros.</p>}
 
+          {/* Renderizado dinámico de las tarjetas de curso */}
           {filteredCursos.map((curso) => (
             <Link
               to={`/cursos/${curso.id}`}
-              className="course-card"
+              className="course-card no-decoration inherit-color"
               key={curso.id}
-              style={{ textDecoration: 'none', color: 'inherit' }}
             >
-              <div style={{ fontSize: '2rem', marginBottom: '10px' }}>{curso.icono || '📚'}</div>
+              <div className="course-card-icon">{curso.icono || '📚'}</div>
               <h4>{curso.nombreCurso}</h4>
               <p className="no-select"><strong>Categoría:</strong> {curso.categoria}</p>
               <p className="no-select"><strong>Profesor:</strong> {getNombreProfesor(curso.profesor)}</p>
@@ -170,11 +185,8 @@ function Cursos() {
               <p className="no-select">{curso.descripcion}</p>
             </Link>
           ))}
-
         </section>
-
       </div>
-
     </>
   );
 }

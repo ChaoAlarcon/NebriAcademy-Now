@@ -18,10 +18,10 @@ const TestConnection = () => {
   }, []);
 
   return (
-    <div style={{ padding: '20px', border: '1px solid #ccc', margin: '20px', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
+    <div className="p-2rem auth-card m-0 full-width">
       <h3>Estado del Backend: {status}</h3>
       {data && (
-        <pre style={{ textAlign: 'left', backgroundColor: '#eee', padding: '10px' }}>
+        <pre className="text-left mt-2rem p-2rem" style={{ backgroundColor: '#eee' }}>
           {JSON.stringify(data, null, 2)}
         </pre>
       )}
