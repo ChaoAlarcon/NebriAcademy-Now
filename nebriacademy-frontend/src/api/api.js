@@ -63,3 +63,48 @@ export const putData = async (endpoint, data) => {
     throw error;
   }
 };
+
+/**
+ * Función genérica para enviar datos con archivos (FormData) a un endpoint.
+ * @param {string} endpoint - El endpoint de destino.
+ * @param {FormData} formData - Los datos que incluyen archivos.
+ * @returns {Promise<any>} - La respuesta del servidor.
+ */
+export const postFileData = async (endpoint, formData) => {
+  try {
+    const res = await fetch(`${API_URL}/${endpoint}`, {
+      method: 'POST',
+      // No incluimos 'Content-Type', el navegador seleccionará el correcto con el boundary
+      body: formData,
+    });
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      throw new Error(errorData.error || `Error: ${res.status} ${res.statusText}`);
+    }
+    return await res.json();
+  } catch (error) {
+    console.error(`Error al enviar archivo a ${endpoint}:`, error);
+    throw error;
+  }
+};
+
+/**
+ * Función genérica para eliminar datos (DELETE) en un endpoint.
+ * @param {string} endpoint - El endpoint de destino.
+ * @returns {Promise<any>} - La respuesta del servidor.
+ */
+export const deleteData = async (endpoint) => {
+  try {
+    const res = await fetch(`${API_URL}/${endpoint}`, {
+      method: 'DELETE',
+    });
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      throw new Error(errorData.error || `Error: ${res.status} ${res.statusText}`);
+    }
+    return await res.json();
+  } catch (error) {
+    console.error(`Error al eliminar ${endpoint}:`, error);
+    throw error;
+  }
+};

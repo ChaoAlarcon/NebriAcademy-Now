@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { fetchData, putData } from '../api/api';
+import SharedResources from '../components/SharedResources';
 import '../style/Curso.css';
 
 /**
@@ -196,6 +197,9 @@ const Curso = () => {
                     </div>
                 )}
             </div>
+
+            {/* Nueva sección de recursos compartidos */}
+            <SharedResources cursoId={id} user={user} />
         </div>
     );
 };

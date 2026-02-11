@@ -23,6 +23,11 @@ app.use('/profesorescursos', require('./routes/profesorescursos'));
 app.use('/puntuacionesejercicios', require('./routes/puntuacionesejercicios'));
 app.use('/usuarios', require('./routes/usuarios'));
 app.use('/videos', require('./routes/videos'));
+app.use('/recursos', require('./routes/recursos'));
+
+// Servir archivos estáticos de la carpeta uploads (ubicada en el root del backend)
+const uploadsPath = path.resolve(__dirname, '../uploads');
+app.use('/uploads', express.static(uploadsPath));
 
 const sequelize = require('./database/connection');
 
