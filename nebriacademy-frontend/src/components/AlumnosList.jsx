@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { fetchData } from '../api/api';
 
+/**
+ * Componente que muestra una lista de todos los alumnos registrados.
+ * Obtiene los datos de la API y renderiza tarjetas individuales para cada alumno.
+ */
 const AlumnosList = () => {
   const [alumnos, setAlumnos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // La ruta en el backend es '/alumnos'
+    // La ruta en el backend es '/alumnos' (GET)
     fetchData('alumnos')
       .then((data) => {
         // El backend devuelve { "Numero de alumnos": N, "Alumnos": [...] }
@@ -24,7 +28,7 @@ const AlumnosList = () => {
         setError('Error al cargar alumnos');
         setLoading(false);
       });
-  }, []);
+  }, []); // Se ejecuta solo al montar el componente
 
   if (loading) return <p>Cargando alumnos...</p>;
   if (error) return <p>{error}</p>;

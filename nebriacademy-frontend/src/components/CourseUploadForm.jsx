@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { postData } from '../api/api';
 import '../style/Auth.css'; // Unified form styles
 
+/**
+ * Componente de formulario para que los profesores suban nuevos cursos.
+ * Incluye validación de usuario (solo profesores) y selección de iconos.
+ */
 function CourseUploadForm() {
     const [formData, setFormData] = useState({
         nombreCurso: '',
@@ -20,15 +24,18 @@ function CourseUploadForm() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Verificar si el usuario es profesor antes de permitir el acceso
         const userStr = localStorage.getItem("usuario");
         if (userStr) {
             const user = JSON.parse(userStr);
             if (user.tipo === 'profesor') {
                 setFormData(prev => ({ ...prev, profesor: user.id }));
             } else {
+                // Si no es profesor, redirigir al inicio
                 navigate('/');
             }
         } else {
+            // Si no hay usuario, redirigir al login
             navigate('/login');
         }
     }, [navigate]);
@@ -46,12 +53,13 @@ function CourseUploadForm() {
         setError(null);
 
         try {
+            // Enviar datos del curso al backend (POST /cursos)
             const response = await postData('cursos', formData);
             if (response.error) {
                 setError(response.error);
             } else {
                 alert('Curso creado con éxito');
-                navigate('/');
+                navigate('/'); // Redirigir al dashboard tras éxito
             }
         } catch (err) {
             console.error("Error creating course:", err);

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Administradores = require("../models/Administradores.js");
 
-// Obtener todos los administradores
+// Obtener todos los administradores (GET /administradores)
 router.get("/", (req, res) => {
   try {
     console.log("GET /administradores");
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener por ID un administrador
+// Obtener un administrador por ID (GET /administradores/:id)
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -37,7 +37,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear un administrador
+// Crear un nuevo administrador (POST /administradores)
 router.post("/", (req, res) => {
   try {
     console.log("POST /administradores");
@@ -50,7 +50,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar un administrador por ID
+// Actualizar un administrador existente por ID (PUT /administradores/:id)
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -71,7 +71,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar un administrador por ID
+// Eliminar un administrador por ID (DELETE /administradores/:id)
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);

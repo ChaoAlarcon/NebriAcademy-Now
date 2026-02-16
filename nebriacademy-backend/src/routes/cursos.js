@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Cursos = require("../models/Cursos.js");
 
-// Obtener todos los cursos
+// Obtener todos los cursos (GET /cursos)
 router.get("/", (req, res) => {
   try {
     console.log("GET /cursos");
@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener por ID un curso
+// Obtener un curso por ID (GET /cursos/:id)
 router.get("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Crear un curso
+// Crear un nuevo curso (POST /cursos)
 router.post("/", async (req, res) => {
   try {
     console.log("POST /cursos", req.body);
@@ -48,14 +48,16 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Actualizar un curso por ID
+// Actualizar un curso existente por ID (PUT /cursos/:id)
 router.put("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     console.log(`PUT /cursos/${id}`, req.body);
     const curso = await Cursos.findByPk(id);
     if (curso) {
-      await curso.update(req.body);
+      // Evitar que la valoración se actualice manualmente, ya que es la media
+      const { valoracion, ...datosAActualizar } = req.body;
+      await curso.update(datosAActualizar);
       res.json(curso);
     } else {
       res.status(404).json({ error: "Curso no encontrado" });
@@ -66,7 +68,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Eliminar un curso por ID
+// Eliminar un curso por ID (DELETE /cursos/:id)
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);

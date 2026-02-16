@@ -7,7 +7,8 @@ import TestConnection from './TestConnection';
 
 /**
  * AppLayout define la estructura visual común para todas las páginas.
- * Incluye la navegación superior, el contenido dinámico (Outlet) y el pie de página.
+ * Incluye la navegación superior (Nav), el contenido dinámico (Outlet) y el pie de página (Footer).
+ * Actúa como un contenedor principal ("Layout") para la aplicación.
  */
 function AppLayout() {
   return (

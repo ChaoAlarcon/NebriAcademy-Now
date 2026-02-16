@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const CursosAlumnos = require("../models/CursosAlumnos.js");
 
-// Obtener todos los cursos-alumnos
+// Obtener todos los registros de cursos-alumnos (GET /cursosalumnos)
 router.get("/", (req, res) => {
   try {
     console.log("GET /cursosalumnos");
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener por ID un registro curso-alumno
+// Obtener un registro curso-alumno por ID (GET /cursosalumnos/:id)
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -37,7 +37,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear un registro curso-alumno
+// Crear un nuevo registro curso-alumno (Inscripción) (POST /cursosalumnos)
 router.post("/", (req, res) => {
   try {
     console.log("POST /cursosalumnos");
@@ -50,7 +50,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar un registro curso-alumno por ID
+// Actualizar un registro curso-alumno por ID (PUT /cursosalumnos/:id)
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -69,7 +69,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar un registro curso-alumno por ID
+// Eliminar un registro curso-alumno por ID (DELETE /cursosalumnos/:id)
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);

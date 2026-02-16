@@ -3,6 +3,7 @@ import "../style/Footer.css";
 
 /**
  * Componente del pie de página común.
+ * Se muestra en todas las páginas via AppLayout.
  * Contiene información de la marca y enlaces directos a las secciones principales.
  */
 function Footer() {

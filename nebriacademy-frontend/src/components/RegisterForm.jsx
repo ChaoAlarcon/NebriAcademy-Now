@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { postData } from "../api/api";
 import "../style/Auth.css";
 
+/**
+ * Formulario de registro para nuevos alumnos externos.
+ * Recopila datos personales y crea un nuevo registro en la base de datos via API.
+ */
 function RegisterForm() {
     const [formData, setFormData] = useState({
         nombre: "",
@@ -31,11 +35,13 @@ function RegisterForm() {
         setLoading(true);
 
         try {
+            // Enviar datos al endpoint de creación de alumnos (POST /alumnos)
             const data = await postData("alumnos", formData);
             if (data.error) {
                 setError(data.error);
             } else {
                 alert("Registro completado con éxito. Ahora puedes iniciar sesión.");
+                // Redirigir al formulario de login tras registro exitoso
                 navigate("/login-form");
             }
         } catch (err) {

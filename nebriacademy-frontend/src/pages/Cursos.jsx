@@ -75,7 +75,8 @@ function Cursos() {
 
   /**
    * Lógica de filtrado en tiempo real.
-   * Aplica todos los filtros seleccionados sobre la lista completa de cursos.
+   * Aplica todos los filtros seleccionados (categoría, valoración, nivel, profesor)
+   * sobre la lista completa de cursos obtenidos.
    */
   const filteredCursos = cursos.filter(curso => {
     const matchCategoria = filters.categoria === "" || curso.categoria === filters.categoria;
@@ -181,7 +182,7 @@ function Cursos() {
               <p className="no-select"><strong>Categoría:</strong> {curso.categoria}</p>
               <p className="no-select"><strong>Profesor:</strong> {getNombreProfesor(curso.profesor)}</p>
               <p className="no-select"><strong>Nivel:</strong> {curso.nivel}</p>
-              <p className="no-select"><strong>Valoración:</strong> {curso.valoracion} ⭐</p>
+              <p className="no-select"><strong>Valoración:</strong> {curso.valoracion || 0} ⭐</p>
               <p className="no-select">{curso.descripcion}</p>
             </Link>
           ))}

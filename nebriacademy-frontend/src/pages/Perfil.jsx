@@ -31,6 +31,10 @@ function Perfil() {
     /**
      * Obtiene los datos detallados del usuario dependiendo de si es alumno o profesor.
      */
+    /**
+     * Obtiene los datos detallados del usuario dependiendo de si es alumno o profesor.
+     * Si carga correctamente, inicializa el formulario de edición.
+     */
     const getDetailedData = async () => {
       try {
         const endpoint = currentUser.tipo === 'profesor' ? 'profesores' : 'alumnos';
@@ -48,7 +52,7 @@ function Perfil() {
     getDetailedData();
   }, [navigate]);
 
-  // Cierra sesión eliminando los datos de localStorage
+  // Cierra sesión eliminando los datos de localStorage y recargando la aplicación
   const handleLogout = () => {
     localStorage.removeItem("usuario");
     navigate("/");
@@ -66,6 +70,10 @@ function Perfil() {
 
   /**
    * Envía los cambios realizados en el perfil al backend.
+   */
+  /**
+   * Envía los cambios realizados en el perfil al backend (PUT).
+   * Actualiza tanto el estado local como la infromación mostrada.
    */
   const handleSave = async (e) => {
     if (e) e.preventDefault();

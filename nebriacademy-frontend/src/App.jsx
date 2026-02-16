@@ -20,8 +20,9 @@ import CourseUploadForm from "./Components/CourseUploadForm";
 import { Navigate } from "react-router-dom";
 
 /**
- * Componente Higher-Order para proteger rutas.
- * Redirige al login si no hay un usuario autenticado en localStorage.
+ * Componente Higher-Order (HOC) para proteger rutas privadas.
+ * Verifica si existe un usuario autenticado en localStorage ('usuario').
+ * Si no hay usuario, redirige a la página de login (/login).
  */
 const ProtectedRoute = ({ children }) => {
 	const user = localStorage.getItem("usuario");
@@ -31,59 +32,61 @@ const ProtectedRoute = ({ children }) => {
 	return children;
 };
 
-// Configuración del enrutador de React con rutas protegidas y públicas
+// Configuración del enrutador de React (React Router)
+// Define la estructura de navegación de la aplicación
 const router = createBrowserRouter([
 	{
-		path: "/", // Ruta base que carga el layout común (Nav + Footer)
-		element: <AppLayout />,
-		errorElement: <ErrorPage />,
+		path: "/", // Ruta raíz
+		element: <AppLayout />, // Layout principal que envuelve a las páginas (Navbar, Footer, etc.)
+		errorElement: <ErrorPage />, // Componente a mostrar en caso de error (404, etc.)
 		children: [
 			{
-				path: "/", // Dashboard principal según el rol
+				path: "/", // Página de Inicio (Dashboard) - Protegida
 				element: <ProtectedRoute><Home /></ProtectedRoute>,
 			},
 			{
-				path: "/cursos", // Listado general de cursos
+				path: "/cursos", // Catálogo de cursos - Protegida
 				element: <ProtectedRoute><Cursos /></ProtectedRoute>,
 			},
 			{
-				path: "/masterclass", // Página de Masterclass (placeholder)
+				path: "/masterclass", // Sección Masterclass - Protegida
 				element: <ProtectedRoute><MasterClass /></ProtectedRoute>,
 			},
 			{
-				path: "/alumnos", // Listado de alumnos (vista para profesores)
+				path: "/alumnos", // Gestión de alumnos (para profesores/admin) - Protegida
 				element: <ProtectedRoute><AlumnosList /></ProtectedRoute>,
 			},
 			{
-				path: "/profesores", // Listado de profesores
+				path: "/profesores", // Lista de profesores - Protegida
 				element: <ProtectedRoute><Profesores /></ProtectedRoute>,
 			},
 			{
-				path: "/perfil", // Perfil de usuario (ver y editar)
+				path: "/perfil", // Perfil del usuario actual - Protegida
 				element: <ProtectedRoute><Perfil /></ProtectedRoute>,
 			},
 			{
-				path: "/cursos/:id", // Detalle de un curso específico
+				path: "/cursos/:id", // Detalle de curso (ruta dinámica con ID) - Protegida
 				element: <ProtectedRoute><Curso /></ProtectedRoute>,
 			},
+			// Rutas públicas (Login y Registro)
 			{
-				path: "/login", // Selección de tipo de login
+				path: "/login", // Pantalla de selección de rol para login
 				element: <LoginSelection />,
 			},
 			{
-				path: "/login-form", // Formulario de login para alumnos
+				path: "/login-form", // Login específico para alumnos
 				element: <Login />,
 			},
 			{
-				path: "/login-profesor", // Formulario de login para profesores
+				path: "/login-profesor", // Login específico para profesores
 				element: <LoginProfesor />,
 			},
 			{
-				path: "/register", // Formulario de registro para nuevos alumnos
+				path: "/register", // Registro de nuevos alumnos
 				element: <Register />,
 			},
 			{
-				path: "/nuevo-curso", // Formulario para que profesores suban cursos
+				path: "/nuevo-curso", // Formulario para crear curso - Protegida
 				element: <ProtectedRoute><CourseUploadForm /></ProtectedRoute>,
 			},
 		],

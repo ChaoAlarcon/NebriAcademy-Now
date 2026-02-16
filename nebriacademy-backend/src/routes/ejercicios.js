@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Ejercicios = require("../models/Ejercicios.js");
 
-// Obtener todos los ejercicios
+// Obtener todos los ejercicios (GET /ejercicios)
 router.get("/", (req, res) => {
   try {
     console.log("GET /ejercicios");
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener por ID un ejercicio
+// Obtener un ejercicio por ID (GET /ejercicios/:id)
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -37,7 +37,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear un ejercicio
+// Crear un nuevo ejercicio (POST /ejercicios)
 router.post("/", (req, res) => {
   try {
     console.log("POST /ejercicios");
@@ -50,7 +50,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar un ejercicio por ID
+// Actualizar un ejercicio por ID (PUT /ejercicios/:id)
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -69,7 +69,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar un ejercicio por ID
+// Eliminar un ejercicio por ID (DELETE /ejercicios/:id)
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);

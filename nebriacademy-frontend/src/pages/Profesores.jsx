@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { fetchData } from '../api/api';
 import "../style/Profesores.css";
 
+/**
+ * Página que muestra el listado de todos los profesores registrados.
+ * Accesible para usuarios autenticados.
+ */
 const Profesores = () => {
   const [profesores, setProfesores] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,6 +16,7 @@ const Profesores = () => {
   useEffect(() => {
     const userStr = localStorage.getItem("usuario");
     if (!userStr) {
+      // Redirigir a login si no hay usuario
       navigate('/login');
       return;
     }
@@ -33,7 +38,7 @@ const Profesores = () => {
         setError('Error al cargar profesores');
         setLoading(false);
       });
-  }, []);
+  }, []); // Se ejecuta solo al iniciar
 
   if (loading) return <p className="loading-message">Cargando profesores...</p>;
   if (error) return <p className="error-message">{error}</p>;

@@ -20,6 +20,7 @@ function ProfessorDashboard({ userName, userId }) {
     useEffect(() => {
         /**
          * Obtiene todos los cursos de la API y filtra los que pertenecen al profesor actual.
+         * Calcula métricas como número de cursos, alumnos totales y valoración media.
          */
         const getProfessorData = async () => {
             try {

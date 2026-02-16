@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Incidencias = require("../models/Incidencias.js");
 
-// Obtener todas las incidencias
+// Obtener todas las incidencias (GET /incidencias)
 router.get("/", (req, res) => {
   try {
     console.log("GET /incidencias");
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener por ID una incidencia
+// Obtener una incidencia por ID (GET /incidencias/:id)
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -37,7 +37,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear una incidencia
+// Crear una nueva incidencia (POST /incidencias)
 router.post("/", (req, res) => {
   try {
     console.log("POST /incidencias");
@@ -50,7 +50,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar una incidencia por ID
+// Actualizar una incidencia por ID (PUT /incidencias/:id)
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -71,7 +71,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar una incidencia por ID
+// Eliminar una incidencia por ID (DELETE /incidencias/:id)
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);

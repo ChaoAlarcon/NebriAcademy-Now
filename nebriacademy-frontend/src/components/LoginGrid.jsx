@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { postData } from "../api/api";
 import "../style/Auth.css";
 
+/**
+ * Componente que renderiza el formulario de inicio de sesión genérico.
+ * Maneja la autenticación contra el endpoint 'usuarios/login'.
+ */
 function LoginGrid() {
   const [formData, setFormData] = useState({
     email: "",
@@ -25,16 +29,17 @@ function LoginGrid() {
     setLoading(true);
 
     try {
+      // Petición de login al backend
       const data = await postData("usuarios/login", formData);
 
       if (data.error) {
         setError(data.error);
       } else {
-        // Guardar usuario en localStorage
+        // Guardar sesión del usuario en localStorage
         localStorage.setItem("usuario", JSON.stringify(data));
-        // Redirigir al home
+        // Redirigir al inicio (Dashboard)
         navigate("/");
-        // Forzar recarga o actualización del Nav (en un App real usaríamos Context, pero esto es más directo para este caso)
+        // Recargar página para actualizar estado global (Nav, etc.)
         window.location.reload();
       }
     } catch (err) {

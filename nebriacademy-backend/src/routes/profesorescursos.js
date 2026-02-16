@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ProfesoresCursos = require("../models/ProfesoresCursos.js");
 
-// Obtener todos los profesores-cursos
+// Obtener todas las asignaciones profesor-curso (GET /profesorescursos)
 router.get("/", (req, res) => {
   try {
     console.log("GET /profesorescursos");
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener por ID un profesor-curso
+// Obtener una asignación profesor-curso por ID (GET /profesorescursos/:id)
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -39,7 +39,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear un registro profesor-curso
+// Crear una nueva asignación profesor-curso (POST /profesorescursos)
 router.post("/", (req, res) => {
   try {
     console.log("POST /profesorescursos");
@@ -52,7 +52,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar un registro profesor-curso por ID
+// Actualizar una asignación profesor-curso por ID (PUT /profesorescursos/:id)
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -73,7 +73,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar un registro profesor-curso por ID
+// Eliminar una asignación profesor-curso por ID (DELETE /profesorescursos/:id)
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);

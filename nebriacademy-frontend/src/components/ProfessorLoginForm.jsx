@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { fetchData, postData } from "../api/api";
 import "../style/Auth.css";
 
+/**
+ * Formulario de inicio de sesión específico para profesores.
+ * Carga una lista de profesores existentes para facilitar la selección (en lugar de escribir el email manualmente).
+ */
 function ProfessorLoginForm() {
     const [profesores, setProfesores] = useState([]);
     const [formData, setFormData] = useState({
@@ -14,6 +18,7 @@ function ProfessorLoginForm() {
     const [fetching, setFetching] = useState(true);
     const navigate = useNavigate();
 
+    // Cargar la lista de profesores al iniciar el componente
     useEffect(() => {
         const getProfesores = async () => {
             try {
@@ -42,6 +47,7 @@ function ProfessorLoginForm() {
         setError(null);
         setLoading(true);
 
+        // Validar que se haya seleccionado un profesor
         if (!formData.email) {
             setError("Por favor, selecciona un profesor");
             setLoading(false);
@@ -49,11 +55,13 @@ function ProfessorLoginForm() {
         }
 
         try {
+            // Intentar login contra el backend
             const data = await postData("usuarios/login", formData);
 
             if (data.error) {
                 setError(data.error);
             } else {
+                // Si el login es exitoso, guardar usuario y redirigir
                 localStorage.setItem("usuario", JSON.stringify(data));
                 navigate("/");
                 window.location.reload();

@@ -5,7 +5,8 @@ const path = require('path');
 const fs = require('fs');
 const RecursosCompartidos = require('../models/RecursosCompartidos');
 
-// Configuración de Multer
+// Configuración de Multer para la subida de archivos
+// Define el destino (uploads/recursos) y el nombre del archivo (timestamp + original)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const dir = path.join(__dirname, '../../uploads/recursos');
@@ -22,7 +23,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Obtener todos los recursos de un curso
+// Obtener todos los recursos de un curso específico (GET /recursos/curso/:cursoId)
 router.get('/curso/:cursoId', async (req, res) => {
   try {
     const recursos = await RecursosCompartidos.findAll({
@@ -36,7 +37,9 @@ router.get('/curso/:cursoId', async (req, res) => {
   }
 });
 
-// Crear un nuevo recurso (soporta archivo o URL)
+// Crear un nuevo recurso (POST /recursos)
+// Soporta tanto subida de archivos como enlaces (URLs)
+// Usa middleware 'upload.single' para procesar el archivo adjunto si existe
 router.post('/', upload.single('archivo'), async (req, res) => {
   try {
     const { autorId, cursoId, titulo, descripcion, tipo, formato, url } = req.body;
@@ -61,7 +64,8 @@ router.post('/', upload.single('archivo'), async (req, res) => {
   }
 });
 
-// Eliminar un recurso
+// Eliminar un recurso por ID (DELETE /recursos/:id)
+// Si es un archivo local, también lo borra del sistema de archivos
 router.delete('/:id', async (req, res) => {
   try {
     const recurso = await RecursosCompartidos.findByPk(req.params.id);

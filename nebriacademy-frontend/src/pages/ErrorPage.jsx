@@ -1,3 +1,7 @@
+/**
+ * Página de Error genérica.
+ * Se muestra cuando ocurre un fallo en la carga de datos o navegación.
+ */
 function ErrorPage() {
     return (
         <div>

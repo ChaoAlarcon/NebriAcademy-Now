@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { fetchData } from '../api/api';
 
+/**
+ * Componente de utilidad para probar la conexión con el backend.
+ * Intenta obtener la lista de usuarios y muestra el resultado o error.
+ */
 const TestConnection = () => {
   const [status, setStatus] = useState('Probando conexión...');
   const [data, setData] = useState(null);

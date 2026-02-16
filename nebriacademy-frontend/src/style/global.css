@@ -145,3 +145,17 @@ body,
   border-bottom-color: var(--nebrija-red);
   color: var(--nebrija-red-hover);
 }
+
+/**
+ * Utility Classes
+ */
+
+/* Remove text decoration (underlines) from links */
+.no-decoration {
+  text-decoration: none;
+}
+
+/* Inherit color from parent instead of using default link color */
+.inherit-color {
+  color: inherit;
+}

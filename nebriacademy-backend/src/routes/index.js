@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+// Ruta principal de la API
+// Muestra información sobre cómo usar la API y los endpoints disponibles
 router.get('/', (req, res) => {
 	res.send("Pagina principal de la API de NebriAcademy"
 		+"<br><br>Para poder ver los JSON de cada tabla con todos sus datos, poner en la URL localhost:3000/nombre de la tabla."

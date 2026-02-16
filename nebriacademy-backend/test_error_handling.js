@@ -1,3 +1,4 @@
+// Script de prueba para verificar el manejo de errores en el registro de alumnos
 async function testDuplicateRegistration() {
     const email = "nico@example.com"; // Este email ya existe según check_alumnos.js
     const data = {
@@ -25,6 +26,7 @@ async function testDuplicateRegistration() {
         const responseData = await response.json();
         console.log("Datos recibidos:", responseData);
         
+        // Esperamos un error 400 si el usuario ya existe
         if (response.status === 400 && responseData.error.includes("ya está registrado")) {
             console.log("¡ÉXITO! El servidor detectó correctamente el duplicado y devolvió 400.");
         } else {
@@ -36,3 +38,4 @@ async function testDuplicateRegistration() {
 }
 
 testDuplicateRegistration();
+

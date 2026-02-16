@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Profesores = require("../models/Profesores.js");
 
-// Obtener todos los profesores
+// Obtener todos los profesores (GET /profesores)
 router.get("/", async (req, res) => {
   try {
     console.log("GET /profesores");
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Obtener por ID un profesor
+// Obtener un profesor por ID (GET /profesores/:id)
 router.get("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -34,7 +34,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Crear un profesor
+// Crear un nuevo profesor (POST /profesores)
 router.post("/", (req, res) => {
   try {
     console.log("POST /profesores");
@@ -47,7 +47,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar un profesor por ID
+// Actualizar un profesor por ID (PUT /profesores/:id)
 router.put("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -65,7 +65,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Eliminar un profesor por ID
+// Eliminar un profesor por ID (DELETE /profesores/:id)
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);

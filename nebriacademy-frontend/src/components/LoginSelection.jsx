@@ -2,9 +2,16 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/Auth.css';
 
+/**
+ * Pantalla que permite al usuario seleccionar su rol antes de iniciar sesión:
+ * - Alumno Interno del centro
+ * - Alumno Externo (requiere registro)
+ * - Profesor (acceso exclusivo)
+ */
 function LoginSelection() {
     const navigate = useNavigate();
 
+    // Redirige al usuario según la opción seleccionada
     const handleSelection = (type) => {
         if (type === 'interno') {
             navigate('/login-form');

@@ -21,21 +21,33 @@ function StudentDashboard({ userName }) {
 
     useEffect(() => {
         /**
-         * Obtiene todos los datos necesarios para el dashboard en una sola ráfaga de peticiones.
+         * Obtiene todos los datos necesarios para el dashboard en una sola ráfaga de peticiones (Promise.all).
+         * Carga: Cursos globales, Profesores, Alumnos, Incidencias y Cursos Guardados del alumno.
          */
         const getAllData = async () => {
             try {
                 // Realizamos peticiones en paralelo para optimizar el tiempo de carga
-                const [cursosData, profesoresData, alumnosData, incidenciasData] = await Promise.all([
+                const userStr = localStorage.getItem("usuario");
+                const currentUser = userStr ? JSON.parse(userStr) : null;
+
+                const requests = [
                     fetchData('cursos'),
                     fetchData('profesores'),
                     fetchData('alumnos'),
                     fetchData('incidencias')
-                ]);
+                ];
+
+                // Si hay usuario logueado, traer sus cursos guardados
+                if (currentUser && currentUser.id) {
+                    requests.push(fetchData(`cursosguardados/alumno/${currentUser.id}`));
+                }
+
+                const [cursosData, profesoresData, alumnosData, incidenciasData, guardadosData] = await Promise.all(requests);
 
                 // Normalizamos la estructura de los datos según lo que devuelve el backend
                 const cursosList = cursosData.Cursos || (Array.isArray(cursosData) ? cursosData : []);
                 const incidenciasList = incidenciasData.Incidencias || (Array.isArray(incidenciasData) ? incidenciasData : []);
+                const guardadosList = guardadosData ? (guardadosData.Cursos || []) : [];
 
                 // Actualizamos las estadísticas globales
                 setStats({
@@ -45,8 +57,8 @@ function StudentDashboard({ userName }) {
                     incidencias: incidenciasData["Numero de incidencias"] || incidenciasList.length
                 });
 
-                // Seleccionamos solo una muestra para mostrar en el dashboard (ej: los primeros de la lista)
-                setActiveCursos(cursosList.slice(0, 3));
+                // Mostramos los cursos guardados en lugar de los aleatorios
+                setActiveCursos(guardadosList);
                 setRecentIncidencias(incidenciasList.slice(0, 2));
                 setLoading(false);
             } catch (err) {
@@ -71,7 +83,7 @@ function StudentDashboard({ userName }) {
                 <div className="main-column">
                     <div className="dashboard-card">
                         <div className="card-header">
-                            <h2 className="card-title">Continuar Aprendiendo</h2>
+                            <h2 className="card-title">Mis Cursos Guardados</h2>
                             <Link to="/cursos" className="card-link">Ver todos</Link>
                         </div>
 

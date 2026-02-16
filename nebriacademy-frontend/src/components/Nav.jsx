@@ -10,7 +10,8 @@ function Nav() {
 	const [usuario, setUsuario] = useState(null);
 	const navigate = useNavigate();
 
-	// Al montar el componente, verificamos si hay un usuario en localStorage
+	// Al montar el componente, verificamos si hay un usuario autenticado en localStorage
+	// Esto permite mostrar opciones personalizadas (ej: "Hola, Juan" o "Salir")
 	useEffect(() => {
 		const userStr = localStorage.getItem("usuario");
 		if (userStr) {
@@ -18,12 +19,12 @@ function Nav() {
 		}
 	}, []);
 
-	// Función para cerrar sesión: limpia el storage y redirige al inicio
+	// Función para cerrar sesión: limpia el usuario del almacenamiento local y redirige al inicio
 	const handleLogout = () => {
 		localStorage.removeItem("usuario");
 		setUsuario(null);
 		navigate("/");
-		// Recargamos para limpiar estados globales si fuera necesario
+		// Recargamos la página para asegurar que todos los componentes actualicen su estado (limpiar caché, etc.)
 		window.location.reload();
 	};
 
@@ -45,7 +46,6 @@ function Nav() {
 					<Link to="/">Mi Academia</Link>
 					<Link to="/cursos">Cursos</Link>
 					<Link to="/profesores">Profesores</Link>
-					<Link to="/masterclass">Masterclass</Link>
 					{/* Solo los profesores pueden ver el enlace para subir cursos */}
 					{usuario && usuario.tipo === 'profesor' && (
 						<Link to="/nuevo-curso" className="nav-link-special">Subir Curso</Link>

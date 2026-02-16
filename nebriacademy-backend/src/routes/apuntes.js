@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Apuntes = require("../models/Apuntes.js");
 
-// Obtener todos los apuntes
+// Obtener todos los apuntes (GET /apuntes)
 router.get("/", (req, res) => {
   try {
     console.log("GET /apuntes");
@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener por ID un apunte
+// Obtener un apunte por ID (GET /apuntes/:id)
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -34,7 +34,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear un apunte
+// Crear un nuevo apunte (POST /apuntes)
 router.post("/", (req, res) => {
   try {
     console.log("POST /apuntes");
@@ -47,7 +47,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar un apunte por ID
+// Actualizar un apunte existente por ID (PUT /apuntes/:id)
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -66,7 +66,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar un apunte por ID
+// Eliminar un apunte por ID (DELETE /apuntes/:id)
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);

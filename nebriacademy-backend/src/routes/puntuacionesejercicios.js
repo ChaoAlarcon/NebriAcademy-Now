@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const PuntuacionesEjercicios = require("../models/PuntuacionesEjercicios.js");
 
-// Obtener todas las puntuaciones de ejercicios
+// Obtener todas las puntuaciones de ejercicios (GET /puntuacionesejercicios)
 router.get("/", (req, res) => {
   try {
     console.log("GET /puntuacionesejercicios");
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener por ID una puntuación de ejercicio
+// Obtener una puntuación de ejercicio por ID (GET /puntuacionesejercicios/:id)
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -37,7 +37,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear una puntuación de ejercicio
+// Crear una puntuación de ejercicio (POST /puntuacionesejercicios)
 router.post("/", (req, res) => {
   try {
     console.log("POST /puntuacionesejercicios");
@@ -50,7 +50,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar una puntuación por ID
+// Actualizar una puntuación de ejercicio por ID (PUT /puntuacionesejercicios/:id)
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -71,7 +71,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar una puntuación por ID
+// Eliminar una puntuación de ejercicio por ID (DELETE /puntuacionesejercicios/:id)
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);

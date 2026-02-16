@@ -5,7 +5,8 @@ const Alumnos = require("../models/Alumnos.js");
 const Profesores = require("../models/Profesores.js");
 const Administradores = require("../models/Administradores.js");
 
-// Ruta de Login
+// Ruta de Login (POST /usuarios/login)
+// Verifica credenciales en las tablas de Alumnos, Profesores y Administradores secuencialmente
 router.post("/login", async (req, res) => {
   try {
     const { email, contrasena } = req.body;
@@ -56,7 +57,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Obtener todos los usuarios
+// Obtener todos los usuarios (solo de la tabla base 'usuarios', si se usa) (GET /usuarios)
 router.get("/", async (req, res) => {
   try {
     console.log("GET /usuarios");
@@ -68,7 +69,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Obtener por ID un usuario
+// Obtener un usuario por ID (GET /usuarios/:id)
 router.get("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -85,7 +86,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Crear un usuario
+// Crear un usuario (en la tabla base) (POST /usuarios)
 router.post("/", async (req, res) => {
   try {
     console.log("POST /usuarios");
@@ -97,7 +98,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Actualizar un usuario por ID
+// Actualizar un usuario por ID (PUT /usuarios/:id)
 router.put("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -115,7 +116,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Eliminar un usuario por ID
+// Eliminar un usuario por ID (DELETE /usuarios/:id)
 router.delete("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);

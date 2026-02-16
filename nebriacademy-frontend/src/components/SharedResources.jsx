@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { fetchData, postFileData, deleteData, API_URL } from '../api/api';
 import '../style/SharedResources.css';
 
+/**
+ * Componente para compartir y visualizar recursos (apuntes, proyectos) de un curso.
+ * Permite subir archivos o compartir URLs.
+ */
 const SharedResources = ({ cursoId, user }) => {
     const [recursos, setRecursos] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -20,8 +24,10 @@ const SharedResources = ({ cursoId, user }) => {
         loadRecursos();
     }, [cursoId]);
 
+    // Cargar recursos del backend cuando cambia el curso seleccionado
     const loadRecursos = async () => {
         try {
+            // GET /recursos/curso/:id
             const data = await fetchData(`recursos/curso/${cursoId}`);
             setRecursos(data);
             setLoading(false);
@@ -35,6 +41,7 @@ const SharedResources = ({ cursoId, user }) => {
         e.preventDefault();
         setSubiendo(true);
 
+        // Usamos FormData para permitir la subida de archivos
         const formData = new FormData();
         formData.append('autorId', user.id);
         formData.append('cursoId', cursoId);
