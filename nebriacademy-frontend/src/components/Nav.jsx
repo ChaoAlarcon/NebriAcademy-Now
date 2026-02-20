@@ -38,7 +38,7 @@ function Nav() {
 						alt="NebriAcademy Logo"
 						className="navbar-logo-image"
 					/>
-					<p className="navbar-logo-text">NebriAcademy</p>
+					<p className="navbar-logo-text">NebriAcademy Now</p>
 				</Link>
 
 				{/* Enlaces de navegación principales */}

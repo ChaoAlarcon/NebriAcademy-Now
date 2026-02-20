@@ -114,28 +114,30 @@ function Cursos() {
           {/* Filtro por Valoración Mínima */}
           <label>
             Valoración Mínima
-            <input
-              type="number"
+            <select
+              className="form-control"
               name="valoracion"
-              min="0"
-              max="5"
-              step="0.1"
               value={filters.valoracion}
-              onChange={handleFilterChange}
-              placeholder="Ej: 4.5"
-            />
+              onChange={handleFilterChange}>
+              <option value="">Todas las valoraciones</option>
+              <option value="4.5">4.5+</option>
+              <option value="4.0">4.0+</option>
+            </select>
           </label>
 
           {/* Filtro por Nivel (Texto) */}
           <label>
             Nivel
-            <input
-              type="text"
+            <select
+              className="form-control"
               name="nivel"
               value={filters.nivel}
-              onChange={handleFilterChange}
-              placeholder="Ej: Básico"
-            />
+              onChange={handleFilterChange}>
+              <option value="">Todos los niveles</option>
+              <option value="Principiante">Principiante</option>
+              <option value="Intermedio">Intermedio</option>
+              <option value="Avanzado">Avanzado</option>
+            </select>
           </label>
 
           {/* Filtro por Profesor específico */}

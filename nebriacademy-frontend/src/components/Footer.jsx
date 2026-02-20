@@ -13,7 +13,7 @@ function Footer() {
 				<div className="footer-container">
 					{/* Información de la marca */}
 					<div className="footer-column">
-						<div className="footer-brand">NebriAcademy</div>
+						<div className="footer-brand">NebriAcademy Now</div>
 						<p>Plataforma de aprendizaje online</p>
 					</div>
 

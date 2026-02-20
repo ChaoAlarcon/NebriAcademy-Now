@@ -12,12 +12,12 @@ const TestConnection = () => {
   useEffect(() => {
     fetchData('usuarios')
       .then((res) => {
-        setStatus('Conexión exitosa ✅');
+        setStatus('Conexión exitosa');
         setData(res);
       })
       .catch((err) => {
         console.error(err);
-        setStatus('Error de conexión ❌');
+        setStatus('Error');
       });
   }, []);
 
