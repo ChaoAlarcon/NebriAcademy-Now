@@ -1,16 +1,10 @@
 // URL base del backend
 export const API_URL = "http://localhost:3000";
 
-/**
- * Función genérica para obtener datos (GET) desde un endpoint específico.
- * @param {string} endpoint - El endpoint al que se realiza la petición (ej: 'cursos').
- * @returns {Promise<any>} - Los datos devueltos por la API en formato JSON.
- * Maneja errores de respuesta no exitosa (diferente de 2xx).
- */
+/* Obtiene datos de un endpoint (GET) */
 export const fetchData = async (endpoint) => {
   try {
     const res = await fetch(`${API_URL}/${endpoint}`);
-    // Si la respuesta no es correcta, intentamos extraer el error del JSON o usamos un mensaje genérico
     if (!res.ok) {
       const errorData = await res.json().catch(() => ({}));
       throw new Error(errorData.error || `Error: ${res.status} ${res.statusText}`);
@@ -22,13 +16,7 @@ export const fetchData = async (endpoint) => {
   }
 };
 
-/**
- * Función genérica para enviar datos (POST) a un endpoint.
- * @param {string} endpoint - El endpoint de destino (ej: 'alumnos').
- * @param {object} data - Los datos que se enviarán en el cuerpo de la petición.
- * @returns {Promise<any>} - La respuesta del servidor en formato JSON.
- * Útil para crear nuevos registros.
- */
+/* Envía datos a un endpoint (POST) */
 export const postData = async (endpoint, data) => {
   const res = await fetch(`${API_URL}/${endpoint}`, {
     method: 'POST',
@@ -44,13 +32,7 @@ export const postData = async (endpoint, data) => {
   return res.json();
 };
 
-/**
- * Función genérica para actualizar datos (PUT) en un endpoint.
- * @param {string} endpoint - El endpoint de destino (ej: 'profesores/1').
- * @param {object} data - Los datos actualizados.
- * @returns {Promise<any>} - Los datos actualizados devueltos por el servidor.
- * Útil para modificar registros existentes.
- */
+/* Actualiza datos existentes (PUT) */
 export const putData = async (endpoint, data) => {
   try {
     const res = await fetch(`${API_URL}/${endpoint}`, {
@@ -71,13 +53,7 @@ export const putData = async (endpoint, data) => {
   }
 };
 
-/**
- * Función genérica para enviar datos con archivos (FormData) a un endpoint.
- * Usada principalmente para subir archivos (ej: crear curso con imagen, subir recursos).
- * @param {string} endpoint - El endpoint de destino.
- * @param {FormData} formData - Objeto FormData que incluye archivos y otros campos.
- * @returns {Promise<any>} - La respuesta del servidor.
- */
+/* Envía formularios con archivos (POST con FormData) */
 export const postFileData = async (endpoint, formData) => {
   try {
     const res = await fetch(`${API_URL}/${endpoint}`, {
@@ -95,11 +71,7 @@ export const postFileData = async (endpoint, formData) => {
   }
 };
 
-/**
- * Función genérica para eliminar datos (DELETE) en un endpoint.
- * @param {string} endpoint - El endpoint de destino (ej: 'cursos/5').
- * @returns {Promise<any>} - La respuesta del servidor confirmando la eliminación.
- */
+/* Elimina un registro (DELETE) */
 export const deleteData = async (endpoint) => {
   try {
     const res = await fetch(`${API_URL}/${endpoint}`, {
