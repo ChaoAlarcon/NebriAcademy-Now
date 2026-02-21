@@ -1,3 +1,4 @@
+
 .shared-resources-container {
 	margin-top: 3rem;
 	padding: 2rem;
@@ -6,6 +7,12 @@
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* ============================
+   CABECERA DE LA SECCIÓN
+   ============================
+   Fila horizontal con el título y el botón "Compartir Recurso".
+   Separada del contenido por una línea roja inferior.
+*/
 .shared-resources-header {
 	display: flex;
 	justify-content: space-between;
@@ -15,12 +22,19 @@
 	padding-bottom: 1rem;
 }
 
+/* Título de la sección de recursos */
 .shared-resources-header h3 {
 	margin: 0;
 	color: var(--nebrija-blue);
 	font-size: 1.5rem;
 }
 
+/* ============================
+   FORMULARIO DE SUBIDA DE RECURSO
+   ============================
+   Fondo gris claro con borde izquierdo rojo para diferenciarlo
+   visualmente del listado de recursos existentes.
+*/
 .resource-upload-form {
 	background: #f8f9fa;
 	padding: 2rem;
@@ -29,10 +43,12 @@
 	border-left: 4px solid var(--nebrija-red);
 }
 
+/* Grupo de campo: label + input/textarea/select */
 .form-group {
 	margin-bottom: 1.2rem;
 }
 
+/* Etiqueta del campo del formulario */
 .form-group label {
 	display: block;
 	margin-bottom: 0.5rem;
@@ -40,6 +56,7 @@
 	color: #444;
 }
 
+/* Inputs y textareas del formulario de subida */
 .form-group input[type="text"],
 .form-group input[type="url"],
 .form-group textarea,
@@ -51,12 +68,18 @@
 	font-size: 1rem;
 }
 
+/* Fila de dos columnas (Tipo de recurso + Formato) */
 .form-row {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 1.5rem;
 }
 
+/* ============================
+   BOTÓN DE ENVÍO DEL FORMULARIO
+   ============================ */
+
+/* Botón principal rojo para publicar el recurso */
 .nebri-btn-submit {
 	background: var(--nebrija-red);
 	color: white;
@@ -68,16 +91,23 @@
 	transition: background 0.3s;
 }
 
+/* Variante más oscura del botón al pasar el ratón */
 .nebri-btn-submit:hover {
 	background: #a01a1a;
 }
 
+/* ============================
+   SECCION DE RECURSOS (GRID)
+   ============================
+   Dos columnas: una para Apuntes y otra para Proyectos.
+*/
 .resources-sections {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 2rem;
 }
 
+/* Título de columna (Apuntes / Proyectos) */
 .resources-column h4 {
 	color: var(--nebrija-blue);
 	border-bottom: 1px solid #eee;
@@ -85,12 +115,18 @@
 	margin-bottom: 1.5rem;
 }
 
+/* Lista vertical de tarjetas dentro de cada columna */
 .resources-grid {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 }
 
+/* ============================
+   TARJETA INDIVIDUAL DE RECURSO
+   ============================ */
+
+/* Tarjeta horizontal: Icono + contenido */
 .resource-card {
 	display: flex;
 	gap: 1rem;
@@ -103,17 +139,20 @@
 		box-shadow 0.2s;
 }
 
+/* Efecto hover: eleva ligeramente la tarjeta */
 .resource-card:hover {
 	transform: translateY(-2px);
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+/* Icono grande a la izquierda de la tarjeta */
 .resource-card-icon {
 	font-size: 2rem;
 	display: flex;
 	align-items: center;
 }
 
+/* Título del recurso (sin borde, para diferenciar de los h4 de columna) */
 .resource-card-content h4 {
 	margin: 0 0 0.3rem 0;
 	font-size: 1.1rem;
@@ -122,12 +161,14 @@
 	padding: 0;
 }
 
+/* Descripción del recurso */
 .resource-card-content p {
 	margin: 0 0 1rem 0;
 	font-size: 0.9rem;
 	color: #666;
 }
 
+/* Botón de descarga o enlace externo del recurso */
 .resource-download-btn {
 	display: inline-block;
 	padding: 0.4rem 1rem;
@@ -151,11 +192,13 @@
 	vertical-align: middle;
 }
 
+/* Hover del botón de descarga */
 .resource-download-btn:hover {
 	background: #ffe3e3;
 	transform: scale(1.1);
 }
 
+/* Botón rojo de papelera para eliminar el recurso (solo autor) */
 .resource-delete-btn {
 	border: none;
 	background: #fff5f5;
@@ -171,29 +214,38 @@
 	vertical-align: middle;
 }
 
+/* Hover del botón de eliminar */
 .resource-delete-btn:hover {
 	background: #ffe3e3;
 	transform: scale(1.1);
 }
 
+/* Cuerpo de la tarjeta: flex con botones al fondo */
 .resource-card-content {
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
 }
 
+/* Área de acciones (descarga + eliminar) pegada al fondo de la tarjeta */
 .resource-card-content .resource-actions {
 	margin-top: auto;
 	display: flex;
 	align-items: center;
 }
 
+/* Mensaje cuando no hay recursos en la sección */
 .no-resources {
 	color: #999;
 	font-style: italic;
 	font-size: 0.9rem;
 }
 
+/* ============================
+   RESPONSIVE (MÓVIL)
+   ============================
+   En pantallas pequeñas, las dos columnas pasan a una sola.
+*/
 @media (max-width: 768px) {
 	.resources-sections {
 		grid-template-columns: 1fr;

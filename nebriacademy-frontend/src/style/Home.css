@@ -1,3 +1,4 @@
+
 @import "./variables.css";
 
 /* Contenedor principal del Dashboard */
@@ -76,6 +77,7 @@
   font-size: 0.9rem;
 }
 
+/* Hover: subraya el enlace de ver todos */
 .card-link:hover {
   text-decoration: underline;
 }
@@ -100,6 +102,7 @@
   color: inherit;
 }
 
+/* Hover: desplazamiento sutil a la derecha */
 .dashboard-course-item:hover {
   transform: translateX(5px);
   background-color: #fcfcfc;
@@ -191,6 +194,7 @@
   gap: 1rem;
 }
 
+/* El último evento no muestra borde inferior (evita doble línea) */
 .event-item:last-child {
   border-bottom: none;
   margin-bottom: 0;

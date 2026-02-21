@@ -1,24 +1,56 @@
+
+
 :root {
+  /* ============================
+     PALETA DE COLORES CORPORATIVOS
+     ============================ */
+
+  /* Color rojo principal de la marca Nebrija */
   --nebrija-red: #dc3545;
+
+  /* Variante más oscura del rojo (para :hover) */
   --nebrija-red-hover: #c82333;
+
+  /* Color de foco semi-transparente para accesibilidad */
   --nebrija-focus-color: rgba(220, 53, 69, 0.25);
 
+  /* ============================
+     SOMBRAS
+     ============================ */
+
+  /* Sombra ligera para tarjetas y contenedores en reposo */
   --shadow-sm-custom: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.08);
+
+  /* Sombra más pronunciada para efectos :hover */
   --shadow-lg-custom: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
 
+  /* ============================
+     MISCELÁNEA
+     ============================ */
+
+  /* Radio de borde estándar para tarjetas, botones e inputs */
   --border-radius: 0.75rem;
+
+  /* Velocidad de transición uniforme para animaciones */
   --transition-speed: 0.3s;
 }
 
+/* Espaciado superior en el body para compensar la navbar fija */
 body {
   padding-top: 80px;
 }
 
+/* ============================
+   ESTILOS BASE DE BOTONES
+   ============================ */
+
+/* Estilo por defecto para todos los elementos <button> */
 button {
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
   background-color: #C2002F;
+  /* Rojo Nebrija */
   color: white;
   border: none;
   border-radius: var(--border-radius);
@@ -26,6 +58,7 @@ button {
   transition: all 0.3s ease;
 }
 
+/* Efecto hover: eleva el botón con sombra */
 button:hover {
   background-color: #C2002F;
   transform: translateY(-2px);

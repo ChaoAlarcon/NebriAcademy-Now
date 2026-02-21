@@ -1,3 +1,4 @@
+
 @import "./variables.css";
 
 /* Layout general de la página */
@@ -77,6 +78,7 @@
 	margin-bottom: 0.3rem;
 }
 
+/* Impide que el usuario seleccione texto de las tarjetas por accidente */
 .no-select {
 	user-select: none;
 }
@@ -107,6 +109,7 @@
 	box-shadow: 0 0 0 0.25rem var(--nebrija-focus-color);
 }
 
+/* Icono emoji del curso en la parte superior de la tarjeta */
 .course-card-icon {
 	font-size: 2rem;
 	margin-bottom: 10px;

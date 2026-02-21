@@ -2,15 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Incidencias = require("../models/Incidencias.js");
 
-// Obtener todas las incidencias (GET /incidencias)
+// Devuelve todas las incidencias registradas
 router.get("/", (req, res) => {
   try {
     console.log("GET /incidencias");
     Incidencias.findAll().then((resultado) => {
-      res.json({
-        "Numero de incidencias": resultado.length,
-        Incidencias: resultado,
-      });
+      res.json({ "Numero de incidencias": resultado.length, Incidencias: resultado });
     });
   } catch (error) {
     console.error("Error al obtener incidencias:", error);
@@ -18,7 +15,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener una incidencia por ID (GET /incidencias/:id)
+// Busca una incidencia por su ID
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -37,7 +34,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear una nueva incidencia (POST /incidencias)
+// Crea una nueva incidencia
 router.post("/", (req, res) => {
   try {
     console.log("POST /incidencias");
@@ -50,7 +47,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar una incidencia por ID (PUT /incidencias/:id)
+// Actualiza una incidencia (p.ej. cambiar su estado a "resuelto")
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -58,9 +55,7 @@ router.put("/:id", (req, res) => {
     Incidencias.findAll().then((resultado) => {
       const incidencia = resultado.find((i) => i.id === id);
       if (incidencia) {
-        incidencia
-          .update(req.body)
-          .then((actualizado) => res.json(actualizado));
+        incidencia.update(req.body).then((actualizado) => res.json(actualizado));
       } else {
         res.status(404).json({ error: "Incidencia no encontrada" });
       }
@@ -71,7 +66,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar una incidencia por ID (DELETE /incidencias/:id)
+// Elimina una incidencia por su ID
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -79,9 +74,7 @@ router.delete("/:id", (req, res) => {
     Incidencias.findAll().then((resultado) => {
       const incidencia = resultado.find((i) => i.id === id);
       if (incidencia) {
-        incidencia
-          .destroy()
-          .then(() => res.json({ mensaje: "Incidencia eliminada" }));
+        incidencia.destroy().then(() => res.json({ mensaje: "Incidencia eliminada" }));
       } else {
         res.status(404).json({ error: "Incidencia no encontrada" });
       }

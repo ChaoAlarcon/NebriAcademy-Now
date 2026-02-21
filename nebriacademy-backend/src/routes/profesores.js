@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Profesores = require("../models/Profesores.js");
 
-// Obtener todos los profesores (GET /profesores)
+// Devuelve todos los profesores (se usa también en los filtros del listado de cursos)
 router.get("/", async (req, res) => {
   try {
     console.log("GET /profesores");
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Obtener un profesor por ID (GET /profesores/:id)
+// Busca un profesor por su ID
 router.get("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -34,7 +34,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Crear un nuevo profesor (POST /profesores)
+// Crea un nuevo profesor
 router.post("/", (req, res) => {
   try {
     console.log("POST /profesores");
@@ -47,7 +47,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar un profesor por ID (PUT /profesores/:id)
+// Actualiza los datos de un profesor (usado desde el perfil)
 router.put("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -65,7 +65,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Eliminar un profesor por ID (DELETE /profesores/:id)
+// Elimina un profesor por su ID
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -73,9 +73,7 @@ router.delete("/:id", (req, res) => {
     Profesores.findAll().then((resultado) => {
       const profesor = resultado.find((p) => p.id === id);
       if (profesor) {
-        profesor
-          .destroy()
-          .then(() => res.json({ mensaje: "Profesor eliminado" }));
+        profesor.destroy().then(() => res.json({ mensaje: "Profesor eliminado" }));
       } else {
         res.status(404).json({ error: "Profesor no encontrado" });
       }

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-// Ruta principal de la API
-// Muestra información sobre cómo usar la API y los endpoints disponibles
+// Página de bienvenida de la API. Muestra todos los endpoints disponibles en HTML.
+// Útil para explorar rápidamente la API desde el navegador.
 router.get('/', (req, res) => {
     res.send(`
         <html>
@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
                         <li>Para ver una tabla completa: <code>localhost:3000/&lt;nombre_tabla&gt;</code></li>
                         <li>Para ver un registro único: <code>localhost:3000/&lt;nombre_tabla&gt;/&lt;id&gt;</code></li>
                     </ul>
-                    
+
                     <h3>Endpoints Disponibles:</h3>
                     <ul>
                         <li><a href="/administradores" class="endpoint">/administradores</a></li>

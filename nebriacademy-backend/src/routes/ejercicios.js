@@ -2,15 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Ejercicios = require("../models/Ejercicios.js");
 
-// Obtener todos los ejercicios (GET /ejercicios)
+// Devuelve todos los ejercicios
 router.get("/", (req, res) => {
   try {
     console.log("GET /ejercicios");
     Ejercicios.findAll().then((resultado) => {
-      res.json({
-        "Numero de ejercicios": resultado.length,
-        Ejercicios: resultado,
-      });
+      res.json({ "Numero de ejercicios": resultado.length, Ejercicios: resultado });
     });
   } catch (error) {
     console.error("Error al obtener ejercicios:", error);
@@ -18,7 +15,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener un ejercicio por ID (GET /ejercicios/:id)
+// Busca un ejercicio por su ID
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -37,7 +34,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear un nuevo ejercicio (POST /ejercicios)
+// Crea un nuevo ejercicio
 router.post("/", (req, res) => {
   try {
     console.log("POST /ejercicios");
@@ -50,7 +47,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar un ejercicio por ID (PUT /ejercicios/:id)
+// Actualiza un ejercicio por su ID
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -69,7 +66,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar un ejercicio por ID (DELETE /ejercicios/:id)
+// Elimina un ejercicio por su ID
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -77,9 +74,7 @@ router.delete("/:id", (req, res) => {
     Ejercicios.findAll().then((resultado) => {
       const ejercicio = resultado.find((e) => e.id === id);
       if (ejercicio) {
-        ejercicio
-          .destroy()
-          .then(() => res.json({ mensaje: "Ejercicio eliminado" }));
+        ejercicio.destroy().then(() => res.json({ mensaje: "Ejercicio eliminado" }));
       } else {
         res.status(404).json({ error: "Ejercicio no encontrado" });
       }

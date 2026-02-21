@@ -5,13 +5,13 @@ const path = require('path');
 const fs = require('fs');
 const RecursosCompartidos = require('../models/RecursosCompartidos');
 
-// Configuración de Multer para la subida de archivos
-// Define el destino (uploads/recursos) y el nombre del archivo (timestamp + original)
+// Configuración de multer: los archivos se guardan en uploads/recursos
+// con un nombre único basado en timestamp para evitar colisiones
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const dir = path.join(__dirname, '../../uploads/recursos');
-    if (!fs.existsSync(dir)){
-        fs.mkdirSync(dir, { recursive: true });
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true }); // crea la carpeta si no existe
     }
     cb(null, dir);
   },
@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Obtener todos los recursos de un curso específico (GET /recursos/curso/:cursoId)
+// Devuelve todos los recursos de un curso, ordenados del más reciente al más antiguo
 router.get('/curso/:cursoId', async (req, res) => {
   try {
     const recursos = await RecursosCompartidos.findAll({
@@ -37,13 +37,12 @@ router.get('/curso/:cursoId', async (req, res) => {
   }
 });
 
-// Crear un nuevo recurso (POST /recursos)
-// Soporta tanto subida de archivos como enlaces (URLs)
-// Usa middleware 'upload.single' para procesar el archivo adjunto si existe
+// Crea un recurso compartido. Puede ser un archivo subido o una URL externa.
+// El middleware 'upload.single' procesa el campo 'archivo' del formulario si existe.
 router.post('/', upload.single('archivo'), async (req, res) => {
   try {
     const { autorId, cursoId, titulo, descripcion, tipo, formato, url } = req.body;
-    
+
     const nuevoRecurso = {
       autorId,
       cursoId,
@@ -51,8 +50,8 @@ router.post('/', upload.single('archivo'), async (req, res) => {
       descripcion,
       tipo,
       formato,
-      url: formato === 'url' ? url : null,
-      nombreArchivo: req.file ? req.file.originalname : null,
+      url: formato === 'url' ? url : null,                       // solo guardamos la URL si el formato es 'url'
+      nombreArchivo: req.file ? req.file.originalname : null,    // nombre original del archivo subido
       rutaArchivo: req.file ? path.join('uploads/recursos', req.file.filename) : null
     };
 
@@ -64,8 +63,7 @@ router.post('/', upload.single('archivo'), async (req, res) => {
   }
 });
 
-// Eliminar un recurso por ID (DELETE /recursos/:id)
-// Si es un archivo local, también lo borra del sistema de archivos
+// Elimina un recurso por su ID. Si era un archivo físico, también lo borra del disco.
 router.delete('/:id', async (req, res) => {
   try {
     const recurso = await RecursosCompartidos.findByPk(req.params.id);
@@ -73,7 +71,7 @@ router.delete('/:id', async (req, res) => {
       return res.status(404).json({ error: 'Recurso no encontrado' });
     }
 
-    // Si tiene un archivo, eliminarlo del disco
+    // Si el recurso tenía un archivo asociado y sigue en disco, lo eliminamos
     if (recurso.rutaArchivo && fs.existsSync(recurso.rutaArchivo)) {
       fs.unlinkSync(recurso.rutaArchivo);
     }

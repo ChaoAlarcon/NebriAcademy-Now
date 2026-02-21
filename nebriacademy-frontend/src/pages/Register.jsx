@@ -1,4 +1,4 @@
-import RegisterForm from '../Components/RegisterForm';
+import RegisterForm from '../components/RegisterForm';
 
 /**
  * Página contenedora para el formulario de Registro.

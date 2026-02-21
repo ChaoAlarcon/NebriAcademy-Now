@@ -2,15 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Administradores = require("../models/Administradores.js");
 
-// Obtener todos los administradores (GET /administradores)
+// Devuelve todos los administradores
 router.get("/", (req, res) => {
   try {
     console.log("GET /administradores");
     Administradores.findAll().then((resultado) => {
-      res.json({
-        "Numero de administradores": resultado.length,
-        Administradores: resultado,
-      });
+      res.json({ "Numero de administradores": resultado.length, Administradores: resultado });
     });
   } catch (error) {
     console.error("Error al obtener administradores:", error);
@@ -18,7 +15,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener un administrador por ID (GET /administradores/:id)
+// Busca un administrador por su ID
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -37,7 +34,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear un nuevo administrador (POST /administradores)
+// Crea un nuevo administrador
 router.post("/", (req, res) => {
   try {
     console.log("POST /administradores");
@@ -50,7 +47,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar un administrador existente por ID (PUT /administradores/:id)
+// Actualiza un administrador por su ID
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -58,9 +55,7 @@ router.put("/:id", (req, res) => {
     Administradores.findAll().then((resultado) => {
       const administrador = resultado.find((a) => a.id === id);
       if (administrador) {
-        administrador
-          .update(req.body)
-          .then((actualizado) => res.json(actualizado));
+        administrador.update(req.body).then((actualizado) => res.json(actualizado));
       } else {
         res.status(404).json({ error: "Administrador no encontrado" });
       }
@@ -71,7 +66,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar un administrador por ID (DELETE /administradores/:id)
+// Elimina un administrador por su ID
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -79,9 +74,7 @@ router.delete("/:id", (req, res) => {
     Administradores.findAll().then((resultado) => {
       const administrador = resultado.find((a) => a.id === id);
       if (administrador) {
-        administrador
-          .destroy()
-          .then(() => res.json({ mensaje: "Administrador eliminado" }));
+        administrador.destroy().then(() => res.json({ mensaje: "Administrador eliminado" }));
       } else {
         res.status(404).json({ error: "Administrador no encontrado" });
       }

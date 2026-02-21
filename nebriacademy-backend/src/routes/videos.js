@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Videos = require("../models/Videos.js");
 
-// Obtener todos los videos (GET /videos)
+// Devuelve todos los vídeos registrados
 router.get("/", (req, res) => {
   try {
     console.log("GET /videos");
@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener un video por ID (GET /videos/:id)
+// Busca un vídeo por su ID
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -34,7 +34,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear un nuevo video (POST /videos)
+// Crea un nuevo vídeo
 router.post("/", (req, res) => {
   try {
     console.log("POST /videos");
@@ -47,7 +47,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar un video por ID (PUT /videos/:id)
+// Actualiza un vídeo por su ID
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -66,7 +66,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar un video por ID (DELETE /videos/:id)
+// Elimina un vídeo por su ID
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);

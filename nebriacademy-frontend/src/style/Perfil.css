@@ -1,3 +1,4 @@
+
 /* Contenedor principal de la página de perfil */
 .profile-container {
     max-width: 900px;
@@ -82,6 +83,7 @@
     color: #856404;
 }
 
+/* Grupo de botones de acción (Editar / Guardar / Cancelar / Cerrar Sesión) */
 .profile-actions {
     display: flex;
     gap: 10px;
@@ -97,6 +99,7 @@
     border: none;
 }
 
+/* Botón primario (rojo, acción principal como Guardar o Cerrar Sesión) */
 .btn-primary {
     background-color: var(--nebrija-red);
     color: white;
@@ -106,6 +109,7 @@
     background-color: #a01a2c;
 }
 
+/* Botón secundario gris (acción secundaria como Editar o Cancelar) */
 .btn-secondary {
     background-color: #f8f9fa;
     color: #333;
@@ -203,6 +207,7 @@
     text-decoration: none;
 }
 
+/* Lista horizontal de enlaces de redes sociales */
 .profile-social-list {
     display: flex;
     gap: 15px;

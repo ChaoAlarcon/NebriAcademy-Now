@@ -2,15 +2,12 @@ const express = require("express");
 const router = express.Router();
 const CursosAlumnos = require("../models/CursosAlumnos.js");
 
-// Obtener todos los registros de cursos-alumnos (GET /cursosalumnos)
+// Devuelve todas las inscripciones (tabla de unión alumno ↔ curso)
 router.get("/", (req, res) => {
   try {
     console.log("GET /cursosalumnos");
     CursosAlumnos.findAll().then((resultado) => {
-      res.json({
-        "Numero de cursosAlumnos": resultado.length,
-        CursosAlumnos: resultado,
-      });
+      res.json({ "Numero de cursosAlumnos": resultado.length, CursosAlumnos: resultado });
     });
   } catch (error) {
     console.error("Error al obtener cursos-alumnos:", error);
@@ -18,7 +15,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener un registro curso-alumno por ID (GET /cursosalumnos/:id)
+// Busca una inscripción por su ID
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -37,7 +34,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear un nuevo registro curso-alumno (Inscripción) (POST /cursosalumnos)
+// Inscribe a un alumno en un curso
 router.post("/", (req, res) => {
   try {
     console.log("POST /cursosalumnos");
@@ -50,7 +47,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar un registro curso-alumno por ID (PUT /cursosalumnos/:id)
+// Actualiza una inscripción por su ID
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -69,7 +66,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar un registro curso-alumno por ID (DELETE /cursosalumnos/:id)
+// Elimina una inscripción por su ID (da de baja al alumno del curso)
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -77,9 +74,7 @@ router.delete("/:id", (req, res) => {
     CursosAlumnos.findAll().then((resultado) => {
       const registro = resultado.find((r) => r.id === id);
       if (registro) {
-        registro
-          .destroy()
-          .then(() => res.json({ mensaje: "Registro curso-alumno eliminado" }));
+        registro.destroy().then(() => res.json({ mensaje: "Registro curso-alumno eliminado" }));
       } else {
         res.status(404).json({ error: "Registro curso-alumno no encontrado" });
       }

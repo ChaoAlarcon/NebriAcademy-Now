@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Cursos = require("../models/Cursos.js");
 
-// Obtener todos los cursos (GET /cursos)
+// Devuelve todos los cursos de la base de datos
 router.get("/", (req, res) => {
   try {
     console.log("GET /cursos");
@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener un curso por ID (GET /cursos/:id)
+// Busca un curso por su ID
 router.get("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Crear un nuevo curso (POST /cursos)
+// Crea un nuevo curso. Si la columna 'icono' no existe en la BD, devuelve un mensaje de error claro
 router.post("/", async (req, res) => {
   try {
     console.log("POST /cursos", req.body);
@@ -40,22 +40,21 @@ router.post("/", async (req, res) => {
     res.status(201).json(nuevo);
   } catch (error) {
     console.error("Error al crear curso:", error);
-    // Provide more specific error if it's a database schema issue
-    const message = error.name === 'SequelizeDatabaseError' 
+    const message = error.name === 'SequelizeDatabaseError'
       ? `Error de base de datos: ${error.message}. Asegúrate de que la tabla 'cursos' tenga la columna 'icono'.`
       : "Error interno del servidor al crear el curso";
     res.status(500).json({ error: message, details: error.message });
   }
 });
 
-// Actualizar un curso existente por ID (PUT /cursos/:id)
+// Actualiza un curso. El campo 'valoracion' se ignora para que no se toque manualmente
+// (se actualiza solo como media a través de puntuacionescursos)
 router.put("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     console.log(`PUT /cursos/${id}`, req.body);
     const curso = await Cursos.findByPk(id);
     if (curso) {
-      // Evitar que la valoración se actualice manualmente, ya que es la media
       const { valoracion, ...datosAActualizar } = req.body;
       await curso.update(datosAActualizar);
       res.json(curso);
@@ -68,7 +67,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Eliminar un curso por ID (DELETE /cursos/:id)
+// Elimina un curso por su ID
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);

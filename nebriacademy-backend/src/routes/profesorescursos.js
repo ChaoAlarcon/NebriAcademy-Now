@@ -2,15 +2,12 @@ const express = require("express");
 const router = express.Router();
 const ProfesoresCursos = require("../models/ProfesoresCursos.js");
 
-// Obtener todas las asignaciones profesor-curso (GET /profesorescursos)
+// Devuelve todas las asignaciones entre profesores y cursos
 router.get("/", (req, res) => {
   try {
     console.log("GET /profesorescursos");
     ProfesoresCursos.findAll().then((resultado) => {
-      res.json({
-        "Numero de profesoresCursos": resultado.length,
-        ProfesoresCursos: resultado,
-      });
+      res.json({ "Numero de profesoresCursos": resultado.length, ProfesoresCursos: resultado });
     });
   } catch (error) {
     console.error("Error al obtener profesores-cursos:", error);
@@ -18,7 +15,7 @@ router.get("/", (req, res) => {
   }
 });
 
-// Obtener una asignación profesor-curso por ID (GET /profesorescursos/:id)
+// Busca una asignación por su ID
 router.get("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -28,9 +25,7 @@ router.get("/:id", (req, res) => {
       if (registro) {
         res.json(registro);
       } else {
-        res
-          .status(404)
-          .json({ error: "Registro profesor-curso no encontrado" });
+        res.status(404).json({ error: "Registro profesor-curso no encontrado" });
       }
     });
   } catch (error) {
@@ -39,7 +34,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
-// Crear una nueva asignación profesor-curso (POST /profesorescursos)
+// Asigna un profesor a un curso
 router.post("/", (req, res) => {
   try {
     console.log("POST /profesorescursos");
@@ -52,7 +47,7 @@ router.post("/", (req, res) => {
   }
 });
 
-// Actualizar una asignación profesor-curso por ID (PUT /profesorescursos/:id)
+// Actualiza una asignación profesor-curso por su ID
 router.put("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -62,9 +57,7 @@ router.put("/:id", (req, res) => {
       if (registro) {
         registro.update(req.body).then((actualizado) => res.json(actualizado));
       } else {
-        res
-          .status(404)
-          .json({ error: "Registro profesor-curso no encontrado" });
+        res.status(404).json({ error: "Registro profesor-curso no encontrado" });
       }
     });
   } catch (error) {
@@ -73,7 +66,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-// Eliminar una asignación profesor-curso por ID (DELETE /profesorescursos/:id)
+// Elimina una asignación profesor-curso por su ID
 router.delete("/:id", (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -81,15 +74,9 @@ router.delete("/:id", (req, res) => {
     ProfesoresCursos.findAll().then((resultado) => {
       const registro = resultado.find((r) => r.id === id);
       if (registro) {
-        registro
-          .destroy()
-          .then(() =>
-            res.json({ mensaje: "Registro profesor-curso eliminado" })
-          );
+        registro.destroy().then(() => res.json({ mensaje: "Registro profesor-curso eliminado" }));
       } else {
-        res
-          .status(404)
-          .json({ error: "Registro profesor-curso no encontrado" });
+        res.status(404).json({ error: "Registro profesor-curso no encontrado" });
       }
     });
   } catch (error) {

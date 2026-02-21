@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Alumnos = require("../models/Alumnos.js");
 
-// Obtener todos los alumnos (GET /alumnos)
+// Devuelve todos los alumnos registrados
 router.get("/", async (req, res) => {
   try {
     console.log("GET /alumnos");
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Obtener un alumno por ID (GET /alumnos/:id)
+// Busca un alumno por su ID
 router.get("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -34,7 +34,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Crear un nuevo alumno (POST /alumnos)
+// Registra un nuevo alumno. Si el email o DNI ya existen, devuelve un 400 con el campo duplicado
 router.post("/", async (req, res) => {
   try {
     console.log("POST /alumnos");
@@ -42,21 +42,18 @@ router.post("/", async (req, res) => {
     res.status(201).json(nuevo);
   } catch (error) {
     console.error("Error al crear alumno:", error);
-    
-    // Manejar errores de validación/unicidad de Sequelize
     if (error.name === 'SequelizeUniqueConstraintError') {
       const campo = error.errors[0].path;
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: `El ${campo} ya está registrado`,
         mensaje: error.errors.map(e => e.message)
       });
     }
-    
     res.status(500).json({ error: "Error interno del servidor al crear alumno" });
   }
 });
 
-// Actualizar un alumno existente por ID (PUT /alumnos/:id)
+// Actualiza los datos de un alumno (usado desde la página de perfil)
 router.put("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -74,7 +71,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Eliminar un alumno por ID (DELETE /alumnos/:id)
+// Elimina un alumno por su ID
 router.delete("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);

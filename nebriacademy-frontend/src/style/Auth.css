@@ -1,13 +1,25 @@
+/**
+ * =======================================================
+ * ESTILOS DE AUTENTICACIÓN: SELECCIÓN, REGISTRO Y LOGIN
+ * =======================================================
+ */
 @import "./variables.css";
 
-/* Auth Selection Screen */
+/* ============================
+   PANTALLA DE SELECCIÓN DE ROL
+   ============================
+   Grid de tarjetas para que el usuario elija entre:
+   Alumno interno, Alumno externo o Profesor
+*/
 .selection-grid {
     display: grid;
+    /* Ajuste automático: mínimo 250px por columna */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
 }
 
+/* Tarjeta individual de selección de rol */
 .selection-item {
     background: #ffffff;
     border: 2px solid #f0f0f0;
@@ -23,35 +35,48 @@
     color: inherit;
 }
 
+/* Hover: se eleva y muestra borde rojo corporativo */
 .selection-item:hover {
     border-color: var(--nebrija-red);
     transform: translateY(-8px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
+/* Icono grande (emoji) dentro de la tarjeta de selección */
 .selection-icon {
     font-size: 4rem;
     line-height: 1;
 }
 
-/* Specific Register Layout */
+/* ============================
+   REGISTRO (ANCHO AMPLIADO)
+   ============================
+   El formulario de registro tiene más campos, por lo que
+   necesita una tarjeta más ancha que el login normal.
+*/
 .register-form-width {
     max-width: 600px;
 }
 
+/* Dos columnas horizontales para campos del formulario de registro */
 .register-form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.25rem;
 }
 
+/* En pantallas pequeñas, una sola columna */
 @media (max-width: 480px) {
     .register-form-row {
         grid-template-columns: 1fr;
     }
 }
 
-/* Title & Subtitle */
+/* ============================
+   TÍTULOS Y SUBTÍTULOS DE AUTH
+   ============================ */
+
+/* Título principal del formulario (ej: "Iniciar Sesión") */
 .auth-title {
     font-size: 2rem;
     font-weight: 700;
@@ -59,6 +84,7 @@
     margin-bottom: 0.5rem;
 }
 
+/* Subtítulo descriptivo debajo del título principal */
 .auth-subtitle {
     font-size: 1rem;
     color: #718096;

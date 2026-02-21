@@ -1,3 +1,4 @@
+
 @import "./variables.css";
 
 /* Reseteo básico y configuración de caja */
@@ -61,11 +62,13 @@ body,
   transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 
+/* Efecto hover: la tarjeta se eleva ligeramente */
 .auth-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg-custom);
 }
 
+/* Contenedor del formulario: apila los campos verticalmente */
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -116,10 +119,12 @@ body,
   box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
 }
 
+/* Efecto de clic: el botón se encoge ligeramente */
 .nebri-button:active:not(:disabled) {
   transform: scale(0.98);
 }
 
+/* Estado deshabilitado: color claro y cursor de bloqueo */
 .nebri-button:disabled {
   background-color: #feb2b2;
   cursor: not-allowed;

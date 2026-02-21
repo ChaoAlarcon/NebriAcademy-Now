@@ -1,4 +1,4 @@
-import ProfessorLoginForm from '../Components/ProfessorLoginForm';
+import ProfessorLoginForm from '../components/ProfessorLoginForm';
 
 /**
  * Página que renderiza el formulario de inicio de sesión exclusivo para profesores.

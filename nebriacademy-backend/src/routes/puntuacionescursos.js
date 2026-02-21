@@ -3,21 +3,18 @@ const router = express.Router();
 const PuntuacionesCursos = require("../models/PuntuacionesCursos.js");
 const Cursos = require("../models/Cursos.js");
 
-// Obtener todas las puntuaciones de los cursos (GET /puntuacionescursos)
+// Devuelve todas las valoraciones de todos los cursos
 router.get("/", async (req, res) => {
   try {
     const resultado = await PuntuacionesCursos.findAll();
-    res.json({
-      "Numero de puntuacionesCursos": resultado.length,
-      PuntuacionesCursos: resultado,
-    });
+    res.json({ "Numero de puntuacionesCursos": resultado.length, PuntuacionesCursos: resultado });
   } catch (error) {
     console.error("Error al obtener puntuaciones de cursos:", error);
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
 
-// Obtener una puntuación de curso por ID (GET /puntuacionescursos/:id)
+// Busca una valoración por su ID
 router.get("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -33,8 +30,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Función auxiliar para recalcular y actualizar la valoración media de un curso
-// Se ejecuta después de crear, actualizar o eliminar una puntuación
+// Recalcula y guarda la media de valoraciones de un curso.
+// Se llama automáticamente tras cualquier cambio en las puntuaciones.
 const actualizarValoracionCurso = async (cursoId) => {
   const puntuaciones = await PuntuacionesCursos.findAll({ where: { cursoId } });
   if (puntuaciones.length > 0) {
@@ -42,23 +39,20 @@ const actualizarValoracionCurso = async (cursoId) => {
     const media = parseFloat((suma / puntuaciones.length).toFixed(2));
     await Cursos.update({ valoracion: media }, { where: { id: cursoId } });
   } else {
+    // Si no quedan valoraciones, resetea a 0
     await Cursos.update({ valoracion: 0 }, { where: { id: cursoId } });
   }
 };
 
-// Crear o actualizar una puntuación de curso (POST /puntuacionescursos)
-// Si el alumno ya valoró el curso, se actualiza su valoración existente
+// Crea una valoración. Si el alumno ya valoró ese curso, actualiza la existente (upsert manual)
 router.post("/", async (req, res) => {
   try {
     const { cursoId, alumnoId, puntuacion, comentario } = req.body;
-    
-    // Verificar si el alumno ya ha valorado este curso
-    let puntuacionExistente = await PuntuacionesCursos.findOne({
-      where: { cursoId, alumnoId }
-    });
+
+    let puntuacionExistente = await PuntuacionesCursos.findOne({ where: { cursoId, alumnoId } });
 
     if (puntuacionExistente) {
-      // Si ya existe, la actualizamos
+      // Ya tiene una valoración: la sobreescribimos
       puntuacionExistente.puntuacion = puntuacion;
       puntuacionExistente.comentario = comentario;
       await puntuacionExistente.save();
@@ -66,7 +60,7 @@ router.post("/", async (req, res) => {
       return res.json(puntuacionExistente);
     }
 
-    // Si no existe, creamos una nueva
+    // Primera vez que valora este curso
     const nuevo = await PuntuacionesCursos.create(req.body);
     await actualizarValoracionCurso(cursoId);
     res.status(201).json(nuevo);
@@ -76,7 +70,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Actualizar una puntuación por ID (PUT /puntuacionescursos/:id)
+// Actualiza una valoración por su ID y recalcula la media del curso
 router.put("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -94,38 +88,33 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Obtener todas las puntuaciones de cursos de un alumno específico (GET /puntuacionescursos/alumno/:alumnoId)
+// Devuelve las valoraciones de un alumno concreto, con el nombre del curso incluido
+// (usado en el dashboard del alumno para mostrar "Mis Reseñas")
 router.get("/alumno/:alumnoId", async (req, res) => {
   try {
     const alumnoId = parseInt(req.params.alumnoId);
     const puntuaciones = await PuntuacionesCursos.findAll({ where: { alumnoId } });
-    
-    // Si queremos incluir el nombre del curso, podemos hacerlo aquí
+
+    // Añadimos el nombre del curso a cada valoración (join manual)
     const puntuacionesConCurso = await Promise.all(puntuaciones.map(async (p) => {
       const curso = await Cursos.findByPk(p.cursoId);
-      return {
-        ...p.toJSON(),
-        nombreCurso: curso ? curso.nombreCurso : 'Curso no encontrado'
-      };
+      return { ...p.toJSON(), nombreCurso: curso ? curso.nombreCurso : 'Curso no encontrado' };
     }));
 
-    res.json({
-      "Numero de puntuacionesCursos": puntuacionesConCurso.length,
-      PuntuacionesCursos: puntuacionesConCurso,
-    });
+    res.json({ "Numero de puntuacionesCursos": puntuacionesConCurso.length, PuntuacionesCursos: puntuacionesConCurso });
   } catch (error) {
     console.error("Error al obtener puntuaciones de cursos del alumno:", error);
     res.status(500).json({ error: "Error interno del servidor" });
   }
 });
 
-// Eliminar una puntuación por ID (DELETE /puntuacionescursos/:id)
+// Elimina una valoración y recalcula la media del curso afectado
 router.delete("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const puntuacion = await PuntuacionesCursos.findByPk(id);
     if (puntuacion) {
-      const cursoId = puntuacion.cursoId;
+      const cursoId = puntuacion.cursoId; // lo guardamos antes de borrar
       await puntuacion.destroy();
       await actualizarValoracionCurso(cursoId);
       res.json({ mensaje: "Puntuación eliminada" });
