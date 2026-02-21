@@ -29,7 +29,7 @@
   font-weight: 700;
   color: var(--nebrija-red);
   text-decoration: none;
-  transition: color var(--transition-speed);
+  transition: all var(--transition-speed) ease-in-out;
   display: flex;
   align-items: center;
   gap: 25px;
@@ -37,6 +37,26 @@
 
 .navbar-logo:hover {
   color: var(--nebrija-red-hover);
+}
+
+.navbar-logo-text {
+  position: relative;
+}
+
+/* Efecto de subrayado para el logo */
+.navbar-logo-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background-color: var(--nebrija-red);
+  transition: width var(--transition-speed);
+}
+
+.navbar-logo:hover .navbar-logo-text::after {
+  width: 100%;
 }
 
 .navbar-logo-image {

@@ -27,7 +27,7 @@ function Footer() {
 
 				{/* Derechos de autor */}
 				<div className="footer-bottom">
-					© 2026 NebriAcademy. Todos los derechos reservados.
+					© 2026 NebriAcademy Now. Todos los derechos reservados.
 				</div>
 			</footer>
 		</>

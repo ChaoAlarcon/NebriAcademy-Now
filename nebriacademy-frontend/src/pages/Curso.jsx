@@ -158,6 +158,9 @@ const Curso = () => {
             setOpiniones(puntuacionesList.filter(p => p.cursoId === parseInt(id)));
 
             alert("Valoración guardada con éxito");
+            // Reiniciar el formulario
+            setUserRating(0);
+            setComment('');
         } catch (err) {
             console.error("Error al enviar valoración:", err);
             alert("Error al guardar la valoración");

@@ -13,16 +13,16 @@ function StudentDashboard({ userName }) {
         cursos: 0,
         profesores: 0,
         alumnos: 0,
-        incidencias: 0
+        reseñas: 0
     });
     const [activeCursos, setActiveCursos] = useState([]); // Cursos destacados del alumno
-    const [recentIncidencias, setRecentIncidencias] = useState([]); // Últimas incidencias registradas
+    const [recentReviews, setRecentReviews] = useState([]); // Últimas reseñas del alumno
     const [loading, setLoading] = useState(true); // Estado de carga inicial
 
     useEffect(() => {
         /**
          * Obtiene todos los datos necesarios para el dashboard en una sola ráfaga de peticiones (Promise.all).
-         * Carga: Cursos globales, Profesores, Alumnos, Incidencias y Cursos Guardados del alumno.
+         * Carga: Cursos globales, Profesores, Alumnos, Reseñas del alumno y Cursos Guardados.
          */
         const getAllData = async () => {
             try {
@@ -33,33 +33,36 @@ function StudentDashboard({ userName }) {
                 const requests = [
                     fetchData('cursos'),
                     fetchData('profesores'),
-                    fetchData('alumnos'),
-                    fetchData('incidencias')
+                    fetchData('alumnos')
                 ];
 
-                // Si hay usuario logueado, traer sus cursos guardados
+                // Si hay usuario logueado, traer sus cursos guardados y sus reseñas
                 if (currentUser && currentUser.id) {
                     requests.push(fetchData(`cursosguardados/alumno/${currentUser.id}`));
+                    requests.push(fetchData(`puntuacionescursos/alumno/${currentUser.id}`));
                 }
 
-                const [cursosData, profesoresData, alumnosData, incidenciasData, guardadosData] = await Promise.all(requests);
+                const responses = await Promise.all(requests);
+                const [cursosData, profesoresData, alumnosData] = responses;
+                const guardadosData = currentUser ? responses[3] : null;
+                const reviewsData = currentUser ? responses[4] : null;
 
                 // Normalizamos la estructura de los datos según lo que devuelve el backend
                 const cursosList = cursosData.Cursos || (Array.isArray(cursosData) ? cursosData : []);
-                const incidenciasList = incidenciasData.Incidencias || (Array.isArray(incidenciasData) ? incidenciasData : []);
                 const guardadosList = guardadosData ? (guardadosData.Cursos || []) : [];
+                const reviewsList = reviewsData ? (reviewsData.PuntuacionesCursos || []) : [];
 
                 // Actualizamos las estadísticas globales
                 setStats({
                     cursos: cursosData["Numero de cursos"] || cursosList.length,
                     profesores: profesoresData["Numero de profesores"] || (Array.isArray(profesoresData) ? profesoresData.length : 0),
                     alumnos: alumnosData["Numero de alumnos"] || (Array.isArray(alumnosData) ? alumnosData.length : 0),
-                    incidencias: incidenciasData["Numero de incidencias"] || incidenciasList.length
+                    reseñas: reviewsList.length
                 });
 
                 // Mostramos los cursos guardados en lugar de los aleatorios
                 setActiveCursos(guardadosList);
-                setRecentIncidencias(incidenciasList.slice(0, 2));
+                setRecentReviews(reviewsList.slice(0, 2));
                 setLoading(false);
             } catch (err) {
                 console.error("Error al cargar datos del dashboard:", err);
@@ -79,7 +82,7 @@ function StudentDashboard({ userName }) {
             </header>
 
             <div className="dashboard-grid">
-                {/* Columna principal: Cursos e Incidencias */}
+                {/* Columna principal: Cursos e Reseñas */}
                 <div className="main-column">
                     <div className="dashboard-card">
                         <div className="card-header">
@@ -112,27 +115,26 @@ function StudentDashboard({ userName }) {
                         )}
                     </div>
 
-                    {/* Lista de incidencias recientes con estados de colores */}
+                    {/* Lista de reseñas recientes */}
                     <div className="dashboard-card">
                         <div className="card-header">
-                            <h2 className="card-title">Últimas Incidencias</h2>
+                            <h2 className="card-title">Mis Reseñas</h2>
                         </div>
                         <ul className="list-none">
-                            {recentIncidencias.length > 0 ? (
-                                recentIncidencias.map((inc, index) => (
-                                    <li key={inc.id || index} className="event-item">
-                                        <div className={`event-date ${inc.estado}`}>
-                                            <span>#{inc.id}</span>
+                            {recentReviews.length > 0 ? (
+                                recentReviews.map((rev, index) => (
+                                    <li key={rev.id || index} className="event-item">
+                                        <div className="event-date" style={{ backgroundColor: '#F8F8FB', color: '#000' }}>
+                                            <span>⭐ {rev.puntuacion}</span>
                                         </div>
                                         <div className="event-details">
-                                            <h4>{inc.asunto || 'Sin asunto'}</h4>
-                                            <p>{inc.descripcion ? inc.descripcion.substring(0, 50) + '...' : 'Sin descripción'}</p>
-                                            <small className="text-muted">Estado: {inc.estado}</small>
+                                            <h4>{rev.nombreCurso}</h4>
+                                            <p>{rev.comentario ? (rev.comentario.length > 200 ? rev.comentario.substring(0, 60) + '...' : rev.comentario) : 'Sin comentario'}</p>
                                         </div>
                                     </li>
                                 ))
                             ) : (
-                                <p>No hay incidencias registradas.</p>
+                                <p>Aún no has escrito ninguna reseña.</p>
                             )}
                         </ul>
                     </div>
@@ -156,10 +158,10 @@ function StudentDashboard({ userName }) {
                                 <span className="stat-label">Alumnos</span>
                             </div>
                             <div className="stat-item">
-                                <span className="stat-number" style={{ color: stats.incidencias > 0 ? '#dc3545' : '#28a745' }}>
-                                    {stats.incidencias}
+                                <span className="stat-number" style={{ color: '#28a745' }}>
+                                    {stats.reseñas}
                                 </span>
-                                <span className="stat-label">Incidencias</span>
+                                <span className="stat-label">Mis Reseñas</span>
                             </div>
                         </div>
                     </div>

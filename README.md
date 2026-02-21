@@ -6,60 +6,67 @@
 ![Express](https://img.shields.io/badge/Framework-Express.js-000000?style=for-the-badge&logo=express)
 ![Sequelize](https://img.shields.io/badge/ORM-Sequelize-52B0E7?style=for-the-badge&logo=sequelize)
 
-**NebriAcademy Now** es una plataforma de formación online integral diseñada como proyecto integrador para el ciclo de **Desarrollo de Aplicaciones Web (DAW)**. La plataforma ofrece una experiencia de aprendizaje completa, desde la gestión de profesores y cursos hasta un panel de control personalizado para el estudiante.
+**NebriAcademy Now** es una plataforma de formación online integral diseñada como proyecto intermodular para el ciclo de **Desarrollo de Aplicaciones Web (DAW)**. La plataforma ofrece una experiencia de aprendizaje completa, desde la gestión de profesores y cursos hasta un DashBoard personalizado para el usuario.
 
 ---
 
 ## 🚀 Características Principales
 
-*   **Dashboard de Estudiante:** Panel principal dinámico que muestra estadísticas reales del backend (cursos, profesores, alumnos e incidencias) y acceso rápido a los cursos activos.
-*   **Gestión de Cursos y Profesores:** Catálogos completos con vistas detalladas. La página de curso incluye información del profesor asignado mediante relaciones de datos.
-*   **Autenticación Centralizada:** Sistema de login funcional que valida credenciales en múltiples tablas (Alumnos, Profesores, Administradores) mediante una búsqueda en cascada.
-*   **Seguridad y Acceso:** Protección de rutas privadas (Home, Cursos, Profesores) con redirección automática al login para usuarios no autenticados.
-*   **Interfaz Premium:** Diseño moderno y coherente utilizando variables CSS globales, transiciones suaves y una estética alineada con la identidad de Nebrija.
-*   **Arquitectura REST:** Backend robusto desarrollado con Express y Sequelize ORM para una gestión eficiente de la base de datos MySQL.
+*   **Registro y Login Detallado:** Sistema de acceso diferenciado para tres perfiles (Alumno Interno, Alumno Externo y Profesor), con validación en cascada y registro completo para usuarios externos.
+*   **Dashboard de Estudiante Real:** Panel dinámico que muestra estadísticas en tiempo real (cursos, profesores, alumnos) y un sistema de seguimiento de **Cursos Guardados**.
+*   **Sistema de Reseñas y Puntuaciones:** Los estudiantes pueden puntuar cursos y dejar comentarios detallados sobre su experiencia.
+*   **Gestión de Cursos y Profesores:** Catálogos completos con vistas detalladas. La página de curso incluye información del profesor asignado mediante relaciones de datos complejas.
+*   **Seguridad Avanzada:** Protección de rutas privadas (Home, Cursos, Profesores) mediante persistencia en `localStorage` y redirección inteligente.
+*   **Interfaz Premium:** Diseño moderno y coherente utilizando variables CSS globales, transiciones suaves y una estética profesional alineada con la identidad institucional.
+*   **Arquitectura REST Robust:** Backend desarrollado con Node.js, Express y Sequelize ORM para una gestión eficiente de la base de datos MySQL.
 
 ---
 
 ## 📂 Estructura del Proyecto
 
-El repositorio se divide en dos áreas principales:
+/Documents → Recursos de datos (SQL) y documentación 
 
-```text
-NebriAcademy-Now/
-├── nebriacademy-frontend/    # Cliente (React + Vite)
-│   ├── src/
-│   │   ├── components/       # Nav, Footer, LoginGrid, etc.
-│   │   ├── pages/            # Home (Dashboard), Cursos, Profesores, Curso Detalle...
-│   │   ├── style/            # CSS organizado (Home.css, Login.css, etc.)
-│   │   └── api/              # Helpers para peticiones al backend
-├── nebriacademy-backend/     # Servidor (Node.js + Express)
-│   ├── src/
-│   │   ├── routes/           # Endpoints de la API (Cursos, Usuarios, Login...)
-│   │   ├── models/           # Modelos de datos de Sequelize
-│   │   └── database/         # Configuración de la conexión a DB
-```
+/nebriacademy-backend 
+
+- src/database → Conexión a la base de datos 
+
+- src/models → Modelos de datos 
+
+- src/routes → Definición de endpoints 
+
+- app.js → Archivo principal de la aplicación 
+
+/nebriacademy-frontend 
+
+- /public→ Recursos multimedia utilizados  
+
+- src/api → Modelos de datos 
+
+- src/components→ UI Reutilizable 
+
+- src/pages→ Dashboards y Vistas 
+
+- src/router → Definición de endpoints 
+
+- src/style→ Hojas de estilo globales y locales 
+
+- App.jsx → Archivo principal de la aplicación React 
+
+- main.jsx → Punto de entrada de la aplicación React 
 
 ---
 
 ## 🛠️ Instalación y Ejecución
 
 ### Backend
-1. Navega a `nebriacademy-backend`.
+1. Navega a `nebriacademy-backend/src`.
 2. Instala las dependencias: `npm install`.
-3. Configura el archivo `.env` con tus credenciales de base de datos.
-4. Inicia el servidor: `npm run dev` (requiere nodemon) o `npm start`.
+3. Inicia la base de datos.
+4. Inicia el servidor: `nodemon app.js`.
 
 ### Frontend
-1. Navega a `nebriacademy-frontend`.
+1. Navega a `nebriacademy-frontend/src`.
 2. Instala las dependencias: `npm install`.
 3. Inicia la aplicación: `npm run dev`.
 
 ---
-
-## 📝 Notas de Implementación
-Para detalles técnicos profundos sobre el sistema de login y seguridad, consulta los [apuntes de implementación](file:///c:/GitHub/NebriAcademy-Now/nebriacademy-frontend/docs/login_implementation_notes.md).
-
-## 📝 Notas de los desarrolladores:
-
-- Usar Zustand para un diferente Home tanto para Alumnos como para Profesores

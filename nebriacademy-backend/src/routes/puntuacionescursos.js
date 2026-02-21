@@ -94,6 +94,31 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// Obtener todas las puntuaciones de cursos de un alumno específico (GET /puntuacionescursos/alumno/:alumnoId)
+router.get("/alumno/:alumnoId", async (req, res) => {
+  try {
+    const alumnoId = parseInt(req.params.alumnoId);
+    const puntuaciones = await PuntuacionesCursos.findAll({ where: { alumnoId } });
+    
+    // Si queremos incluir el nombre del curso, podemos hacerlo aquí
+    const puntuacionesConCurso = await Promise.all(puntuaciones.map(async (p) => {
+      const curso = await Cursos.findByPk(p.cursoId);
+      return {
+        ...p.toJSON(),
+        nombreCurso: curso ? curso.nombreCurso : 'Curso no encontrado'
+      };
+    }));
+
+    res.json({
+      "Numero de puntuacionesCursos": puntuacionesConCurso.length,
+      PuntuacionesCursos: puntuacionesConCurso,
+    });
+  } catch (error) {
+    console.error("Error al obtener puntuaciones de cursos del alumno:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+
 // Eliminar una puntuación por ID (DELETE /puntuacionescursos/:id)
 router.delete("/:id", async (req, res) => {
   try {

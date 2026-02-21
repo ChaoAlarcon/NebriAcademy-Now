@@ -24,9 +24,14 @@ function ProfessorDashboard({ userName, userId }) {
          */
         const getProfessorData = async () => {
             try {
-                // Obtenemos todos los cursos registrados
-                const cursosData = await fetchData('cursos');
+                // Obtenemos todos los cursos registrados y la lista de alumnos
+                const [cursosData, alumnosData] = await Promise.all([
+                    fetchData('cursos'),
+                    fetchData('alumnos')
+                ]);
+
                 const allCursos = cursosData.Cursos || (Array.isArray(cursosData) ? cursosData : []);
+                const allAlumnos = alumnosData.Alumnos || (Array.isArray(alumnosData) ? alumnosData : []);
 
                 // Filtramos por el ID del profesor actual (pasado por props)
                 const professorCursos = allCursos.filter(c => c.profesor === userId);
@@ -35,7 +40,7 @@ function ProfessorDashboard({ userName, userId }) {
                 setMisCursos(professorCursos);
                 setStats({
                     misCursos: professorCursos.length,
-                    totalAlumnos: professorCursos.length * 15, // Estimación: 15 alumnos de media por curso
+                    totalAlumnos: alumnosData["Numero de alumnos"] || allAlumnos.length,
                     valoracionMedia: professorCursos.length > 0
                         ? (professorCursos.reduce((acc, c) => acc + (c.valoracion || 0), 0) / professorCursos.length).toFixed(1)
                         : 0
