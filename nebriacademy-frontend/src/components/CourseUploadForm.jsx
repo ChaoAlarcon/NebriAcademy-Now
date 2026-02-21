@@ -18,7 +18,8 @@ function CourseUploadForm() {
 		videoUrl: "",
 	});
 
-	const icons = ["📚", "💻", "🎨", "🧪", "🌍", "📊", "🚀", "🧠", "⚖️", "🎭"];
+	const icons = ["📚", "💻", "🎨", "🧪", "🌍", "📊", "🚀", "🧠", "⚖️", "🎭", "🔐", "📱", "🛠️", "💾", "🌐", "📡", "⚙️", "🔧"];
+	
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	const navigate = useNavigate();

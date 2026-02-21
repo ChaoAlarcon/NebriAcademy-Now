@@ -6,7 +6,7 @@ import '../style/Auth.css';
  * Pantalla que permite al usuario seleccionar su rol antes de iniciar sesión:
  * - Alumno Interno del centro
  * - Alumno Externo (requiere registro)
- * - Profesor (acceso exclusivo)
+ * - Profesor
  */
 function LoginSelection() {
     const navigate = useNavigate();

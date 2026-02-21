@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2026 a las 09:51:58
+-- Tiempo de generación: 21-02-2026 a las 20:34:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -76,33 +76,13 @@ CREATE TABLE `alumnos` (
 
 INSERT INTO `alumnos` (`id`, `usuarioId`, `dni`, `nombre`, `apellidos`, `email`, `contrasena`, `numeroTarjeta`, `numTelefono`, `redes`, `pais`, `localidad`) VALUES
 (1, 2, '48231055B', 'Pablo', 'Santos Rodríguez', 'pablo.data@servidor.es', 'pass123', '5211 0099 8877 6655', '610998877', '@nicostudent', 'España', 'Sevilla'),
-(2, 3, '87654321C', 'María', 'López Díaz', 'maria@example.com', 'pass456', '4539 1234 5678 9012', '699887766', '@marialopez', 'España', 'Valencia'),
-(7, NULL, '77412309M', 'Elena', 'Bueno Calvo', 'elena.cloud@empresa.com', 'pass789', '5231 0097 8897 6652', '655223344', NULL, 'España', 'Madrid'),
+(2, 3, '87654321C', 'María', 'López Domínguez', 'maria@example.com', 'pass456', '4539 1234 5678 9012', '699887766', '@marialopez', 'España', 'Valencia'),
+(7, NULL, '77412309M', 'Elena', 'Bueno Calvo', 'elena@example.com', 'pass789', '5231 0097 8897 6652', '655223344', NULL, 'España', 'Madrid'),
 (8, NULL, '03145692X', 'Raúl', 'Hernández Gómez', 'raul.tech@proton.me', 'pass91011', '4012 8822 3344 5566', '688112233', NULL, 'España', 'Málaga'),
-(9, NULL, '51264725W', 'Chao', 'Alarcón Chen', 'chaoalarcon03@gmail.com', '1234', NULL, '689846699', NULL, 'España', 'Madrid');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `apuntes`
---
-
-CREATE TABLE `apuntes` (
-  `id` int(11) NOT NULL,
-  `autor` int(11) DEFAULT NULL,
-  `curso` int(11) DEFAULT NULL,
-  `contenido` text DEFAULT NULL,
-  `valoracion` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `apuntes`
---
-
-INSERT INTO `apuntes` (`id`, `autor`, `curso`, `contenido`, `valoracion`) VALUES
-(1, 2, 1, 'Resumen de funciones en Python', 5),
-(2, 4, 1, 'Apunte del profesor sobre listas y tuplas', 4),
-(3, 3, 2, 'Notas sobre firewall y seguridad básica', 5);
+(9, NULL, '51264725W', 'Chao', 'Alarcón Chen', 'chaoalarcon03@gmail.com', '1234', NULL, '689846699', 'https://www.linkedin.com/in/chao-alarc%C3%B3n/', 'España', 'Madrid'),
+(10, 9, '12345678A', 'Ana', 'García López', 'ana.garcia@example.com', 'password123', '1234567890123456', '600111222', NULL, 'España', 'Madrid'),
+(11, 10, '23456789B', 'Carlos', 'Rodríguez Martínez', 'carlos.rod@example.com', 'password123', '2345678901234567', '600222333', NULL, 'España', 'Barcelona'),
+(12, 11, '34567890C', 'Lucía', 'Sánchez Pérez', 'lucia.san@example.com', 'password123', '3456789012345678', '600333444', NULL, 'España', 'Valencia');
 
 -- --------------------------------------------------------
 
@@ -130,8 +110,9 @@ CREATE TABLE `cursos` (
 INSERT INTO `cursos` (`id`, `nombreCurso`, `categoria`, `profesor`, `nivel`, `valoracion`, `comentarios`, `descripcion`, `icono`, `videoUrl`) VALUES
 (1, 'Introducción a Python', 'Programación', 1, 'Principiante', 5, 'Muy buen curso', 'Aprende el lenguaje más versátil y demandado del mundo con un enfoque 100% práctico. Este curso te lleva desde la instalación hasta la creación de tus propios scripts funcionales, sin rellenos innecesarios.\n\n', '🐍', 'https://youtu.be/IimBRwHhW54?si=ItzLuEaEQUjRoKYG'),
 (2, 'Redes y Seguridad', 'Ciberseguridad', 2, 'Intermedio', 4.5, 'Contenido útil', 'Aprende a identificar vulnerabilidades antes de que los atacantes lo hagan. Este curso te proporciona las herramientas y la mentalidad necesarias para defender activos digitales en un entorno de amenazas constante.', '🔐', 'https://youtu.be/rX7Sy1eAfH8?si=W6mANJCJ9vBT5O_i'),
-(3, 'Curso de VueJS', 'Desarrollo Web', 1, 'Principiante', 4, NULL, 'Aprende a construir interfaces de usuario reactivas y elegantes con un framework que destaca por su curva de aprendizaje amigable y su excelente documentación.', '🔽', 'https://youtu.be/s6Svbfj-31M?si=01T_FgoC3MPvOqMt'),
-(4, 'Iniciación con Astro', 'Desarrollo Web', 1, 'Principiante', 5, NULL, 'Astro está diseñado para crear sitios web centrados en el contenido (blogs, landings, e-commerce) con un rendimiento inigualable. Su filosofía es simple: entrega cero JavaScript por defecto.', '🅰️', 'https://youtu.be/RB5tR_nqUEw?si=R6BmsU2o5xHcolR8');
+(3, 'Curso de VueJS', 'Desarrollo Web', 1, 'Principiante', 5, NULL, 'Aprende a construir interfaces de usuario reactivas y elegantes con un framework que destaca por su curva de aprendizaje amigable y su excelente documentación.', '🔽', 'https://youtu.be/s6Svbfj-31M?si=01T_FgoC3MPvOqMt'),
+(4, 'Iniciación con Astro', 'Desarrollo Web', 1, 'Principiante', 3, NULL, 'Astro está diseñado para crear sitios web centrados en el contenido (blogs, landings, e-commerce) con un rendimiento inigualable. Su filosofía es simple: entrega cero JavaScript por defecto.', '🅰️', 'https://youtu.be/RB5tR_nqUEw?si=R6BmsU2o5xHcolR8'),
+(6, 'Aprende React desde 0', 'Desarrollo', 3, 'Principiante', 4, NULL, 'Curso de React desde cero. ¿Qué es? ¿Por qué deberías aprenderlo? ¿Cómo crear tu primera aplicación? Todo lo que necesitas saber para empezar lo tienes en este curso.', '⚛️', 'https://youtu.be/7iobxzd_2wY?list=PLUofhDIg_38q4D0xNWp7FEHOTcZhjWJ29');
 
 -- --------------------------------------------------------
 
@@ -171,7 +152,12 @@ CREATE TABLE `cursosguardados` (
 --
 
 INSERT INTO `cursosguardados` (`id`, `cursoId`, `alumnoId`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(9, 1, 9),
+(10, 2, 9),
+(11, 6, 10),
+(12, 4, 11),
+(13, 3, 9);
 
 -- --------------------------------------------------------
 
@@ -193,29 +179,6 @@ CREATE TABLE `ejercicios` (
 INSERT INTO `ejercicios` (`id`, `autor`, `curso`, `valoracion`) VALUES
 (1, 1, 1, 4.5),
 (2, 2, 2, 4);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `incidencias`
---
-
-CREATE TABLE `incidencias` (
-  `id` int(11) NOT NULL,
-  `tipo` varchar(255) DEFAULT NULL,
-  `descripcion` text DEFAULT NULL,
-  `resuelto` tinyint(1) DEFAULT NULL,
-  `usuario` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `incidencias`
---
-
-INSERT INTO `incidencias` (`id`, `tipo`, `descripcion`, `resuelto`, `usuario`) VALUES
-(1, 'Error en plataforma', 'No carga el vídeo del módulo 2', 0, 2),
-(2, 'Pago', 'Problema al registrar tarjeta', 1, 3),
-(3, 'Sugerencia', 'Añadir más ejercicios prácticos', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -244,8 +207,11 @@ CREATE TABLE `profesores` (
 --
 
 INSERT INTO `profesores` (`id`, `usuarioId`, `dni`, `nombre`, `apellidos`, `email`, `contrasena`, `numCuentaBancaria`, `numTelefono`, `redes`, `pais`, `localidad`, `especializacion`) VALUES
-(1, 4, '45821093H', 'Sofía', 'Martínez Ruiz', 'sofia@prof.com', 'prof123', 'ES9820385778983000760236', '612345678', '@profeSofia', 'España', 'Madrid', 'Programación'),
-(2, 5, '22222222E', 'Jorge', 'Pérez Torres', 'jorge@prof.com', 'prof456', 'ES6600190020961234567890', '644444444', '@profeJorge', 'España', 'Madrid', 'Ciberseguridad');
+(1, 5, '45821093H', 'Sofía', 'Martínez Ruiz', 'sofia@prof.com', 'prof123', 'ES9820385778983000760236', '612345678', '@profeSofia', 'España', 'Madrid', 'Programación'),
+(2, 5, '22222222E', 'Jorge', 'Pérez Torres', 'jorge@prof.com', 'prof456', 'ES6600190020961234567890', '644444444', '@profeJorge', 'España', 'Madrid', 'Ciberseguridad'),
+(3, 5, '55274927M', 'Antonio', 'López Sánchez', 'antonio@prof.com', 'prof789', NULL, '678567456', NULL, 'España', 'Barcelona', NULL),
+(5, 12, '45678901D', 'Roberto', 'Fernández Gómez', 'roberto@prof.com', 'profe123', 'ES1234567890123456789012', '611444555', NULL, 'España', 'Sevilla', 'Matemáticas y Algoritmos'),
+(6, 13, '56789012E', 'Marta', 'Jiménez Ruiz', 'marta@prof.com', 'profe123', 'ES2345678901234567890123', '611555666', NULL, 'España', 'Bilbao', 'Desarrollo Web Full Stack');
 
 -- --------------------------------------------------------
 
@@ -279,7 +245,10 @@ CREATE TABLE `puntuacionescursos` (
 
 INSERT INTO `puntuacionescursos` (`id`, `cursoId`, `alumnoId`, `puntuacion`, `comentario`) VALUES
 (5, 1, 2, 5, '¡He aprendido muchísimo con este curso!'),
-(6, 2, 9, 5, 'Me parece un excelente curso para iniciarse en el mundo del Hacking Ético. Empecé en este mundillo hace poco y este curso me ha ayudado a asentar las bases de muy buena manera.');
+(6, 2, 9, 5, 'Me parece un excelente curso para iniciarse en el mundo del Hacking Ético. Empecé en este mundillo hace poco y este curso me ha ayudado a asentar las bases de muy buena manera.'),
+(7, 6, 10, 4, 'Me encanta la forma de enseñar del profesor, me parece que aunque sea un proceso complejo, lo hace ameno y entretenido.'),
+(8, 4, 11, 3, 'Considero que el tutor en este curso no profundiza lo suficiente en los conceptos explicados, haciendo que no entiendas muchas cosas de las que se están dando.'),
+(9, 3, 9, 5, '¡Me ha encantado!');
 
 -- --------------------------------------------------------
 
@@ -329,7 +298,9 @@ CREATE TABLE `recursos_compartidos` (
 --
 
 INSERT INTO `recursos_compartidos` (`id`, `autorId`, `cursoId`, `titulo`, `descripcion`, `tipo`, `formato`, `url`, `nombreArchivo`, `rutaArchivo`, `createdAt`, `updatedAt`) VALUES
-(2, 2, 3, 'Proyecto inicial de Vue', 'Proyecto inicial para iniciarse en el Framework.', 'proyecto', 'archivo', NULL, 'primer_proyecto_vue.zip', 'uploads\\recursos\\1770797699688-623219300.zip', '2026-02-11 08:14:59', '2026-02-11 08:14:59');
+(2, 2, 3, 'Proyecto inicial de Vue', 'Proyecto inicial para iniciarse en el Framework.', 'proyecto', 'archivo', NULL, 'primer_proyecto_vue.zip', 'uploads\\recursos\\1770797699688-623219300.zip', '2026-02-11 08:14:59', '2026-02-11 08:14:59'),
+(3, 10, 6, 'Proyecto Tema Oscuro de React', 'Este es un proyecto en el que utilizo la propiedad \"Zustand\" para hacer que el tema de la página cambie a nuestro gusto.', 'proyecto', 'archivo', NULL, 'pokemon-dia-noche-zustand.zip', 'uploads\\recursos\\1771666146372-297102480.zip', '2026-02-21 09:29:06', '2026-02-21 09:29:06'),
+(4, 11, 4, 'Documentación Oficial de Astro', 'Aquí os dejo la documentación oficial de Astro, me ha servido para entender mejor algunos conceptos.', 'apuntes', 'url', 'https://docs.astro.build/es/getting-started/', NULL, NULL, '2026-02-21 09:36:10', '2026-02-21 09:36:10');
 
 -- --------------------------------------------------------
 
@@ -352,29 +323,12 @@ INSERT INTO `usuarios` (`id`, `tipo`) VALUES
 (3, 'alumno'),
 (4, 'profesor'),
 (5, 'profesor'),
-(8, 'administrador');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `videos`
---
-
-CREATE TABLE `videos` (
-  `id` int(11) NOT NULL,
-  `autor` int(11) DEFAULT NULL,
-  `curso` int(11) DEFAULT NULL,
-  `duracion` int(11) DEFAULT NULL,
-  `valoracion` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `videos`
---
-
-INSERT INTO `videos` (`id`, `autor`, `curso`, `duracion`, `valoracion`) VALUES
-(1, 1, 1, 600, 4.8),
-(2, 2, 2, 900, 4.2);
+(8, 'administrador'),
+(9, 'alumno'),
+(10, 'alumno'),
+(11, 'alumno'),
+(12, 'profesor'),
+(13, 'profesor');
 
 --
 -- Índices para tablas volcadas
@@ -519,14 +473,6 @@ ALTER TABLE `alumnos`
   ADD KEY `usuarioId` (`usuarioId`);
 
 --
--- Indices de la tabla `apuntes`
---
-ALTER TABLE `apuntes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `autor` (`autor`),
-  ADD KEY `curso` (`curso`);
-
---
 -- Indices de la tabla `cursos`
 --
 ALTER TABLE `cursos`
@@ -554,13 +500,6 @@ ALTER TABLE `ejercicios`
   ADD PRIMARY KEY (`id`),
   ADD KEY `autor` (`autor`),
   ADD KEY `curso` (`curso`);
-
---
--- Indices de la tabla `incidencias`
---
-ALTER TABLE `incidencias`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `usuario` (`usuario`);
 
 --
 -- Indices de la tabla `profesores`
@@ -658,14 +597,6 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `videos`
---
-ALTER TABLE `videos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `autor` (`autor`),
-  ADD KEY `curso` (`curso`);
-
---
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -679,19 +610,13 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT de la tabla `apuntes`
---
-ALTER TABLE `apuntes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `cursosalumnos`
@@ -703,7 +628,7 @@ ALTER TABLE `cursosalumnos`
 -- AUTO_INCREMENT de la tabla `cursosguardados`
 --
 ALTER TABLE `cursosguardados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `ejercicios`
@@ -712,16 +637,10 @@ ALTER TABLE `ejercicios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `incidencias`
---
-ALTER TABLE `incidencias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT de la tabla `profesores`
 --
 ALTER TABLE `profesores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `profesorescursos`
@@ -733,7 +652,7 @@ ALTER TABLE `profesorescursos`
 -- AUTO_INCREMENT de la tabla `puntuacionescursos`
 --
 ALTER TABLE `puntuacionescursos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `puntuacionesejercicios`
@@ -745,19 +664,13 @@ ALTER TABLE `puntuacionesejercicios`
 -- AUTO_INCREMENT de la tabla `recursos_compartidos`
 --
 ALTER TABLE `recursos_compartidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de la tabla `videos`
---
-ALTER TABLE `videos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas
@@ -774,13 +687,6 @@ ALTER TABLE `administradores`
 --
 ALTER TABLE `alumnos`
   ADD CONSTRAINT `alumnos_ibfk_1` FOREIGN KEY (`usuarioId`) REFERENCES `usuarios` (`id`);
-
---
--- Filtros para la tabla `apuntes`
---
-ALTER TABLE `apuntes`
-  ADD CONSTRAINT `apuntes_ibfk_1` FOREIGN KEY (`autor`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `apuntes_ibfk_2` FOREIGN KEY (`curso`) REFERENCES `cursos` (`id`);
 
 --
 -- Filtros para la tabla `cursos`
@@ -803,12 +709,6 @@ ALTER TABLE `ejercicios`
   ADD CONSTRAINT `ejercicios_ibfk_2` FOREIGN KEY (`curso`) REFERENCES `cursos` (`id`);
 
 --
--- Filtros para la tabla `incidencias`
---
-ALTER TABLE `incidencias`
-  ADD CONSTRAINT `incidencias_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuarios` (`id`);
-
---
 -- Filtros para la tabla `profesores`
 --
 ALTER TABLE `profesores`
@@ -827,13 +727,6 @@ ALTER TABLE `profesorescursos`
 ALTER TABLE `puntuacionesejercicios`
   ADD CONSTRAINT `puntuacionesejercicios_ibfk_1` FOREIGN KEY (`ejercicioId`) REFERENCES `ejercicios` (`id`),
   ADD CONSTRAINT `puntuacionesejercicios_ibfk_2` FOREIGN KEY (`alumnoId`) REFERENCES `alumnos` (`id`);
-
---
--- Filtros para la tabla `videos`
---
-ALTER TABLE `videos`
-  ADD CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`autor`) REFERENCES `profesores` (`id`),
-  ADD CONSTRAINT `videos_ibfk_2` FOREIGN KEY (`curso`) REFERENCES `cursos` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

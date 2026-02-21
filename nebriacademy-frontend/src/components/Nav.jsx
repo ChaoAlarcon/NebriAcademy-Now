@@ -24,7 +24,7 @@ function Nav() {
 		localStorage.removeItem("usuario");
 		setUsuario(null);
 		navigate("/");
-		// Recargamos la página para asegurar que todos los componentes actualicen su estado (limpiar caché, etc.)
+		// Recargamos la página para asegurar que todos los componentes actualicen su estado
 		window.location.reload();
 	};
 
