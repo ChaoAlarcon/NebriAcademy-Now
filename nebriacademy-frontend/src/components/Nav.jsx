@@ -34,7 +34,7 @@ function Nav() {
 				{/* Sección del Logo */}
 				<Link to="/" className="navbar-logo">
 					<img
-						src="/nebrija.png"
+						src="/NebriAcademy Now - Logo.png"
 						alt="NebriAcademy Logo"
 						className="navbar-logo-image"
 					/>
