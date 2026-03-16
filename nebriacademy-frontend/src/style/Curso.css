@@ -1,92 +1,132 @@
 /* Contenedor principal de los detalles del curso cargado */
 .curso-detail-container {
     padding: 2rem;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 64px auto 0;
 }
 
 /* Enlace de retroceso (vuelve al listado general) */
 .curso-back-link {
     text-decoration: none;
-    color: #666;
-    margin-bottom: 1rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
     display: inline-flex;
     align-items: center;
-    font-weight: 500;
+    font-weight: 600;
+    transition: color var(--transition-speed);
+}
+
+.curso-back-link:hover {
+    color: var(--nebrija-red);
 }
 
 /* Tarjeta contenedora de la información del curso */
 .curso-card {
     background-color: #fff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e0e0e0;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm-custom);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     position: relative;
+    transition: box-shadow var(--transition-speed);
+}
+
+.curso-card:hover {
+    box-shadow: var(--shadow-lg-custom);
 }
 
 /* Botón flotante para activar el modo edición (solo profesores) */
 .curso-edit-btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 8px 16px;
+    top: 2rem;
+    right: 2rem;
+    padding: 0.75rem 1.5rem;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-speed);
+}
+
+.curso-edit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 /* Cabecera del curso: Título e Icono principal */
 .curso-header {
     margin-top: 0;
-    color: #333;
-    margin-bottom: 1.5rem;
+    color: #1a1a2e;
+    margin-bottom: 2.5rem;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: 800;
 }
 
 .curso-icon-large {
-    font-size: 2.5rem;
+    font-size: 3rem;
+    background: #f8f9fa;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 /* Grid para mostrar metadatos (Nivel, Valoración, Profesor) */
 .curso-stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.curso-stat-item {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .curso-stat-item strong {
     display: block;
-    color: #666;
-    font-size: 0.9rem;
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .curso-stat-item span {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #1a1a2e;
 }
 
 /* Línea divisoria decorativa */
 .curso-divider {
     border: 0;
-    border-top: 1px solid #eee;
-    margin: 2rem 0;
+    border-top: 1px solid #f1f3f5;
+    margin: 3rem 0;
 }
 
 /* Párrafo de la descripción detallada */
 .curso-description {
-    line-height: 1.6;
-    color: #555;
-    margin-bottom: 2rem;
+    line-height: 1.8;
+    color: #4a5568;
+    font-size: 1.05rem;
+    margin-bottom: 3rem;
 }
 
 /* SECCIÓN DE VÍDEO CON RELACIÓN DE ASPECTO 16:9 */
 .curso-video-section {
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 
 .curso-video-container {
@@ -95,8 +135,8 @@
     /* Mantiene proporción 16:9 */
     height: 0;
     overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm-custom);
 }
 
 /* El frame del video ocupa todo el contenedor relative */

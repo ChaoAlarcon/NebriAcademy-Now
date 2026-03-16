@@ -44,17 +44,26 @@ const Profesores = () => {
   if (error) return <p className="error-message">{error}</p>;
 
   return (
-    <div className="profesores-container">
-      <h2 className="profesores-title">Lista de Profesores</h2>
-      <ul className="profesores-list">
-        {profesores.map((profesor) => (
-          <li key={profesor.id} className="profesor-card">
-            <strong className="profesor-name">{profesor.nombre} {profesor.apellidos}</strong>
-            <small className="profesor-email">{profesor.email}</small>
-          </li>
-        ))}
-      </ul>
-      {profesores.length === 0 && <p className="empty-message">No hay profesores registrados.</p>}
+    <div className="profesores-page-wrapper">
+      <div className="profesores-header">
+        <h1>Nuestro Equipo Docente</h1>
+        <p>Aprende de los mejores profesionales del sector. Expertos en su materia con años de experiencia real.</p>
+      </div>
+
+      <div className="profesores-container">
+        <ul className="profesores-list">
+          {profesores.map((profesor) => (
+            <li key={profesor.id} className="profesor-card">
+              <div className="profesor-avatar">{profesor.nombre.charAt(0)}</div>
+              <div className="profesor-info">
+                <strong className="profesor-name">{profesor.nombre} {profesor.apellidos}</strong>
+                <small className="profesor-email">{profesor.email}</small>
+              </div>
+            </li>
+          ))}
+        </ul>
+        {profesores.length === 0 && <p className="empty-message">No hay profesores registrados.</p>}
+      </div>
     </div>
   );
 };

@@ -1,52 +1,86 @@
 /* Contenedor principal de la página de perfil */
 .profile-container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 64px auto 0;
     padding: 2rem;
+
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    margin-top: -4rem;
+    padding: 1rem 0;
+
+
+}
+
+.profile-header h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #1a1a2e;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+
+}
+
+.profile-header p {
+    font-size: 1.15rem;
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
+
 }
 
 /* Tarjeta principal del usuario */
 .profile-card {
     background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm-custom);
     overflow: hidden;
-    border: 1px solid #f0f0f0;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: box-shadow var(--transition-speed);
+}
+
+.profile-card:hover {
+    box-shadow: var(--shadow-lg-custom);
 }
 
 /* Cabecera con degradado corporativo */
-.profile-header {
+.profile-header1 {
     background: linear-gradient(135deg, var(--nebrija-red) 0%, #a01a2c 100%);
-    height: 120px;
+    height: 160px;
     position: relative;
 }
 
 /* Marco circular para el avatar del perfil */
 .profile-avatar-container {
     position: absolute;
-    bottom: -50px;
+    bottom: -60px;
     left: 40px;
-    padding: 5px;
+    padding: 6px;
     background: #fff;
     border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .profile-avatar {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     background-color: #f8f9fa;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    border: 3px solid #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--nebrija-red);
+    border: 4px solid #fff;
 }
 
 /* Contenido interno del perfil (Ajustado para el avatar flotante) */
 .profile-body {
-    padding: 70px 40px 40px;
+    padding: 80px 40px 40px;
 }
 
 /* Cabecera de información: Nombre y botones */
@@ -54,46 +88,51 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
 .profile-name-role h1 {
     margin: 0;
-    font-size: 2rem;
-    color: #333;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1a1a2e;
+    letter-spacing: -0.02em;
 }
 
 /* Etiquetas de rol estilizadas */
 .profile-role-badge {
     display: inline-block;
-    padding: 4px 12px;
+    padding: 6px 16px;
     background-color: #e7f1ff;
     color: #007bff;
     border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 700;
     text-transform: uppercase;
-    margin-top: 5px;
+    margin-top: 10px;
+    letter-spacing: 0.05em;
 }
 
 .profile-role-badge.profesor {
-    background-color: #fff3cd;
-    color: #856404;
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--nebrija-red);
 }
 
 .profile-actions {
     display: flex;
-    gap: 10px;
+    gap: 12px;
 }
 
 /* Estilos de botones dentro del perfil */
 .btn-profile {
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
     font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all var(--transition-speed);
     border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .btn-primary {
@@ -102,63 +141,72 @@
 }
 
 .btn-primary:hover {
-    background-color: #a01a2c;
+    background-color: var(--nebrija-red-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(220, 53, 69, 0.2);
 }
 
 .btn-secondary {
     background-color: #f8f9fa;
     color: #333;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .btn-secondary:hover {
     background-color: #e9ecef;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Grid para detalles divididos de información */
 .profile-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
 }
 
 .profile-section h2 {
-    font-size: 1.2rem;
-    color: #333;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 8px;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 2rem;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f1f3f5;
 }
 
 .profile-detail-item {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
 }
 
 .profile-detail-label {
     display: block;
-    font-size: 0.85rem;
-    color: #888;
-    margin-bottom: 4px;
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 6px;
+    font-weight: 600;
 }
 
 .profile-detail-value {
-    font-size: 1rem;
-    color: #444;
+    font-size: 1.1rem;
+    color: #1a1a2e;
     font-weight: 500;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed #e9ecef;
 }
 
 /* Sección de Redes Sociales */
 .social-links {
     display: flex;
-    gap: 15px;
-    margin-top: 5px;
+    gap: 1.5rem;
+    margin-top: 1rem;
 }
 
 .social-link {
     font-size: 1.2rem;
-    color: #555;
+    color: #4a5568;
     text-decoration: none;
     transition: color 0.2s;
+    font-weight: 600;
 }
 
 .social-link:hover {
@@ -168,7 +216,7 @@
 /* Adaptación para dispositivos pequeños */
 @media (max-width: 600px) {
     .profile-body {
-        padding: 60px 20px 30px;
+        padding: 80px 20px 30px;
     }
 
     .profile-info-header {
@@ -177,32 +225,62 @@
     }
 
     .profile-avatar-container {
-        left: 20px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
 /* Utilidades para campos de edición */
 .profile-edit-input {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
+    background-color: #ffffff;
+    font-size: 1rem;
+    color: #1a1a2e;
+    transition: all var(--transition-speed);
+}
+
+.profile-edit-input:focus {
+    outline: none;
+    border-color: var(--nebrija-red);
+    box-shadow: 0 0 0 3px var(--nebrija-focus-color);
 }
 
 .profile-social-input {
     width: 100%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
+    background-color: #ffffff;
+    font-size: 1rem;
+    transition: all var(--transition-speed);
+}
+
+.profile-social-input:focus {
+    outline: none;
+    border-color: var(--nebrija-red);
+    box-shadow: 0 0 0 3px var(--nebrija-focus-color);
 }
 
 .profile-social-link {
     color: var(--nebrija-red);
     text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    background: rgba(220, 53, 69, 0.05);
+    border-radius: 2rem;
+    transition: all var(--transition-speed);
+}
+
+.profile-social-link:hover {
+    background: rgba(220, 53, 69, 0.1);
+    transform: translateY(-2px);
 }
 
 .profile-social-list {
     display: flex;
-    gap: 15px;
+    gap: 1rem;
+    flex-wrap: wrap;
 }

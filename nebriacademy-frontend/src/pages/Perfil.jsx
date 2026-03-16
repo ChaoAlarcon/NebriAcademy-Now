@@ -101,10 +101,18 @@ function Perfil() {
   const info = detailedInfo || {};
 
   return (
+
+
     <div className="profile-container">
+
+      <div className="profile-header">
+        <h1>Perfil de Usuario</h1>
+        <p>Información personal y profesional</p>
+      </div>
+
       <div className="profile-card">
         {/* Cabecera con Avatar (inicial del nombre) */}
-        <div className="profile-header">
+        <div className="profile-header1">
           <div className="profile-avatar-container">
             <div className="profile-avatar">
               {user.nombre.charAt(0)}

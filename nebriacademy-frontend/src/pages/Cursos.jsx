@@ -89,106 +89,123 @@ function Cursos() {
 
   return (
     <>
-      <div className="cursos-page">
-        {/* Barra Lateral de Filtros */}
-        <aside className="filters">
-          <h3>Filtros</h3>
+      <div className="cursos-page-wrapper">
+        <div className="cursos-header">
+          <h1>Catálogo de Cursos</h1>
+          <p>Encuentra el curso perfecto para llevar tus habilidades al siguiente nivel con nuestros expertos.</p>
+        </div>
 
-          {/* Filtro por Categoría */}
-          <label>
-            Categoría
-            <select
-              className="form-control"
-              name="categoria"
-              value={filters.categoria}
-              onChange={handleFilterChange}>
-              <option value="">Todas las categorías</option>
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </label>
+        <div className="cursos-page">
+          {/* Barra Lateral de Filtros */}
+          <aside className="filters">
+            <h3>Filtros</h3>
 
-          {/* Filtro por Valoración Mínima */}
-          <label>
-            Valoración Mínima
-            <select
-              className="form-control"
-              name="valoracion"
-              value={filters.valoracion}
-              onChange={handleFilterChange}>
-              <option value="">Todas las valoraciones</option>
-              <option value="4.5">4.5+</option>
-              <option value="4.0">4.0+</option>
-            </select>
-          </label>
+            {/* Filtro por Categoría */}
+            <label>
+              Categoría
+              <select
+                className="form-control"
+                name="categoria"
+                value={filters.categoria}
+                onChange={handleFilterChange}>
+                <option value="">Todas las categorías</option>
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+            </label>
 
-          {/* Filtro por Nivel (Texto) */}
-          <label>
-            Nivel
-            <select
-              className="form-control"
-              name="nivel"
-              value={filters.nivel}
-              onChange={handleFilterChange}>
-              <option value="">Todos los niveles</option>
-              <option value="Principiante">Principiante</option>
-              <option value="Intermedio">Intermedio</option>
-              <option value="Avanzado">Avanzado</option>
-            </select>
-          </label>
+            {/* Filtro por Valoración Mínima */}
+            <label>
+              Valoración Mínima
+              <select
+                className="form-control"
+                name="valoracion"
+                value={filters.valoracion}
+                onChange={handleFilterChange}>
+                <option value="">Todas las valoraciones</option>
+                <option value="4.5">4.5+</option>
+                <option value="4.0">4.0+</option>
+              </select>
+            </label>
 
-          {/* Filtro por Profesor específico */}
-          <label>
-            Profesor
-            <select
-              className="form-control"
-              name="profesorId"
-              value={filters.profesorId}
-              onChange={handleFilterChange}>
-              <option value="">Todos los profesores</option>
-              {profesores.map((profesor) => (
-                <option key={profesor.id} value={profesor.id}>
-                  {profesor.nombre} {profesor.apellidos}
-                </option>
-              ))}
-            </select>
-          </label>
+            {/* Filtro por Nivel (Texto) */}
+            <label>
+              Nivel
+              <select
+                className="form-control"
+                name="nivel"
+                value={filters.nivel}
+                onChange={handleFilterChange}>
+                <option value="">Todos los niveles</option>
+                <option value="Principiante">Principiante</option>
+                <option value="Intermedio">Intermedio</option>
+                <option value="Avanzado">Avanzado</option>
+              </select>
+            </label>
 
-          {/* Botón para resetear todos los filtros a su estado inicial */}
-          <button
-            className="btn-limpiar"
-            onClick={() => setFilters({ categoria: "", valoracion: "", nivel: "", profesorId: "" })}
-          >
-            Limpiar Filtros
-          </button>
-        </aside>
+            {/* Filtro por Profesor específico */}
+            <label>
+              Profesor
+              <select
+                className="form-control"
+                name="profesorId"
+                value={filters.profesorId}
+                onChange={handleFilterChange}>
+                <option value="">Todos los profesores</option>
+                {profesores.map((profesor) => (
+                  <option key={profesor.id} value={profesor.id}>
+                    {profesor.nombre} {profesor.apellidos}
+                  </option>
+                ))}
+              </select>
+            </label>
 
-        {/* Grid Principal de Cursos */}
-        <section className="courses-grid">
-          {loading && <p>Cargando datos...</p>}
-          {error && <p>{error}</p>}
-          {!loading && !error && filteredCursos.length === 0 && <p>No hay cursos que coincidan con los filtros.</p>}
-
-          {/* Renderizado dinámico de las tarjetas de curso */}
-          {filteredCursos.map((curso) => (
-            <Link
-              to={`/cursos/${curso.id}`}
-              className="course-card no-decoration inherit-color"
-              key={curso.id}
+            {/* Botón para resetear todos los filtros a su estado inicial */}
+            <button
+              className="btn-limpiar"
+              onClick={() => setFilters({ categoria: "", valoracion: "", nivel: "", profesorId: "" })}
             >
-              <div className="course-card-icon">{curso.icono || '📚'}</div>
-              <h4>{curso.nombreCurso}</h4>
-              <p className="no-select"><strong>Categoría:</strong> {curso.categoria}</p>
-              <p className="no-select"><strong>Profesor:</strong> {getNombreProfesor(curso.profesor)}</p>
-              <p className="no-select"><strong>Nivel:</strong> {curso.nivel}</p>
-              <p className="no-select"><strong>Valoración:</strong> {curso.valoracion || 0} ⭐</p>
-              <p className="no-select">{curso.descripcion}</p>
-            </Link>
-          ))}
-        </section>
+              Limpiar Filtros
+            </button>
+          </aside>
+
+          {/* Grid Principal de Cursos */}
+          <section className="courses-grid">
+            {loading && <p>Cargando datos...</p>}
+            {error && <p>{error}</p>}
+            {!loading && !error && filteredCursos.length === 0 && <p>No hay cursos que coincidan con los filtros.</p>}
+
+            {/* Renderizado dinámico de las tarjetas de curso */}
+            {filteredCursos.map((curso) => (
+              <Link
+                to={`/cursos/${curso.id}`}
+                className="course-card no-decoration inherit-color"
+                key={curso.id}
+              >
+                <div className="course-card-header">
+                  <div className="course-card-icon">{curso.icono || '📚'}</div>
+                  <div className="course-card-badges">
+                    <span className="badge category-badge">{curso.categoria}</span>
+                    <span className={`badge level-badge ${curso.nivel.toLowerCase()}`}>{curso.nivel}</span>
+                  </div>
+                </div>
+
+                <div className="course-card-body">
+                  <h4>{curso.nombreCurso}</h4>
+                  <p className="descripcion no-select">{curso.descripcion}</p>
+                </div>
+
+                <div className="course-card-footer">
+                  <span className="profesor no-select">👨‍🏫 {getNombreProfesor(curso.profesor)}</span>
+                  <span className="valoracion no-select">⭐ {curso.valoracion || 0}</span>
+                </div>
+              </Link>
+            ))}
+          </section>
+        </div>
       </div>
     </>
   );
