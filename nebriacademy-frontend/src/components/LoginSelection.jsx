@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../style/Auth.css';
+import '../style/LoginSelection.css';
 
 /**
  * Pantalla que permite al usuario seleccionar su rol antes de iniciar sesión:
@@ -24,7 +24,7 @@ function LoginSelection() {
 
     return (
         <div className="auth-grid">
-            <div className="auth-card register-form-width">
+            <div className="auth-card selection-card register-form-width">
                 <h1 className="auth-title">¿Cómo quieres acceder?</h1>
                 <div className="selection-grid">
                     <div
@@ -57,8 +57,12 @@ function LoginSelection() {
                         <p>Acceso exclusivo para personal docente autorizado.</p>
                     </div>
                 </div>
+                <button type="submit" className="nebri-button register-button-big" href="/register" onClick={(e) => { e.preventDefault(); navigate('/register'); }}>
+                    ¿No tienes cuenta? <br /> <strong>Regístrate aquí ➜</strong>
+                </button>
             </div>
-        </div>
+
+        </div >
     );
 }
 

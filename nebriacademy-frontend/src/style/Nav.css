@@ -47,35 +47,6 @@
   /* Subtle horizontal stretch to simulate extra thickness */
 }
 
-/* Font Comparison Classes */
-.font-anton {
-  font-family: 'Anton SC', sans-serif;
-}
-
-.font-gasoek {
-  font-family: 'Gasoek One', sans-serif;
-}
-
-.font-hammersmith {
-  font-family: 'Hammersmith One', sans-serif;
-}
-
-.font-koulen {
-  font-family: 'Koulen', sans-serif;
-}
-
-.font-krona {
-  font-family: 'Krona One', sans-serif;
-}
-
-.font-staatliches {
-  font-family: 'Staatliches', sans-serif;
-}
-
-.font-calsans {
-  font-family: 'Cal Sans', sans-serif;
-}
-
 
 /* Efecto de subrayado para el logo */
 .navbar-logo-text::after {
@@ -158,6 +129,7 @@
 
 /* Botón de Registro resaltado */
 .navbar-register {
+  font-family: 'Poppins', sans-serif;
   text-decoration: none;
   background-color: var(--nebrija-red);
   color: #ffffff;

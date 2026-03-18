@@ -59,7 +59,7 @@ function Nav() {
 							<div className="navbar-links">
 								<Link to="/perfil">Hola, {usuario.nombre}</Link>
 							</div>
-							<button onClick={handleLogout}>Salir</button>
+							<button className="navbar-register" onClick={handleLogout}>Salir</button>
 						</div>
 					) : (
 						<>

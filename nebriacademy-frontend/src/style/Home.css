@@ -10,6 +10,8 @@
 /* Cabecera del Dashboard: Título y bienvenida */
 .dashboard-header {
   margin-bottom: 3rem;
+  margin-left: 3rem;
+
   padding: 1rem 0;
 }
 

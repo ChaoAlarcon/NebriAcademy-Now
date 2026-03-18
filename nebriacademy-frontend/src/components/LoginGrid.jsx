@@ -81,7 +81,7 @@ function LoginGrid() {
         </form>
 
         <div className="auth-footer">
-          <a href="/register" onClick={(e) => { e.preventDefault(); navigate('/register'); }}>¿No tienes cuenta? Regístrate aquí</a>
+          <a className="register-button" href="/register" onClick={(e) => { e.preventDefault(); navigate('/register'); }}>¿No tienes cuenta? Regístrate aquí</a>
         </div>
       </div>
     </div>

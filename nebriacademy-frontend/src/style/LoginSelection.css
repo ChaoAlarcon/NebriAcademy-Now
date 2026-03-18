@@ -2,8 +2,6 @@
 
 /* Auth Selection Screen */
 
-.register-button {
-}
 
 .selection-grid {
     display: grid;
@@ -25,6 +23,7 @@
     gap: 1.5rem;
     text-decoration: none;
     color: inherit;
+
 }
 
 .selection-item:hover {
@@ -50,6 +49,13 @@
     gap: 1.25rem;
 }
 
+.register-button-big {
+    width: 100%;
+    margin-top: 2rem;
+
+
+}
+
 @media (max-width: 480px) {
     .register-form-row {
         grid-template-columns: 1fr;
@@ -62,14 +68,10 @@
     font-weight: 700;
     color: #2d3748;
     margin-bottom: 0.5rem;
-
 }
 
 .auth-subtitle {
     font-size: 1rem;
     color: #718096;
     margin-bottom: 2rem;
-}
-
-.auth-footer {
 }
