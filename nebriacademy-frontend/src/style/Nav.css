@@ -41,7 +41,6 @@
 
 .navbar-logo-text {
   position: relative;
-  font-family: 'Major Mono Display', monospace;
   font-weight: bold;
   text-shadow: 0.5px 0 0 currentColor;
   /* Subtle horizontal stretch to simulate extra thickness */
@@ -129,7 +128,6 @@
 
 /* Botón de Registro resaltado */
 .navbar-register {
-  font-family: 'Poppins', sans-serif;
   text-decoration: none;
   background-color: var(--nebrija-red);
   color: #ffffff;

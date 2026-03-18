@@ -2,8 +2,6 @@
 
 /* Auth Selection Screen */
 
-.register-button {
-}
 
 .selection-grid {
     display: grid;
@@ -69,7 +67,4 @@
     font-size: 1rem;
     color: #718096;
     margin-bottom: 2rem;
-}
-
-.auth-footer {
-}
+}
