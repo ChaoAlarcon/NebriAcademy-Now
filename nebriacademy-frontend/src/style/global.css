@@ -1,5 +1,9 @@
 @import "./variables.css";
 
+html {
+  font-size: 94%; /* Reduce ligeramente el tamaño base de todo el sitio */
+}
+
 /* Reseteo básico y configuración de caja */
 * {
   margin: 0;
@@ -33,7 +37,7 @@ body,
 /* Espaciado superior para el contenido principal (Navbar fijo) */
 .main-content {
   flex: 1;
-  margin-top: 64px;
+  margin-top: 56px; /* Reducido de 64px */
 }
 
 /**
@@ -45,15 +49,15 @@ body,
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 64px);
-  padding: 2rem;
+  min-height: calc(100vh - 56px);
+  padding: 1.5rem; /* Reducido de 2rem */
   background-color: #f8fafc;
 }
 
 /* Tarjeta blanca con sombra para formularios de auth */
 .auth-card {
   background-color: #ffffff;
-  padding: 2.5rem;
+  padding: 2rem; /* Reducido de 2.5rem */
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-sm-custom);
   width: 100%;
@@ -82,10 +86,10 @@ body,
 .nebri-input,
 .nebri-select {
   width: 100%;
-  padding: 0.8rem 1rem;
+  padding: 0.7rem 0.9rem; /* Reducido ligeramente */
   border: 2px solid #e1e1e1;
   border-radius: var(--border-radius);
-  font-size: 1rem;
+  font-size: 0.95rem; /* Reducido de 1rem */
   background-color: #fafafa;
   transition: border-color 0.2s, box-shadow 0.2s;
   font-family: inherit;
@@ -102,12 +106,12 @@ body,
 
 /* Botón principal rojo corporativo */
 .nebri-button {
-  padding: 0.9rem;
+  padding: 0.75rem; /* Reducido de 0.9rem */
   background-color: var(--nebrija-red);
   color: white;
   border: none;
   border-radius: var(--border-radius);
-  font-size: 1rem;
+  font-size: 0.95rem; /* Reducido de 1rem */
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;

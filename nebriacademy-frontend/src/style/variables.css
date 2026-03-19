@@ -11,12 +11,12 @@
 }
 
 body {
-  padding-top: 80px;
+  padding-top: 64px; /* Sincronizado con la altura de la navbar */
 }
 
 button {
-  padding: 10px;
-  font-size: 16px;
+  padding: 8px 16px; /* Reducido */
+  font-size: 14px; /* Reducido de 16px */
   font-weight: bold;
   background-color: #C2002F;
   color: white;

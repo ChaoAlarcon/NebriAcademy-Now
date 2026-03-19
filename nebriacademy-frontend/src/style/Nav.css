@@ -6,7 +6,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;
+  height: 75px;
+  /* Reducido de 80px */
   background-color: #ffffff;
   box-shadow: var(--shadow-sm-custom);
   z-index: 1000;
@@ -25,7 +26,8 @@
 
 /* Espacio del Logo corporativo */
 .navbar-logo {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
+  /* Reducido de 1.5rem */
   font-weight: 700;
   color: var(--nebrija-red);
   text-decoration: none;
@@ -64,13 +66,15 @@
 }
 
 .navbar-logo-image {
-  height: 70px;
+  height: 56px;
+  /* Reducido de 70px */
 }
 
 /* Enlaces centrales de navegación */
 .navbar-links {
   display: flex;
-  gap: 32px;
+  gap: 24px;
+  /* Reducido de 32px */
 }
 
 .navbar-links a {
@@ -131,7 +135,8 @@
   text-decoration: none;
   background-color: var(--nebrija-red);
   color: #ffffff;
-  padding: 8px 18px;
+  padding: 6px 16px;
+  /* Reducido */
   border-radius: var(--border-radius);
   font-weight: 500;
   box-shadow: var(--shadow-sm-custom);
