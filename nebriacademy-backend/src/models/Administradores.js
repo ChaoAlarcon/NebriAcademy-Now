@@ -12,7 +12,15 @@ const Administradores = sequelize.define('administradores', {
   contrasena: DataTypes.STRING, // Contraseña (debería estar hasheada)
   numTelefono: DataTypes.STRING, // Número de teléfono
   redes: DataTypes.STRING,      // Enlaces a redes sociales
-  pais: DataTypes.STRING,       // País de residencia
+  pais: {
+    type: DataTypes.STRING,
+    validate: {
+      isIn: {
+        args: [['España', 'México', 'Colombia', 'Argentina', 'Perú', 'Venezuela', 'Chile', 'Ecuador', 'Guatemala', 'Cuba', 'Bolivia', 'República Dominicana', 'Honduras', 'Paraguay', 'El Salvador', 'Nicaragua', 'Costa Rica', 'Puerto Rico', 'Panamá', 'Uruguay', 'Guinea Ecuatorial']],
+        msg: "El país debe ser de habla hispana válido."
+      }
+    }
+  },       // País de residencia
   localidad: DataTypes.STRING   // Localidad o ciudad
 }, { timestamps: false }); // No añadir columnas de createdAt y updatedAt
 

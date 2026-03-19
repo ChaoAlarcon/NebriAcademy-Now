@@ -38,7 +38,24 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     console.log("POST /alumnos");
-    const nuevo = await Alumnos.create(req.body);
+    const { captchaToken, ...alumnoData } = req.body;
+
+    // Verificar Captcha
+    if (!captchaToken) {
+      return res.status(400).json({ error: "Falta el token de verificación de captcha" });
+    }
+
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaToken}`;
+
+    const captchaResponse = await fetch(verifyUrl, { method: "POST" });
+    const captchaData = await captchaResponse.json();
+
+    if (!captchaData.success) {
+      return res.status(400).json({ error: "Verificación de captcha fallida", details: captchaData["error-codes"] });
+    }
+
+    const nuevo = await Alumnos.create(alumnoData);
     res.status(201).json(nuevo);
   } catch (error) {
     console.error("Error al crear alumno:", error);
@@ -48,6 +65,13 @@ router.post("/", async (req, res) => {
       const campo = error.errors[0].path;
       return res.status(400).json({ 
         error: `El ${campo} ya está registrado`,
+        mensaje: error.errors.map(e => e.message)
+      });
+    }
+
+    if (error.name === 'SequelizeValidationError') {
+      return res.status(400).json({
+        error: error.errors[0].message,
         mensaje: error.errors.map(e => e.message)
       });
     }

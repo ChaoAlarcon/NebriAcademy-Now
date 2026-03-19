@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postData } from "../api/api";
+import ReCAPTCHA from "react-google-recaptcha";
 import "../style/Auth.css";
 
 /**
@@ -20,6 +21,7 @@ function RegisterForm() {
     });
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [captchaToken, setCaptchaToken] = useState(null);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -29,6 +31,10 @@ function RegisterForm() {
         });
     };
 
+    const handleCaptchaChange = (token) => {
+        setCaptchaToken(token);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
@@ -36,7 +42,7 @@ function RegisterForm() {
 
         try {
             // Enviar datos al endpoint de creación de alumnos (POST /alumnos)
-            const data = await postData("alumnos", formData);
+            const data = await postData("alumnos", { ...formData, captchaToken });
             if (data.error) {
                 setError(data.error);
             } else {
@@ -122,38 +128,48 @@ function RegisterForm() {
                         />
                     </div>
 
-                    <div className="register-form-row">
-                        <select
-                            name="pais"
-                            className="nebri-select"
-                            value={formData.pais}
-                            onChange={handleChange}
-                            required
-                        >
-                            <option value="" disabled>Selecciona un país</option>
-                            <option value="España">España</option>
-                            <option value="Francia">Francia</option>
-                            <option value="Alemania">Alemania</option>
-                            <option value="Italia">Italia</option>
-                            <option value="Portugal">Portugal</option>
-                        </select>
-                        <select
-                            name="localidad"
-                            className="nebri-select"
-                            value={formData.localidad}
-                            onChange={handleChange}
-                            required
-                        >
-                            <option value="" disabled>Selecciona una localidad</option>
-                            <option value="Madrid">Madrid</option>
-                            <option value="Barcelona">Barcelona</option>
-                            <option value="Valencia">Valencia</option>
-                            <option value="Sevilla">Sevilla</option>
-                            <option value="Otro">Otro</option>
-                        </select>
+
+                    <select
+                        name="pais"
+                        className="nebri-select"
+                        value={formData.pais}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="" disabled>Selecciona un país</option>
+                        <option value="España">España</option>
+                        <option value="México">México</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Perú">Perú</option>
+                        <option value="Venezuela">Venezuela</option>
+                        <option value="Chile">Chile</option>
+                        <option value="Ecuador">Ecuador</option>
+                        <option value="Guatemala">Guatemala</option>
+                        <option value="Cuba">Cuba</option>
+                        <option value="Bolivia">Bolivia</option>
+                        <option value="República Dominicana">República Dominicana</option>
+                        <option value="Honduras">Honduras</option>
+                        <option value="Paraguay">Paraguay</option>
+                        <option value="El Salvador">El Salvador</option>
+                        <option value="Nicaragua">Nicaragua</option>
+                        <option value="Costa Rica">Costa Rica</option>
+                        <option value="Puerto Rico">Puerto Rico</option>
+                        <option value="Panamá">Panamá</option>
+                        <option value="Uruguay">Uruguay</option>
+                        <option value="Guinea Ecuatorial">Guinea Ecuatorial</option>
+                    </select>
+
+
+
+                    <div className="captcha-container">
+                        <ReCAPTCHA
+                            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                            onChange={handleCaptchaChange}
+                        />
                     </div>
 
-                    <button type="submit" className="nebri-button" disabled={loading}>
+                    <button type="submit" className="nebri-button" disabled={loading || !captchaToken}>
                         {loading ? "Registrando..." : "Crear cuenta"}
                     </button>
                 </form>
