@@ -199,7 +199,7 @@ const Curso = () => {
      */
     const handleDeleteCourse = async () => {
         if (!window.confirm("¿Estás seguro de que deseas eliminar este curso permanentemente?")) return;
-        
+
         try {
             await deleteData(`cursos/${id}`);
             alert("Curso eliminado con éxito");
@@ -236,9 +236,9 @@ const Curso = () => {
                     <button
                         onClick={() => isEditing ? handleSave() : setIsEditing(true)}
                         className="curso-edit-btn"
-                        style={{ backgroundColor: isEditing ? '#28a745' : 'var(--nebrija-red)' }}
+                        style={{ backgroundColor: isEditing ? '#28a745' : 'var(--nebrija-red)', top: '1.5rem' }}
                         disabled={saving}
-                    >
+                    >{saving ? '...' : (isEditing ? 'Guardar' : 'Editar')}
                     </button>
                 )}
 
@@ -254,7 +254,7 @@ const Curso = () => {
                 )}
 
                 {/* Botón de Guardar (para alumnos y administradores) */}
-                {user && (user.tipo === 'alumno' || user.tipo === 'administrador') && !isEditing && (
+                {user && (user.tipo === 'alumno') && !isEditing && (
                     <button
                         onClick={handleSaveToggle}
                         className="curso-edit-btn"
@@ -321,7 +321,7 @@ const Curso = () => {
                 </div>
 
                 {/* Sección de Valoración para Alumnos y Administradores */}
-                {user && (user.tipo === 'alumno' || user.tipo === 'administrador') && !isEditing && (
+                {user && (user.tipo === 'alumno') && !isEditing && (
                     <div className="curso-rating-section" style={{ marginTop: '1.5rem', padding: '1.5rem', background: '#f8f9fa', borderRadius: '12px', textAlign: 'center', border: '1px solid #eee' }}>
                         <h4 style={{ marginBottom: '0.8rem', color: 'var(--nebrija-blue)' }}>¿Qué te parece este curso?</h4>
                         <StarRating
