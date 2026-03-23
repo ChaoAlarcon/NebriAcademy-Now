@@ -56,6 +56,16 @@ function LoginSelection() {
                         <h2>Profesor</h2>
                         <p>Acceso exclusivo para personal docente autorizado.</p>
                     </div>
+
+                    <div
+                        className="selection-item"
+                        data-type="administrador"
+                        onClick={() => handleSelection('interno')} // Enlace al login general (LoginGrid)
+                    >
+                        <div className="selection-icon">🛡️</div>
+                        <h2>Administrador</h2>
+                        <p>Gestión global y control de la plataforma.</p>
+                    </div>
                 </div>
                 <button type="submit" className="nebri-button register-button-big" href="/register" onClick={(e) => { e.preventDefault(); navigate('/register'); }}>
                     ¿No tienes cuenta? <br /> <strong>Regístrate aquí ➜</strong>

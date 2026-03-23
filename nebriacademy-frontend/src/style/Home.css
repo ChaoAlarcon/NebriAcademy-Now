@@ -284,3 +284,12 @@
 .create-course-link:hover {
   background-color: #218838;
 }
+
+
+
+.admin-actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+}

@@ -1,0 +1,110 @@
+.alumnos-page-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.alumnos-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 1rem 0;
+}
+
+.alumnos-header h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.alumnos-header p {
+  font-size: 1.15rem;
+  color: #6c757d;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.alumnos-container {
+  width: 100%;
+}
+
+.alumnos-list {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.alumno-card {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: var(--shadow-sm-custom);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.alumno-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg-custom);
+}
+
+.alumno-avatar {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--nebrija-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.alumno-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.alumno-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.alumno-email {
+  color: #6c757d;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+}
+
+.alumno-email::before {
+  content: '✉';
+  margin-right: 8px;
+  font-size: 1.1em;
+  color: var(--nebrija-red);
+}
+
+.loading-message,
+.error-message,
+.empty-message {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.1rem;
+  color: #6c757d;
+}
+
+.error-message {
+  color: #e74c3c;
+}

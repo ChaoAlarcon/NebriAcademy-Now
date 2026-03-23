@@ -46,8 +46,8 @@ function Nav() {
 					<Link to="/">Mi Academia</Link>
 					<Link to="/cursos">Cursos</Link>
 					<Link to="/profesores">Profesores</Link>
-					{/* Solo los profesores pueden ver el enlace para subir cursos */}
-					{usuario && usuario.tipo === 'profesor' && (
+					{/* Solo los profesores y administradores pueden ver el enlace para subir cursos */}
+					{usuario && (usuario.tipo === 'profesor' || usuario.tipo === 'administrador') && (
 						<Link to="/nuevo-curso" className="nav-link-special">Subir Curso</Link>
 					)}
 				</div>

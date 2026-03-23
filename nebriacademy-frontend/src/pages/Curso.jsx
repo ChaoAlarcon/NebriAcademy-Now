@@ -73,8 +73,8 @@ const Curso = () => {
                 const cursoOpiniones = puntuacionesList.filter(p => p.cursoId === parseInt(id));
                 setOpiniones(cursoOpiniones);
 
-                // Si el usuario es alumno, cargar su valoración previa y estado de guardado
-                if (currentUser && currentUser.tipo === 'alumno') {
+                // Si el usuario es alumno o administrador, cargar su valoración previa y estado de guardado
+                if (currentUser && (currentUser.tipo === 'alumno' || currentUser.tipo === 'administrador')) {
                     const miPuntuacion = cursoOpiniones.find(p => p.alumnoId === currentUser.id);
                     if (miPuntuacion) {
                         setUserRating(miPuntuacion.puntuacion);
@@ -134,7 +134,7 @@ const Curso = () => {
      * Verifica que el usuario sea alumno y haya seleccionado estrellas.
      */
     const handleRatingSubmit = async () => {
-        if (!user || user.tipo !== 'alumno') return;
+        if (!user || (user.tipo !== 'alumno' && user.tipo !== 'administrador')) return;
         if (userRating === 0) {
             alert("Por favor, selecciona una puntuación");
             return;
@@ -174,7 +174,7 @@ const Curso = () => {
      * Si ya está guardado, lo elimina. Si no, lo crea.
      */
     const handleSaveToggle = async () => {
-        if (!user || user.tipo !== 'alumno') return;
+        if (!user || (user.tipo !== 'alumno' && user.tipo !== 'administrador')) return;
         setSavingToFavorites(true);
         try {
             if (isSaved) {
@@ -194,12 +194,28 @@ const Curso = () => {
         }
     };
 
+    /**
+     * Elimina el curso actual (solo administradores).
+     */
+    const handleDeleteCourse = async () => {
+        if (!window.confirm("¿Estás seguro de que deseas eliminar este curso permanentemente?")) return;
+        
+        try {
+            await deleteData(`cursos/${id}`);
+            alert("Curso eliminado con éxito");
+            navigate("/cursos");
+        } catch (err) {
+            console.error("Error al eliminar el curso:", err);
+            alert("Error al eliminar el curso");
+        }
+    };
+
     if (loading) return <div className="p-2rem text-center">Cargando curso...</div>;
     if (error) return <div className="p-2rem text-center text-danger">{error}</div>;
     if (!curso) return <div className="p-2rem text-center">Curso no encontrado</div>;
 
-    // Lógica para determinar si el usuario actual es el dueño del curso
-    const isOwner = user && user.tipo === 'profesor' && user.id === curso.profesor;
+    // Lógica para determinar si el usuario actual está autorizado (dueño o admin)
+    const isAuthorized = user && (user.tipo === 'administrador' || (user.tipo === 'profesor' && user.id === curso.profesor));
 
     // Busca el nombre de un alumno dado su ID
     const getNombreAlumno = (alumnoId) => {
@@ -215,20 +231,30 @@ const Curso = () => {
             </Link>
 
             <div className="curso-card">
-                {/* Botón de Edición (solo visible para el propietario) */}
-                {isOwner && (
+                {/* Botón de Edición (visible para el propietario o administrador) */}
+                {isAuthorized && (
                     <button
                         onClick={() => isEditing ? handleSave() : setIsEditing(true)}
                         className="curso-edit-btn"
                         style={{ backgroundColor: isEditing ? '#28a745' : 'var(--nebrija-red)' }}
                         disabled={saving}
                     >
-                        {saving ? 'Guardando...' : (isEditing ? 'Guardar Cambios' : 'Editar Curso')}
                     </button>
                 )}
 
-                {/* Botón de Guardar (solo para alumnos) */}
-                {user && user.tipo === 'alumno' && !isEditing && (
+                {/* Botón de Borrado (solo visible para administradores) */}
+                {user && user.tipo === 'administrador' && !isEditing && (
+                    <button
+                        onClick={handleDeleteCourse}
+                        className="curso-edit-btn"
+                        style={{ backgroundColor: '#dc3545', right: '11rem', top: '1.5rem' }}
+                    >
+                        Borrar Curso
+                    </button>
+                )}
+
+                {/* Botón de Guardar (para alumnos y administradores) */}
+                {user && (user.tipo === 'alumno' || user.tipo === 'administrador') && !isEditing && (
                     <button
                         onClick={handleSaveToggle}
                         className="curso-edit-btn"
@@ -294,8 +320,8 @@ const Curso = () => {
                     </div>
                 </div>
 
-                {/* Sección de Valoración para Alumnos */}
-                {user && user.tipo === 'alumno' && !isEditing && (
+                {/* Sección de Valoración para Alumnos y Administradores */}
+                {user && (user.tipo === 'alumno' || user.tipo === 'administrador') && !isEditing && (
                     <div className="curso-rating-section" style={{ marginTop: '1.5rem', padding: '1.5rem', background: '#f8f9fa', borderRadius: '12px', textAlign: 'center', border: '1px solid #eee' }}>
                         <h4 style={{ marginBottom: '0.8rem', color: 'var(--nebrija-blue)' }}>¿Qué te parece este curso?</h4>
                         <StarRating

@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
 import { fetchData } from '../api/api';
+import "../style/Alumnos.css";
+
+
+
 
 /**
  * Componente que muestra una lista de todos los alumnos registrados.
@@ -34,16 +38,23 @@ const AlumnosList = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="p-2rem">
-      <h2>Lista de Alumnos</h2>
-      <ul className="list-none">
-        {alumnos.map((alumno) => (
-          <li key={alumno.id} className="dashboard-card mb-1rem p-2rem">
-            <strong>{alumno.nombre} {alumno.apellidos}</strong> <br />
-            <small>{alumno.email}</small>
-          </li>
-        ))}
-      </ul>
+    <div className="alumnos-page-wrapper">
+      <div className="alumnos-header">
+        <h1>Lista de Alumnos</h1>
+      </div>
+      <div className="alumnos-container">
+        <ul className="alumnos-list">
+          {alumnos.map((alumno) => (
+            <li key={alumno.id} className="alumno-card mb-1rem p-2rem">
+              <div className="alumno-avatar">{alumno.nombre.charAt(0)}</div>
+              <div className="alumno-info">
+                <strong className="alumno-name">{alumno.nombre} {alumno.apellidos}</strong>
+                <small className="alumno-email">{alumno.email}</small>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
       {alumnos.length === 0 && <p>No hay alumnos registrados.</p>}
     </div>
   );

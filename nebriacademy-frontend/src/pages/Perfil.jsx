@@ -37,7 +37,7 @@ function Perfil() {
      */
     const getDetailedData = async () => {
       try {
-        const endpoint = currentUser.tipo === 'profesor' ? 'profesores' : 'alumnos';
+        const endpoint = currentUser.tipo === 'profesor' ? 'profesores' : (currentUser.tipo === 'administrador' ? 'administradores' : 'alumnos');
         const data = await fetchData(`${endpoint}/${currentUser.id}`);
         setDetailedInfo(data);
         setFormData(data); // Inicializamos el formulario con los datos actuales
@@ -81,7 +81,7 @@ function Perfil() {
     setError(null);
 
     try {
-      const endpoint = user.tipo === 'profesor' ? 'profesores' : 'alumnos';
+      const endpoint = user.tipo === 'profesor' ? 'profesores' : (user.tipo === 'administrador' ? 'administradores' : 'alumnos');
       const updatedData = await putData(`${endpoint}/${user.id}`, formData);
 
       setDetailedInfo(updatedData);
@@ -125,7 +125,7 @@ function Perfil() {
             <div className="profile-name-role">
               <h1>{user.nombre} {user.apellidos}</h1>
               <span className={`profile-role-badge ${user.tipo}`}>
-                {user.tipo === 'profesor' ? 'Profesor' : 'Alumno'}
+                {user.tipo === 'profesor' ? 'Profesor' : (user.tipo === 'administrador' ? 'Administrador' : 'Alumno')}
               </span>
             </div>
 
@@ -184,6 +184,11 @@ function Perfil() {
                     <span className="profile-detail-label">Especialización</span>
                     <span className="profile-detail-value">{info.especializacion || 'No proporcionada'}</span>
                   </div>
+                ) : user.tipo === 'administrador' ? (
+                  <div className="profile-detail-item">
+                    <span className="profile-detail-label">Clave Admin</span>
+                    <span className="profile-detail-value">Acceso Total Facultado</span>
+                  </div>
                 ) : (
                   <div className="profile-detail-item">
                     <span className="profile-detail-label">Método de Pago</span>
@@ -233,7 +238,7 @@ function Perfil() {
                       <label className="profile-detail-label">Especialización</label>
                       <input type="text" name="especializacion" className="nebri-input profile-edit-input" value={formData.especializacion || ''} onChange={handleChange} />
                     </div>
-                  ) : (
+                  ) : user.tipo === 'administrador' ? null : (
                     <div className="profile-detail-item">
                       <label className="profile-detail-label">Número Tarjeta</label>
                       <input type="text" name="numeroTarjeta" className="nebri-input profile-edit-input" value={formData.numeroTarjeta || ''} onChange={handleChange} />

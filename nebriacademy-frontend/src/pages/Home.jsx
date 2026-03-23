@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import StudentDashboard from './StudentDashboard';
 import ProfessorDashboard from './ProfessorDashboard';
+import AdminDashboard from './AdminDashboard';
 
 /**
  * Componente principal (Home/Dashboard).
@@ -23,7 +24,9 @@ function Home() {
 
     return (
         <>
-            {user.tipo === 'profesor' ? (
+            {user.tipo === 'administrador' ? (
+                <AdminDashboard userName={user.nombre} />
+            ) : user.tipo === 'profesor' ? (
                 <ProfessorDashboard userName={user.nombre} userId={user.id} />
             ) : (
                 <StudentDashboard userName={user.nombre} userId={user.id} />

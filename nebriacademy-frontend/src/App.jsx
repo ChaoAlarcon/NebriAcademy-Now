@@ -5,7 +5,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Importación de páginas y componentes principales
 import Home from "./pages/Home";
 import Cursos from "./pages/Cursos";
-import AppLayout from "./Components/AppLayout";
+import AppLayout from "./components/AppLayout";
 import ErrorPage from "./pages/ErrorPage";
 import MasterClass from "./pages/MasterClass";
 import AlumnosList from "./components/AlumnosList";
@@ -14,9 +14,9 @@ import Register from "./pages/Register";
 import Profesores from "./pages/Profesores";
 import Curso from "./pages/Curso";
 import Perfil from "./pages/Perfil";
-import LoginSelection from "./Components/LoginSelection";
+import LoginSelection from "./components/LoginSelection";
 import LoginProfesor from "./pages/LoginProfesor";
-import CourseUploadForm from "./Components/CourseUploadForm";
+import CourseUploadForm from "./components/CourseUploadForm";
 import { Navigate } from "react-router-dom";
 
 /**

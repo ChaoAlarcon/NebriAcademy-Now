@@ -106,7 +106,7 @@ const SharedResources = ({ cursoId, user }) => {
                         <a href={link} target="_blank" rel="noopener noreferrer" className="resource-download-btn">
                             {isUrl ? 'Ver Enlace' : 'Descargar Archivo'}
                         </a>
-                        {user.id === r.autorId && (
+                        {(user.id === r.autorId || user.tipo === 'administrador') && (
                             <button onClick={() => handleDelete(r.id)} className="resource-delete-btn" title="Eliminar recurso">
                                 🗑️
                             </button>
@@ -121,7 +121,7 @@ const SharedResources = ({ cursoId, user }) => {
         <div className="shared-resources-container">
             <div className="shared-resources-header">
                 <h3>Recursos de Estudiantes</h3>
-                {user.tipo === 'alumno' && (
+                {(user.tipo === 'alumno' || user.tipo === 'administrador') && (
                     <button onClick={() => setShowForm(!showForm)} className="nebri-btn-primary">
                         {showForm ? 'Cancelar' : 'Compartir Recurso'}
                     </button>
