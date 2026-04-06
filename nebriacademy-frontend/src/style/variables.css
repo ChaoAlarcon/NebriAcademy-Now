@@ -8,6 +8,17 @@
 
   --border-radius: 0.75rem;
   --transition-speed: 0.3s;
+
+  /* BREAKPOINTS */
+  --mobile: 480px;
+  --tablet: 768px;
+  --desktop: 1024px;
+  --wide: 1440px;
+
+  /* RESPONSIVE PADDING */
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
 }
 
 body {

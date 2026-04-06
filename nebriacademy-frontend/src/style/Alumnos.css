@@ -4,6 +4,12 @@
   padding: 2rem;
 }
 
+@media (max-width: 768px) {
+  .alumnos-page-wrapper {
+    padding: 1.5rem 1rem;
+  }
+}
+
 .alumnos-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -16,6 +22,12 @@
   color: #1a1a2e;
   margin-bottom: 1rem;
   letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .alumnos-header h1 {
+    font-size: 2rem;
+  }
 }
 
 .alumnos-header p {
@@ -35,6 +47,13 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2rem;
+}
+
+@media (max-width: 480px) {
+  .alumnos-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 .alumno-card {
