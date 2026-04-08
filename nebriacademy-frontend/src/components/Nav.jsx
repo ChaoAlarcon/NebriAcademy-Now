@@ -71,7 +71,7 @@ function Nav() {
 						{usuario ? (
 							<div className="navbar-profile">
 								<Link to="/perfil" className="navbar-profile-link" onClick={() => setMenuAbierto(false)}>
-									Hola, {usuario.nombre}
+									<strong>Hola, {usuario.nombre}</strong>
 								</Link>
 								<button className="navbar-register" onClick={handleLogout}>Salir</button>
 							</div>
