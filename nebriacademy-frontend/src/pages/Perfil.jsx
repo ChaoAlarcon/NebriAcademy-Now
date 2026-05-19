@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchData, putData } from '../api/api';
+import { fetchData, putData, deleteData } from '../api/api';
 import '../style/Perfil.css';
 
 /**
@@ -57,6 +57,34 @@ function Perfil() {
     localStorage.removeItem("usuario");
     navigate("/");
     window.location.reload();
+  };
+
+  /**
+   * Elimina la cuenta del usuario tras confirmación.
+   * Borra el registro del backend, limpia sesión y redirige.
+   */
+  const handleDeleteAccount = async () => {
+    const confirmDelete = window.confirm(
+      "¿Estás seguro de que deseas eliminar tu cuenta? Esta acción es irreversible y perderás todo el progreso."
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      setSaving(true); // Reutilizamos saving para deshabilitar botones
+      const endpoint = user.tipo === 'profesor' ? 'profesores' : (user.tipo === 'administrador' ? 'administradores' : 'alumnos');
+      await deleteData(`${endpoint}/${user.id}`);
+      
+      alert("Tu cuenta ha sido eliminada correctamente.");
+      localStorage.removeItem("usuario");
+      navigate("/");
+      window.location.reload();
+    } catch (err) {
+      console.error("Error al eliminar la cuenta:", err);
+      alert("No se pudo eliminar la cuenta. Inténtalo de nuevo más tarde.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   // Maneja cambios en los campos de los inputs durante la edición
@@ -135,6 +163,9 @@ function Perfil() {
                 <>
                   <button className="btn-profile btn-secondary" onClick={() => setIsEditing(true)}>Editar Perfil</button>
                   <button className="btn-profile btn-primary" onClick={handleLogout}>Cerrar Sesión</button>
+                  <button className="btn-profile btn-danger" onClick={handleDeleteAccount} disabled={saving}>
+                    {saving ? "Eliminando..." : "Eliminar Cuenta"}
+                  </button>
                 </>
               ) : (
                 <>

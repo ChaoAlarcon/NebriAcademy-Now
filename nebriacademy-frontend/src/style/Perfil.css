@@ -175,6 +175,17 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(220, 53, 69, 0.4);
+}
+
 /* Grid para detalles divididos de información */
 .profile-grid {
     display: grid;
